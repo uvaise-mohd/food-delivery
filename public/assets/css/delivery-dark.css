@@ -1,0 +1,44 @@
+.delivery-bg {
+    background-color: #303030 !important;
+}
+
+.delivery-nav {
+	color: white;
+	font-weight: 600;
+	box-shadow: rgb(0 0 0 / 5%) 0px 1px 3px;
+    z-index: 9;
+	background-color: #141414;
+}
+
+.delivery-text {
+    color: white;
+}
+
+.delivery-message {
+    background-color: #141414;
+    color: white;
+}
+
+.delivery-footer {
+    background-color: #141414;
+}
+
+.react-tabs__tab {
+	padding: 10px 14px !important;
+	color: grey;
+}
+
+.react-tabs__tab--selected {
+	border-color: transparent !important;
+	color: #FE0B15 !important;
+	font-weight: 700;
+	border-radius: 0 !important;
+    background-color: #141414;
+}
+
+.delivery-order {
+	margin-bottom: 20px;
+	border-radius: 8px;
+    background-color: #141414;
+    color: white;
+}
