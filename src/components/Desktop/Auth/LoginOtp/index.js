@@ -309,9 +309,9 @@ class LoginOtp extends Component {
 
 
 				<div className="d-flex">
-					<img src="https://chopze.com/assets/images/chop-logo.png" style={{ width: '9vw', position: 'absolute', top: '20vh', left: '5vw' }} />
+					<img src="https://app.snakyz.com/assets/images/chop-logo.png" style={{ width: '9vw', position: 'absolute', top: '20vh', left: '5vw' }} />
 					<div style={{ width: '50vw' }}>
-						<img placeholder="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/portal/m/blue_placeholder" src="https://chopze.com/assets/login-bg.jpg" style={{ width: '50vw', height: '100vh', objectFit: 'cover' }} alt="chopze" />
+						<img placeholder="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/portal/m/blue_placeholder" src="https://app.snakyz.com/assets/login-bg.jpg" style={{ width: '50vw', height: '100vh', objectFit: 'cover' }} alt="chopze" />
 					</div>
 					<div style={{ width: '50vw' }}>
 						<div className="height-100-percent" style={{ backgroundColor: 'white', height: 'contain' }}>
@@ -323,7 +323,7 @@ class LoginOtp extends Component {
 									paddingTop: '10%',
 								}}>
 									<div className='text-center' style={{ width: '100%', left: '0', bottom: '50px', }}>
-										<img src="https://chopze.com/assets/send-otp.jpg" style={{ height: '8rem', marginLeft: '9vw' }} />
+										<img src="https://app.snakyz.com/assets/send-otp.jpg" style={{ height: '8rem', marginLeft: '9vw' }} />
 										{this.state.otp ? (
 											<React.Fragment>
 												<div class="mt-20" style={{ textAlign: 'center', fontSize: '1.5rem', fontWeight: 'bolder', textTransform: 'capitalize' }}>

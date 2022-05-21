@@ -25,7 +25,7 @@ class Payout extends Component {
 
     _fetchPayout(){
         Axios 
-		.post('https://chopze.com/public/api/store/fetch-payout-data', {
+		.post('https://app.snakyz.com/public/api/store/fetch-payout-data', {
             token: this.props.user.auth_token,
 		})
 		.then((response) => {

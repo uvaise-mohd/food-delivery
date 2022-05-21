@@ -49,7 +49,7 @@ class UserInfo extends Component {
 	updateProfile = () => {
 		this.setState({ loading: true });
 		axios
-			.post('https://chopze.com/public/api/update-user', {
+			.post('https://app.snakyz.com/public/api/update-user', {
 				token: this.props.user_info.auth_token,
 				name: this.state.name,
 				phone: this.state.phone,

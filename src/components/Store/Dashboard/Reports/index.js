@@ -48,7 +48,7 @@ class Reports extends Component {
 
 	_fetchOrderData = (cuurent_date_type) => {
 		Axios
-			.post('https://chopze.com/public/api/store/get-report-data', {
+			.post('https://app.snakyz.com/public/api/store/get-report-data', {
 				token: this.props.store_user.data.auth_token,
 				current_date_type: cuurent_date_type,
 				date_from: this.state.date_from,
@@ -81,7 +81,7 @@ class Reports extends Component {
 		this.setState({ settlementsPopup: true, loading: true });
 
 		Axios
-			.post('https://chopze.com/public/api/store/get-restaurant-payout-summary', {
+			.post('https://app.snakyz.com/public/api/store/get-restaurant-payout-summary', {
 				token: this.props.store_user.data.auth_token
 			})
 			.then((response) => {
@@ -103,7 +103,7 @@ class Reports extends Component {
 		this.setState({ payoutPopup: true, loading: true });
 
 		Axios
-			.post('https://chopze.com/public/api/store/get-restaurant-payouts', {
+			.post('https://app.snakyz.com/public/api/store/get-restaurant-payouts', {
 				token: this.props.store_user.data.auth_token
 			})
 			.then((response) => {

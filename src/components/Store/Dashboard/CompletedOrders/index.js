@@ -28,7 +28,7 @@ class CompletedOrders extends Component {
 			if (this.state.from && this.state.to) {
 				this.setState({ loading: true });
 				Axios
-				.post('https://chopze.com/public/api/store/get-completed-orders', {
+				.post('https://app.snakyz.com/public/api/store/get-completed-orders', {
 					token: this.props.user.auth_token,
 					from: this.state.from,
 					to: this.state.to
@@ -54,7 +54,7 @@ class CompletedOrders extends Component {
 		if (this.state.from && this.state.to) {
 			this.setState({ loading: true });
             Axios
-            .post('https://chopze.com/public/api/store/get-completed-orders', {
+            .post('https://app.snakyz.com/public/api/store/get-completed-orders', {
                 token: this.props.user.auth_token,
                 from: this.state.from,
                 to: this.state.to
@@ -127,7 +127,7 @@ class CompletedOrders extends Component {
 			);
 		}
 
-		const url = 'https://chopze.com/public/api/store/datewise-order/export?from=' + this.state.from + '&to=' + this.state.to + '&token=' + user.auth_token;
+		const url = 'https://app.snakyz.com/public/api/store/datewise-order/export?from=' + this.state.from + '&to=' + this.state.to + '&token=' + user.auth_token;
 
 		return (
 			<React.Fragment>

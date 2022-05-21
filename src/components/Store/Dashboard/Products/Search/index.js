@@ -23,7 +23,7 @@ class Search extends Component {
         });
         if(event.length >= 4){
             axios
-            .post('https://chopze.com/public/api/store/search-product', {
+            .post('https://app.snakyz.com/public/api/store/search-product', {
                 token: this.props.auth_token,
                 query: event
             })

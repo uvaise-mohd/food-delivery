@@ -54,7 +54,7 @@ class ProductView extends Component {
 
     __fetchProductData() {
         axios
-            .post('https://chopze.com/public/api/store/view-product', {
+            .post('https://app.snakyz.com/public/api/store/view-product', {
                 token: this.props.store_user.data.auth_token,
                 product_id: this.props.match.params.product_id
             })
@@ -106,7 +106,7 @@ class ProductView extends Component {
         formData.append("product_is_recommended", this.state.product_is_recommended);
 
         axios
-            .post('https://chopze.com/public/api/store/update-product', formData)
+            .post('https://app.snakyz.com/public/api/store/update-product', formData)
             .then((response) => {
                 this.setState({ loading: false });
                 this.setState({ successSnack: true })
@@ -119,7 +119,7 @@ class ProductView extends Component {
 
     __deleteItem = () => {
         axios
-            .post('https://chopze.com/public/api/store/delete-product', {
+            .post('https://app.snakyz.com/public/api/store/delete-product', {
                 token: this.props.store_user.data.auth_token,
                 product_id: this.props.match.params.product_id,
             })
@@ -176,7 +176,7 @@ class ProductView extends Component {
                         <div className="mt-5">
                             <label style={{ fontWeight: '600' }}>New Image</label>
                             <br />
-                            <img className="mb-2" src={"https://chopze.com/assets/img/items/" + this.state.old_image} style={{ height: '100px', width: '100px', borderRadius: '3px' }} />
+                            <img className="mb-2" src={"https://app.snakyz.com/assets/img/items/" + this.state.old_image} style={{ height: '100px', width: '100px', borderRadius: '3px' }} />
                             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                                 <input
                                     type="file"

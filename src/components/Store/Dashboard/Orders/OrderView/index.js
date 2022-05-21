@@ -32,7 +32,7 @@ class order extends Component {
 
     __fetchOrderData() {
         axios
-            .post('https://chopze.com/public/api/store/get-order-data', {
+            .post('https://app.snakyz.com/public/api/store/get-order-data', {
                 unique_order_id: this.props.match.params.unique_order_id,
                 token: this.props.store_user.data.auth_token
             })
@@ -71,7 +71,7 @@ class order extends Component {
     __acceptToDeliver(order_id) {
         this.setState({ loading: true });
         axios
-            .post('https://chopze.com/public/api/accept-order-store', {
+            .post('https://app.snakyz.com/public/api/accept-order-store', {
                 token: this.props.store_user.data.auth_token,
                 order_id: order_id
             }).then((response) => {
@@ -88,7 +88,7 @@ class order extends Component {
     __orderReady(order_id) {
         this.setState({ loading: true });
         axios
-            .post('https://chopze.com/public/api/food-ready-store', {
+            .post('https://app.snakyz.com/public/api/food-ready-store', {
                 token: this.props.store_user.data.auth_token,
                 order_id: order_id
             }).then((response) => {
@@ -105,7 +105,7 @@ class order extends Component {
     __orderDelivered(order_id) {
         this.setState({ loading: true });
         axios
-            .post('https://chopze.com/public/api/self-order-complete', {
+            .post('https://app.snakyz.com/public/api/self-order-complete', {
                 token: this.props.store_user.data.auth_token,
                 order_id: order_id
             }).then((response) => {
@@ -121,7 +121,7 @@ class order extends Component {
 
     __cancelOrder = () => {
         axios
-            .post('https://chopze.com/public/api/store/cancel-order', {
+            .post('https://app.snakyz.com/public/api/store/cancel-order', {
                 token: this.props.store_user.data.auth_token,
                 order_id: this.state.order.id
             }).then((response) => {

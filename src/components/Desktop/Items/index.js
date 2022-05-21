@@ -175,7 +175,7 @@ class Items extends Component {
 		if (this.state.user_review_id) {
 			this.setState({ loading: true });
 			axios
-				.post('https://chopze.com/public/api/update-review', {
+				.post('https://app.snakyz.com/public/api/update-review', {
 					token: this.props.user.data.auth_token,
 					id: this.state.user_review_id,
 					rating: this.state.edited_rating_store,
@@ -367,7 +367,7 @@ class Items extends Component {
 										{this.props.restaurant_info.filterdCoupons.map((coupon, index) => (
 											<div className="p-10 mr-20" style={{ border: '2px solid #FFCCCC', borderRadius: '0.5rem' }} key={index}>
 												<div onClick={() => this.handlePopupOpen(coupon)} style={{ display: 'flex', alignItems: 'center' }}>
-													<img src="https://chopze.com/assets/discount.png" style={{ height: '1.5rem' }} />
+													<img src="https://app.snakyz.com/assets/discount.png" style={{ height: '1.5rem' }} />
 													<div className="ml-1 rupees-symbol" style={{ color: '#7E7E7E', fontWeight: 'bolder' }}>{coupon.name}</div>
 												</div>
 												<div className="mt-1" style={{ display: 'flex', color: '#7E7E7E', fontSize: '10px' }}>

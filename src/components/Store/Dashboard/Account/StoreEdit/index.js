@@ -33,7 +33,7 @@ class StoreEdit extends Component {
 
     __fetchData(){
         axios
-		.post('https://chopze.com/public/api/store/view-store', {
+		.post('https://app.snakyz.com/public/api/store/view-store', {
             token: this.props.store_user.data.auth_token,
             id: this.props.match.params.id
 		})
@@ -61,7 +61,7 @@ class StoreEdit extends Component {
     __updateItem(){
         this.setState({ loading: true });
         axios
-		.post('https://chopze.com/public/api/store/update-store', {
+		.post('https://app.snakyz.com/public/api/store/update-store', {
             token: this.props.store_user.data.auth_token,
             id: this.props.match.params.id,
             name: this.state.name,

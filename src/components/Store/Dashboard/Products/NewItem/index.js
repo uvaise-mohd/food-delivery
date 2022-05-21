@@ -40,7 +40,7 @@ class NewItem extends Component {
 
     fetchDta(){
         axios
-		.post('https://chopze.com/public/api/store/get-store-and-categories', {
+		.post('https://app.snakyz.com/public/api/store/get-store-and-categories', {
 			token: this.props.store_user.data.auth_token
 		})
 		.then((response) => {
@@ -118,7 +118,7 @@ class NewItem extends Component {
             formData.append("is_egg", this.state.is_egg);
             formData.append("is_recommended", this.state.is_recommended);
 
-            Axios.post("https://chopze.com/public/api/store/add-item", formData)
+            Axios.post("https://app.snakyz.com/public/api/store/add-item", formData)
             .then(response => {
                 const data = response.data;
                 if (data.success) {

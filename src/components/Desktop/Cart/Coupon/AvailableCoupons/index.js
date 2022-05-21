@@ -18,7 +18,7 @@ class AvailableCoupons extends Component {
 
   componentDidMount() {
     axios
-      .post("https://chopze.com/public/api/coupons-for-users", {
+      .post("https://app.snakyz.com/public/api/coupons-for-users", {
         restaurant_id: this.props.restaurant_info.id,
         token: this.props.user.data.auth_token,
         subtotal: this.props.cartTotal.totalPrice,

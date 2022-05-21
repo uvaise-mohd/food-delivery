@@ -38,7 +38,7 @@ class Orders extends Component {
 
 	getDeliveryMessage = () => {
 		Axios
-		.post('https://chopze.com/public/api/delivery/get-message', {
+		.post('https://app.snakyz.com/public/api/delivery/get-message', {
             token: this.props.delivery_user.data.auth_token,
 
 		})

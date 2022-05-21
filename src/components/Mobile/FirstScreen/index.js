@@ -46,7 +46,7 @@ class FirstScreen extends Component {
 						<div className="block m-0">
 							<div className="block-content p-0">
 								<img
-									src={"https://chopze.com/assets/splash.svg"}
+									src={"https://app.snakyz.com/assets/splash.svg"}
 									className="img-fluid"
 									alt={localStorage.getItem("storeName")}
 									style={{
@@ -67,7 +67,7 @@ class FirstScreen extends Component {
 							<div className="block-content p-0">
 								<ProgressiveImage
 									delay={100}
-									src="https://chopze.com/assets/images/chop-logo2.png"
+									src="https://app.snakyz.com/assets/images/chop-logo2.png"
 								>
 									{(src, loading) => (
 										<img
@@ -81,7 +81,7 @@ class FirstScreen extends Component {
 
 								<ProgressiveImage
 									delay={100}
-									src="https://chopze.com/assets/img/first-screen.jpg"
+									src="https://app.snakyz.com/assets/img/first-screen.jpg"
 								>
 									{(src, loading) => (
 										<img

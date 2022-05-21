@@ -87,7 +87,7 @@ class Register extends Component {
         formData.append("licence_file", this.state.licence_file);
         formData.append("gst", this.state.gst);
 
-        Axios.post("https://chopze.com/public/api/register/store", formData)
+        Axios.post("https://app.snakyz.com/public/api/register/store", formData)
         .then(response => {
             const data = response.data;
             if (data.success) {
@@ -167,7 +167,7 @@ class Register extends Component {
 				<div className="bg-white" style={{ minHeight: '100vh' }}>
 					<div className="text-center">
 						<img
-							src="https://chopze.com/assets/images/chop-logo2.png"
+							src="https://app.snakyz.com/assets/images/chop-logo2.png"
 							alt="login-header"
                             style={{ maxHeight: '8rem' }}
 						/>

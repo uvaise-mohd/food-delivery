@@ -78,9 +78,9 @@ class Footer extends Component {
 								<aside className="col-md-3 text-white">
 									<ul className="list-unstyled hov_footer">
 										<h6 className="text-white">Pages</h6>
-										<li> <a target="_blank" href="https://chopze.com/privacy/index.html" className="text-muted">Privacy Policy</a></li>
-										<li> <a target="_blank" href="https://chopze.com/privacy/terms.html" className="text-muted">Terms and Conditions</a></li>
-										<li> <a target="_blank" href="https://chopze.com/privacy/cancellation.html" className="text-muted">Cancellation Policy</a></li>
+										<li> <a target="_blank" href="https://app.snakyz.com/privacy/index.html" className="text-muted">Privacy Policy</a></li>
+										<li> <a target="_blank" href="https://app.snakyz.com/privacy/terms.html" className="text-muted">Terms and Conditions</a></li>
+										<li> <a target="_blank" href="https://app.snakyz.com/privacy/cancellation.html" className="text-muted">Cancellation Policy</a></li>
 									</ul>
 								</aside>
 							</div>

@@ -41,7 +41,7 @@ class Register extends Component {
 
 	fetchDeliveryCities(){
         axios
-		.post('https://chopze.com/public/api/delivery/get-cities')
+		.post('https://app.snakyz.com/public/api/delivery/get-cities')
 		.then((response) => {
 			const data = response.data.data;
             // console.log(data);
@@ -119,7 +119,7 @@ class Register extends Component {
         formData.append("aadhar", this.state.aadhar);
         formData.append("vehicle_number", this.state.vehicle_number);
 
-        Axios.post("https://chopze.com/public/api/register/delivery", formData)
+        Axios.post("https://app.snakyz.com/public/api/register/delivery", formData)
         .then(response => {
             const data = response.data;
             if (data.success) {
@@ -199,7 +199,7 @@ class Register extends Component {
 				<div className="bg-white" style={{ minHeight: '100vh' }}>
 					<div className="text-center">
 						<img
-							src="https://chopze.com/assets/images/chop-logo2.png"
+							src="https://app.snakyz.com/assets/images/chop-logo2.png"
 							alt="login-header"
                             style={{ maxHeight: '8rem' }}
 						/>

@@ -19,7 +19,7 @@ class Footer extends Component {
 	componentDidMount() {
 		if (this.props.user.success) {
 			axios
-				.post('https://chopze.com/public/api/user-orders-check', {
+				.post('https://app.snakyz.com/public/api/user-orders-check', {
 					token: this.props.user.data.auth_token
 				})
 				.then((response) => {

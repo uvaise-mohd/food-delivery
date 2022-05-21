@@ -28,7 +28,7 @@ class Products extends Component {
 
     __fetchProducts(){
         axios
-		.post('https://chopze.com/public/api/store/get-store-products', {
+		.post('https://app.snakyz.com/public/api/store/get-store-products', {
 			token: this.props.store_user.data.auth_token
 		})
 		.then((response) => {
@@ -51,7 +51,7 @@ class Products extends Component {
     __toogleActive(product_id){
 		this.setState({ loading: true });
         axios
-		.post('https://chopze.com/public/api/store/toogle-product', {
+		.post('https://app.snakyz.com/public/api/store/toogle-product', {
             token: this.props.store_user.data.auth_token,
             product_id: product_id
 		})
@@ -65,7 +65,7 @@ class Products extends Component {
 	__toogleActiveCategory(id, is_active){
 		this.setState({ loading: true });
         axios
-		.post('https://chopze.com/public/api/store/toogle-item-category', {
+		.post('https://app.snakyz.com/public/api/store/toogle-item-category', {
             token: this.props.store_user.data.auth_token,
             id: id,
             is_active: is_active
@@ -174,7 +174,7 @@ class Products extends Component {
 																<div className="row pl-10">
 																	<LazyLoad>
 																	<div >
-																		<img src={'https://chopze.com/assets/img/items/'+item.image} style={{ height: '60px', width: '60px' }} className="flex-item-image" />
+																		<img src={'https://app.snakyz.com/assets/img/items/'+item.image} style={{ height: '60px', width: '60px' }} className="flex-item-image" />
 																	</div>
 																	</LazyLoad>
 																	<div>

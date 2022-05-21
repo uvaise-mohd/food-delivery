@@ -35,7 +35,7 @@ class Dashboard extends Component {
 
 	_fetchRestaurantsOwned(){
         Axios 
-		.post('https://chopze.com/public/api/store/fetch-owned-stores', {
+		.post('https://app.snakyz.com/public/api/store/fetch-owned-stores', {
             token: this.props.store_user.data.auth_token,
 		})
 		.then((response) => {
@@ -56,7 +56,7 @@ class Dashboard extends Component {
 
 	_fetchOrderData = () => {
 		Axios
-		.post('https://chopze.com/public/api/store/get-report-data', {
+		.post('https://app.snakyz.com/public/api/store/get-report-data', {
             token: this.props.store_user.data.auth_token,
 
 		})
@@ -72,7 +72,7 @@ class Dashboard extends Component {
 	__toggleActiveScheduleOff(restaurant_id){
 		this.setState({ loading: true });
         Axios
-		.post('https://chopze.com/public/api/store/off', {
+		.post('https://app.snakyz.com/public/api/store/off', {
             token: this.props.store_user.data.auth_token,
             store_id: restaurant_id
 		})
@@ -86,7 +86,7 @@ class Dashboard extends Component {
 	__toggleActiveTakeawayOff(restaurant_id){
 		this.setState({ loading: true });
         Axios
-		.post('https://chopze.com/public/api/store/takeaway-off', {
+		.post('https://app.snakyz.com/public/api/store/takeaway-off', {
             token: this.props.store_user.data.auth_token,
             store_id: restaurant_id
 		})

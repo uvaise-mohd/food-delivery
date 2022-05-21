@@ -210,9 +210,9 @@ class Location extends Component {
 				<Hero />
 
 				<div className="d-flex">
-					<img src="https://chopze.com/assets/images/chop-logo.png" style={{ width: '9vw', position: 'absolute', top: '20vh', left: '5vw' }} />
+					<img src="https://app.snakyz.com/assets/images/chop-logo.png" style={{ width: '9vw', position: 'absolute', top: '20vh', left: '5vw' }} />
 					<div style={{ width: '50vw' }}>
-						<img placeholder="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/portal/m/blue_placeholder" src="https://chopze.com/assets/login-bg.jpg" style={{ width: '50vw', height: '100vh', objectFit: 'cover' }} alt="chopze" />
+						<img placeholder="https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/portal/m/blue_placeholder" src="https://app.snakyz.com/assets/login-bg.jpg" style={{ width: '50vw', height: '100vh', objectFit: 'cover' }} alt="chopze" />
 					</div>
 					<div className="col-12 p-0 pt-0" style={{ minHeight: '50vh' }}>
 						<div style={{ width: '50vw' }}>

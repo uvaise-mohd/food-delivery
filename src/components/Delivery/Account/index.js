@@ -29,7 +29,7 @@ class Account extends Component {
 	__toggleActiveOff(user_id) {
 		this.setState({ loading: true });
 		Axios
-			.post('https://chopze.com/public/api/deliver-user/off', {
+			.post('https://app.snakyz.com/public/api/deliver-user/off', {
 				token: this.props.delivery_user.data.auth_token,
 				user_id: user_id
 			})

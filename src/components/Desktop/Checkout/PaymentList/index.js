@@ -138,7 +138,7 @@ class PaymentList extends Component {
 	}
 
 	sendOrderCompleteResponse = (id, payment_id, order_id, signature) => {
-		axios.post('https://chopze.com/public/api/process-razorpay-state-update', {
+		axios.post('https://app.snakyz.com/public/api/process-razorpay-state-update', {
 			id: id,
 			token: this.props.user.data.auth_token,
 			payment_id,
@@ -149,7 +149,7 @@ class PaymentList extends Component {
 
 	launchRazor = (order, history, runFunction, successRazor) => {
 		console.log(parseFloat(order.payable).toFixed(2));
-		axios.post('https://chopze.com/public/api/process-razorpay', {
+		axios.post('https://app.snakyz.com/public/api/process-razorpay', {
 			amount: parseFloat(order.payable).toFixed(2),
 			id: order.id,
 			token: this.props.user.data.auth_token
@@ -841,7 +841,7 @@ class PaymentList extends Component {
 					style={{ width: "20vw", margin: "auto" }}
 					PaperProps={{ style: { backgroundColor: "#fff", borderRadius: "10px", marginTop: "2vh" } }}
 				>
-					<img src="https://chopze.com/assets/order-success.gif" />
+					<img src="https://app.snakyz.com/assets/order-success.gif" />
 					<div style={{ fontWeight: 'bolder', fontSize: '16px', textAlign: 'center' }}>Successful</div>
 					<div className="mb-20" style={{ fontWeight: '400', fontSize: '13px', textAlign: 'center' }}>Order Placed Successfully</div>
 				</Dialog>
@@ -978,7 +978,7 @@ class PaymentList extends Component {
 														</div>
 														<div className="col-2 float-right mt-5">
 															<img
-																src="https://chopze.com/assets/wallet1.png"
+																src="https://app.snakyz.com/assets/wallet1.png"
 																alt={"Wallet"}
 																className="img-fluid"
 																style={{ height: '4rem', width: '4rem' }}
@@ -1005,7 +1005,7 @@ class PaymentList extends Component {
 														</div>
 														<div className="col-2 float-right mt-10">
 															<img
-																src="https://chopze.com/assets/wallet1.png"
+																src="https://app.snakyz.com/assets/wallet1.png"
 																alt={"Wallet"}
 																className="img-fluid"
 																style={{ height: '4rem', width: '4rem' }}
@@ -1032,7 +1032,7 @@ class PaymentList extends Component {
 															</div>
 															<div className="col-2 float-right mt-10">
 																<img
-																	src="https://chopze.com/assets/cod.png"
+																	src="https://app.snakyz.com/assets/cod.png"
 																	alt={gateway.name}
 																	className="img-fluid"
 																	style={{ height: '4rem', width: '4rem' }}
@@ -1053,7 +1053,7 @@ class PaymentList extends Component {
 														</div>
 														<div className="col-2 float-right mt-10">
 															<img
-																src="https://chopze.com/assets/online.png"
+																src="https://app.snakyz.com/assets/online.png"
 																alt={gateway.name}
 																className="img-fluid"
 																style={{ height: '4rem', width: '4rem' }}

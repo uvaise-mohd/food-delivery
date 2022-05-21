@@ -30,7 +30,7 @@ class NewAddon extends Component {
 
     fetchDta(){
         axios
-		.post('https://chopze.com/public/api/store/get-addon-categories', {
+		.post('https://app.snakyz.com/public/api/store/get-addon-categories', {
 			token: this.props.store_user.data.auth_token
 		})
 		.then((response) => {
@@ -73,7 +73,7 @@ class NewAddon extends Component {
             formData.append("price", this.state.price);
             formData.append("addon_category_id", this.state.addon_category_id);
 
-            Axios.post("https://chopze.com/public/api/store/add-addon", formData)
+            Axios.post("https://app.snakyz.com/public/api/store/add-addon", formData)
             .then(response => {
                 const data = response.data;
                 if (data.success) {

@@ -329,7 +329,7 @@ class LoginOtp extends Component {
 							paddingTop: '20%',
 						}}>
 							<div className='text-center' style={{ width: '100%', left: '0', bottom: '50px', }}>
-								<img src="https://chopze.com/assets/send-otp.jpg" style={{ height: '8rem', marginLeft: '9vw' }} />
+								<img src="https://app.snakyz.com/assets/send-otp.jpg" style={{ height: '8rem', marginLeft: '9vw' }} />
 								{this.state.otp ? (
 									<React.Fragment>
 										<div class="mt-20" style={{ textAlign: 'center', fontSize: '1.5rem', fontWeight: 'bolder', textTransform: 'capitalize' }}>
@@ -596,7 +596,7 @@ class LoginOtp extends Component {
 					</div>
 					<div className="mt-50 text-center">
 						By continuing, you agree to our <br />
-						<a href="https://chopze.com/privacy/index.html">
+						<a href="https://app.snakyz.com/privacy/index.html">
 							<span style={{ color: '#FE0B15' }}>
 								Terms of Service & Privacy Policy
 							</span>

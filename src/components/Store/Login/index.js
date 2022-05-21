@@ -76,7 +76,7 @@ class Login extends Component {
 				<div className="bg-white" style={{ height: '100vh' }}>
 					<div className="text-center">
 						<img
-							src="https://chopze.com/assets/images/chop-logo2.png"
+							src="https://app.snakyz.com/assets/images/chop-logo2.png"
 							className="login-image"
 							alt="login-header"
 						/>

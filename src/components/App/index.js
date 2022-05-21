@@ -23,11 +23,11 @@ class App extends Component {
 		// return <Redirect to={"/delivery/login"} />;
 		return (
 			<React.Fragment>
-				{window.innerWidth <= 768 ? (
+				{/* {window.innerWidth <= 768 ? ( */}
 					<Mobile languages={this.props.languages} />
-				) : (
+				{/* ) : (
 					<Desktop languages={this.props.languages} />
-				)}
+				)} */}
 			</React.Fragment>
 		);
 	}

@@ -50,7 +50,7 @@ class Footer extends Component {
 
 	__getOrdersData = () => {
 		axios
-		.post('https://chopze.com/public/api/store/get-all-orders', {
+		.post('https://app.snakyz.com/public/api/store/get-all-orders', {
 			token: this.props.store_user.data.auth_token,
 		})
 		.then((response) => {

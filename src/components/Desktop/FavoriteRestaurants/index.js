@@ -131,7 +131,7 @@ class FavoriteRestaurantList extends Component {
 															{restaurant.featured_description &&
 																<div className={`${!restaurant.is_active && "restaurant-not-active"}`} style={{ display: 'flex', alignItems: 'center' }}>
 																	<div className="mr-1">
-																		<img src="https://chopze.com/assets/discount.png" style={{ height: '1.5rem' }} />
+																		<img src="https://app.snakyz.com/assets/discount.png" style={{ height: '1.5rem' }} />
 																	</div>
 																	<div style={{ "maxWidth": "110px", "overflow": "hidden", "color": "#7E7E7E", "fontSize": "12px" }}>
 																		{restaurant.featured_description}

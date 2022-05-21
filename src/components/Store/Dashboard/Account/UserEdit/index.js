@@ -36,7 +36,7 @@ class StoreEdit extends Component {
         if (this.state.password == this.state.confirm_password) {
             this.setState({ loading: true });
             axios
-            .post('https://chopze.com/public/api/store/update-user', {
+            .post('https://app.snakyz.com/public/api/store/update-user', {
                 token: this.props.store_user.data.auth_token,
                 name: this.state.name,
                 phone: this.state.phone,

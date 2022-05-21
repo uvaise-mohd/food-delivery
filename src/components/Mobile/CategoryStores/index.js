@@ -40,7 +40,7 @@ class SlideStores extends Component {
 
         const userSetAddress = JSON.parse(localStorage.getItem("userSetAddress"));
         axios
-            .post('https://chopze.com/public/api/get-category-stores', {
+            .post('https://app.snakyz.com/public/api/get-category-stores', {
                 id: this.props.match.params.category_id,
                 latitude: userSetAddress.lat,
                 longitude: userSetAddress.lng,
@@ -196,7 +196,7 @@ class SlideStores extends Component {
                                                                     {restaurant.featured_description &&
                                                                         <div style={{ display: 'flex', alignItems: 'center' }}>
                                                                             <div className="mr-1">
-                                                                                <img src="https://chopze.com/assets/discount.png" style={{ height: '1rem' }} />
+                                                                                <img src="https://app.snakyz.com/assets/discount.png" style={{ height: '1rem' }} />
                                                                             </div>
                                                                             <div style={{ "maxWidth": "110px", "overflow": "hidden", "color": "#7E7E7E", "fontSize": "10px" }}>
                                                                                 {restaurant.featured_description}
@@ -253,7 +253,7 @@ class SlideStores extends Component {
                                                                     {restaurant.featured_description &&
                                                                         <div style={{ display: 'flex', alignItems: 'center' }}>
                                                                             <div className="mr-1">
-                                                                                <img src="https://chopze.com/assets/discount.png" style={{ height: '1rem' }} />
+                                                                                <img src="https://app.snakyz.com/assets/discount.png" style={{ height: '1rem' }} />
                                                                             </div>
                                                                             <div style={{ "maxWidth": "110px", "overflow": "hidden", "color": "#7E7E7E", "fontSize": "10px" }}>
                                                                                 {restaurant.featured_description}
@@ -315,7 +315,7 @@ class SlideStores extends Component {
                                                                     {restaurant.featured_description &&
                                                                         <div style={{ display: 'flex', alignItems: 'center' }}>
                                                                             <div className="mr-1">
-                                                                                <img src="https://chopze.com/assets/discount.png" style={{ height: '1rem' }} />
+                                                                                <img src="https://app.snakyz.com/assets/discount.png" style={{ height: '1rem' }} />
                                                                             </div>
                                                                             <div style={{ "maxWidth": "110px", "overflow": "hidden", "color": "#7E7E7E", "fontSize": "10px" }}>
                                                                                 {restaurant.featured_description}

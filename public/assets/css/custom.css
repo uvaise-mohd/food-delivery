@@ -3826,7 +3826,7 @@ button[type="submit"]:disabled {
 	height: 100px;
 	right: -4vw;
 	top: 151px;
-	background: url(https://chopze.com/assets/heart.png) no-repeat;
+	background: url(https://app.snakyz.com/assets/heart.png) no-repeat;
 	background-position: 0 0;
 	cursor: pointer;
 	transition: background-position 1s steps(28);
@@ -3843,7 +3843,7 @@ button[type="submit"]:disabled {
 	right: 260px;
 	width: 100px;
 	height: 100px;
-	background: url(https://chopze.com/assets/heart.png) no-repeat;
+	background: url(https://app.snakyz.com/assets/heart.png) no-repeat;
 	background-position: 0 0;
 	cursor: pointer;
 	transition: background-position 1s steps(28);

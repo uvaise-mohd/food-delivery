@@ -28,7 +28,7 @@ class Help extends Component {
                         <p className="mb-1 font-weight-bold">Email us on</p>
                         <p>
                             Need help with the Chopze app? Write us an email and we'll get back to you at the earliest.
-                            <p className="mt-2"><a className="font-weight-bold" href="mailto:help@chopze.com" style={{ color: localStorage.getItem("storeColor") }}>help@chopze.com</a></p>
+                            <p className="mt-2"><a className="font-weight-bold" href="mailto:help@app.snakyz.com" style={{ color: localStorage.getItem("storeColor") }}>help@app.snakyz.com</a></p>
                         </p>
                         <hr />
                         <p className="mb-1 font-weight-bold">Connect us on</p>

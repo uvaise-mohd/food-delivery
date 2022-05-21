@@ -38,7 +38,7 @@ class CompletedOrders extends Component {
 		if (this.state.from && this.state.to) {
 			this.setState({ loading: true });
 			Axios
-				.post('https://chopze.com/public/api/delivery/get-completed-orders', {
+				.post('https://app.snakyz.com/public/api/delivery/get-completed-orders', {
 					token: this.props.delivery_user.data.auth_token,
 					from: this.state.from,
 					to: this.state.to
@@ -94,7 +94,7 @@ class CompletedOrders extends Component {
 
 	render() {
 
-		const url = 'https://chopze.com/public/api/delivery/datewise-order/export?form=' + this.state.from + '&to=' + this.state.to + '&token=' + this.props.delivery_user.data.auth_token;
+		const url = 'https://app.snakyz.com/public/api/delivery/datewise-order/export?form=' + this.state.from + '&to=' + this.state.to + '&token=' + this.props.delivery_user.data.auth_token;
 
 		return (
 			<React.Fragment>

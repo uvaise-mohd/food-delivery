@@ -29,7 +29,7 @@ class Account extends Component {
 
 	_fetchRestaurantsOwned() {
 		Axios
-			.post('https://chopze.com/public/api/store/fetch-owned-stores', {
+			.post('https://app.snakyz.com/public/api/store/fetch-owned-stores', {
 				token: this.props.user.auth_token,
 			})
 			.then((response) => {
@@ -88,7 +88,7 @@ class Account extends Component {
 								<div className="bg-white mr-15 ml-15 p-15 mb-15" style={{ borderRadius: '8px', display: 'flex' }}>
 									<div className="col-3">
 										<Avatar
-											src={`https://chopze.com/assets/img/stores/${restaurant.image}`}
+											src={`https://app.snakyz.com/assets/img/stores/${restaurant.image}`}
 											name={restaurant.name}
 											size={60} />
 									</div>

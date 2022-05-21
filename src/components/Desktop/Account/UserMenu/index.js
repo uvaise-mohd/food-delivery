@@ -51,7 +51,7 @@ class UserMenu extends Component {
 							{/* <Ink duration="500" /> */}
 						</DelayLink>
 
-						<a href="mailto:help@chopze.com">
+						<a href="mailto:help@app.snakyz.com">
 							<div className="mb-20" style={{ display: 'flex', alignItems: 'center' }}>
 								<div className="my-account-menu-item">
 									<Icon icon="ic:outline-support-agent" width="25" />
