@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 import FirstScreen from "./FirstScreen";
 import Home from "./Home";
+import Onboard from "./Onboard";
 
 class Mobile extends Component {
     state = {
@@ -55,7 +56,7 @@ class Mobile extends Component {
                         <Home />
                     </div>
                 ) : (
-                    <FirstScreen languages={this.props.languages} />
+                    <Onboard languages={this.props.languages} />
                 )}
             </React.Fragment>
         );

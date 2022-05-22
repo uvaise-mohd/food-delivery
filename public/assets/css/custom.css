@@ -4211,3 +4211,61 @@ color: #fff !important;
 .chat-adjust-class {
     bottom: 10% !important;
 }
+
+.first-bg {
+    background-image: url("/assets/img/illustration.png");
+    height: 'auto';
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.active-onboard-progress {
+	height: 8px;
+	width: 30px;
+	background-color: #FF0000;
+	border-radius: 4px;
+
+}
+
+.inactive-onboard-progress {
+	height: 8px;
+	width: 10px;
+	background-color: #FF0000;
+	border-radius: 4px;
+	opacity: 40%;
+	margin-left: 10px;
+
+}
+
+.onboard-text {
+	font-weight: 900;
+	font-size: 22px;
+	line-height: 30.05px;
+	margin-top: 20px;
+	margin-left: 20px;
+}
+
+.onboard-image  {
+	margin-top: 100px;
+}
+
+.next-button  {
+	background-color: #FF0000;
+	height: 65px;
+	width: 90%;
+	border-radius: 25px;
+	margin-top: 100px;
+}
+.next-button div {
+	font-size: 16px;
+	font-weight: 700;
+}
+
+.skip-button  {
+	margin-top: 20px;
+}
+.skip-button div {
+	font-size: 16px;
+	font-weight: 700;
+	color: #ff0000;
+}
