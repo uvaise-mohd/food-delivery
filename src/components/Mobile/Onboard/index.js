@@ -82,7 +82,7 @@ class Onboard extends Component {
               <animated.div style={styles}>
                 <React.Fragment>
                   <div
-                    className="h-100 overflow-hidden"
+                    className="bg-white" style={{height:'100vh'}}
                     onClick={() => this.__secondSlider()}
                   >
                     <div className="pt-3 d-flex  align-items-center justify-content-center">
@@ -91,7 +91,7 @@ class Onboard extends Component {
                       <div className="inactive-onboard-progress" />
                     </div>
 
-                    <div className="onboard-text d-flex flex-column justify-content-start h-100 align-items-start p-5">
+                    <div className="onboard-text d-flex flex-column justify-content-start align-items-start p-5">
                       <span className="">Brow the largest variety of</span>
                       <span className="">fruits, vegetables,</span>
                       <span className="">groceries, drink</span>
@@ -118,7 +118,7 @@ class Onboard extends Component {
           </Spring>
         )}
         {this.state.second && (
-          <React.Fragment>
+          <React.Fragment style={{height:'100vh',backgroundColor:'#fff'}}>
             <div className="second-bg " onClick={this.__thirdSlider}>
               <div className="pt-3 d-flex  align-items-center justify-content-center">
                 <div className="inactive-onboard-progress" />
@@ -145,7 +145,7 @@ class Onboard extends Component {
           </React.Fragment>
         )}
         {this.state.third && (
-          <React.Fragment>
+          <React.Fragment style={{height:'100vh',backgroundColor:'#fff'}}>
             <div className="third-bg " onClick={this.__getStarted}>
               <div className="pt-3 d-flex  align-items-center justify-content-center">
                 <div className="inactive-onboard-progress" />
@@ -157,7 +157,7 @@ class Onboard extends Component {
                 <span className="">realtime.</span>
               </div>
               <div className="onboard-image d-flex align-items-center justify-content-center">
-                <img src="assets/img/delivery-illu.png" />
+                <img src="assets/img/illu-3.png" />
               </div>
               <div className="d-flex flex-column align-items-center justify-content-center">
                 <div className="next-button d-flex align-items-center justify-content-center text-white">
