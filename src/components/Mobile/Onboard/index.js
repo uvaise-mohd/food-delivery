@@ -66,7 +66,6 @@ class Onboard extends Component {
   render() {
     const { user } = this.props;
     if (user && user.success) {
-      console.log(user);
       window.location.href = "/home";
     }
     // if (user.success)
@@ -82,8 +81,9 @@ class Onboard extends Component {
               <animated.div style={styles}>
                 <React.Fragment>
                   <div
-                    className="bg-white" style={{height:'100vh'}}
-                    onClick={() => this.__secondSlider()}
+                    className="bg-white"
+                    style={{ height: "100vh" }}
+                    
                   >
                     <div className="pt-3 d-flex  align-items-center justify-content-center">
                       <div className="active-onboard-progress" />
@@ -103,13 +103,15 @@ class Onboard extends Component {
                     </div>
 
                     <div className="d-flex flex-column align-items-center justify-content-center">
-                      <div className="next-button d-flex align-items-center justify-content-center text-white">
+                      <div onClick={() => this.__secondSlider()} className="next-button d-flex align-items-center justify-content-center text-white">
                         <div>Next</div>
                       </div>
+                      <DelayLink delay={200} to={"/login"}>
 
                       <div className="skip-button d-flex align-items-center justify-content-center">
                         <div>Skip</div>
                       </div>
+                      </DelayLink>
                     </div>
                   </div>
                 </React.Fragment>
@@ -118,8 +120,8 @@ class Onboard extends Component {
           </Spring>
         )}
         {this.state.second && (
-          <React.Fragment style={{height:'100vh',backgroundColor:'#fff'}}>
-            <div className="second-bg " onClick={this.__thirdSlider}>
+          <React.Fragment style={{ height: "100vh", backgroundColor: "#fff" }}>
+            <div className="second-bg " >
               <div className="pt-3 d-flex  align-items-center justify-content-center">
                 <div className="inactive-onboard-progress" />
                 <div className="active-onboard-progress ml-2" />
@@ -133,20 +135,22 @@ class Onboard extends Component {
                 <img src="assets/img/delivery-illu.png" />
               </div>
               <div className="d-flex flex-column align-items-center justify-content-center">
-                <div className="next-button d-flex align-items-center justify-content-center text-white">
+                <div onClick={this.__thirdSlider} className="next-button d-flex align-items-center justify-content-center text-white">
                   <div>Next</div>
                 </div>
+                <DelayLink delay={200} to={"/login"}>
 
                 <div className="skip-button d-flex align-items-center justify-content-center">
                   <div>Skip</div>
                 </div>
+                </DelayLink>
               </div>
             </div>
           </React.Fragment>
         )}
         {this.state.third && (
-          <React.Fragment style={{height:'100vh',backgroundColor:'#fff'}}>
-            <div className="third-bg " onClick={this.__getStarted}>
+          <React.Fragment style={{ height: "100vh", backgroundColor: "#fff" }}>
+            <div className="third-bg ">
               <div className="pt-3 d-flex  align-items-center justify-content-center">
                 <div className="inactive-onboard-progress" />
                 <div className="inactive-onboard-progress" />
@@ -159,105 +163,17 @@ class Onboard extends Component {
               <div className="onboard-image d-flex align-items-center justify-content-center">
                 <img src="assets/img/illu-3.png" />
               </div>
-              <div className="d-flex flex-column align-items-center justify-content-center">
-                <div className="next-button d-flex align-items-center justify-content-center text-white">
-                  <div>Get Started</div>
-                </div>
-              </div>
-            </div>
-          </React.Fragment>
-        )}
-        {this.state.getStarted && (
-          <React.Fragment>
-            <div
-              className="get-started-bg overflow-hidden"
-              onClick={() => this.__getStarted()}
-            >
-              <div className="pt-3 d-flex  align-items-around align-content-center flex-nowrap justify-content-around ">
-                <div>
-                  <ProgressBar
-                    completed={100}
-                    bgColor="#1B6600"
-                    borderRadius="0px"
-                    height="0.7vw"
-                    width="20vw"
-                    isLabelVisible={false}
-                    baseBgColor="#c7c7c7"
-                    maxCompleted={100}
-                  />
-                </div>
-                <div>
-                  <ProgressBar
-                    completed={100}
-                    bgColor="#1B6600"
-                    height="0.7vw"
-                    width="20vw"
-                    borderRadius="0px"
-                    isLabelVisible={false}
-                    baseBgColor="#c7c7c7"
-                    maxCompleted={100}
-                  />
-                </div>
-                <div>
-                  <ProgressBar
-                    completed={100}
-                    bgColor="#1B6600"
-                    height="0.7vw"
-                    width="20vw"
-                    borderRadius="0px"
-                    isLabelVisible={false}
-                    baseBgColor="#c7c7c7"
-                    maxCompleted={100}
-                  />
-                </div>
-                <div>
-                  <ProgressBar
-                    completed={100}
-                    bgColor="#1B6600"
-                    height="0.7vw"
-                    width="20vw"
-                    borderRadius="0px"
-                    isLabelVisible={false}
-                    baseBgColor="#c7c7c7"
-                    maxCompleted={100}
-                  />
-                </div>
-              </div>
-              <div
-                className="d-flex flex-column justify-content-center align-items-start align-content-around h-100  px-4 "
-                style={{ color: "#ffffff" }}
-              >
-                <span className="fs-4 fw-normal ">
-                  {localStorage.getItem("cuts_satisfies_your_food")}
-                </span>{" "}
-                <span className="fs-4 fw-normal ">
-                  {localStorage.getItem("cravings_with_your_favourite")}
-                </span>{" "}
-                <span className="fs-4 fw-normal ">
-                  {localStorage.getItem("food_delivered_to_you")}
-                </span>
-                <span className="fs-4 fw-normal ">
-                  {localStorage.getItem("wherever_you_are")}
-                </span>
-                <DelayLink delay={200} to={"/login"}>
-                  <div className="mt-3 position-relative b-r-10">
-                    <button
-                      className="btn btn-warning text-white b-r-10 fw-bold py-3 px-5"
-                      style={{
-                        backgroundColor: "#FBA808",
-                        border: "none",
-                        outline: "none",
-                      }}
-                    >
-                      {localStorage.getItem("get_started")}
-                    </button>
-                    <Ink duration={500} style={{ color: "#aaaaaaa" }} />
+              <DelayLink delay={200} to={"/login"}>
+                <div className="d-flex flex-column align-items-center justify-content-center">
+                  <div className="next-button d-flex align-items-center justify-content-center text-white">
+                    <div>Get Started</div>
                   </div>
-                </DelayLink>
-              </div>
+                </div>
+              </DelayLink>
             </div>
           </React.Fragment>
         )}
+        
       </React.Fragment>
     );
   }

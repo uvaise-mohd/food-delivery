@@ -54,6 +54,7 @@
 		"react-masonry-css": "^1.0.16",
 		"react-minimal-pie-chart": "^8.2.0",
 		"react-moment": "^0.8.4",
+		"react-otp-input": "^2.4.0",
 		"react-payment-inputs": "^1.1.7",
 		"react-paypal-express-checkout": "^1.0.5",
 		"react-paystack": "^2.0.2",

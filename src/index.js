@@ -8,6 +8,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import Root from "./Root";
 import withTracker from "./withTracker";
+import Home from "./components/Mobile/Home";
 
 // import NotFound from "./components/NotFound";
 const NotFound = Loadable({
@@ -409,6 +410,7 @@ ReactDOM.render(
 				<Switch>
 					{/* <Route exact strict  path="/:url*" render={props => <Redirect to={`${props.location.pathname}/`} />} /> */}
 					<Route path={"/"} exact component={withTracker(App)} />
+					<Route path={"/home"} exact component={withTracker(Home)} />
 
 					{/* Test Routes*/}
 					{/* <Route path={"/saurabh/test"} exact component={TestComponent} /> */}
