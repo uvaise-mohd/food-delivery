@@ -178,26 +178,32 @@ class Home extends Component {
               history={history}
               loggedin={user.success}
             />
-            {/* <Nav
+            <Nav
               active_nearme={true}
               disable_back_button={true}
               history={history}
               loggedin={user.success}
-            /> */}
+            />
 
             <Link to="explore">
-              <div className="mock-search-block bg-white px-15 pt-10">
-                <div className="px-15 d-flex justify-content-between">
-                  <div>
-                    <span>Search Food or Store Here</span>
-                  </div>
+              <div className="mock-search-block bg-white px-5 pt-10">
+                <div style={{backgroundColor:'#F5F5F8',border:'none'}} className="px-15 d-flex justify-content-start align-items-center">
                   <div style={{ color: "#ababab", marginTop: "5px" }}>
-                    <Search />
+                    <Search set={'light'} primaryColor="#000" size={'small'}/>
+                  </div>
+                  <div className="ml-10">
+                    <span>Search Food or Store Here</span>
                   </div>
                 </div>
               </div>
             </Link>
+            <Link to="explore">
+              <div className=" px-5 pt-20">
+               <img style={{width:'100%'}} src="assets/img/snakyz-store.png">
 
+               </img>
+              </div>
+            </Link>
             {promo_slides.message && promo_slides.message.message && (
               <div
                 className="ml-15 mr-15 mt-20 p-10"
@@ -233,7 +239,7 @@ class Home extends Component {
                           <img
                             style={{ height: "2rem", width: "2rem" }}
                             src={WEBSITE_URL + category.image}
-							alt="name"
+                            alt="name"
                           />
                         </div>
                         <div
