@@ -4322,3 +4322,17 @@ footer.section-footer.border-top.bg-dark {
   font-size: 15px;
   background-position: 15px 14px !important;
 }
+
+.snaky-home-header {
+  padding-top: 20px;
+}
+.menu-square {
+  height: 40px;
+  width: 40px;
+  border: 1px solid #fe0000;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
