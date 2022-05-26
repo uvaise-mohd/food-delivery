@@ -4,7 +4,7 @@ import { Discount } from "react-iconly";
 class HomeHeader extends Component {
   render() {
     return (
-      <div className="col-12  sticky-top snaky-home-header">
+      <div className="col-12  snaky-home-header">
         <div className="d-flex align-items-center justify-content-between">
           <div className="menu-square">
             <div>

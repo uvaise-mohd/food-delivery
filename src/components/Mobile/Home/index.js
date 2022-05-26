@@ -27,6 +27,10 @@ import Rater from "react-rater";
 import "react-rater/lib/react-rater.css";
 import DelayLink from "../../helpers/delayLink";
 import HomeHeader from "./HomeHeader";
+import StoreCategories from "./StoreCategories";
+import RecommendedItems from "./RecommendedItems";
+import Categories from "./Categories";
+import PopularRestaurants from "./PopularRestaurants";
 // import moment from "moment";
 
 class Home extends Component {
@@ -162,6 +166,57 @@ class Home extends Component {
     const stores = this.state.shuffle;
 
     // console.log(stores);
+    const test = [
+      {
+        id: 1,
+        name: "Vegetable",
+        image: "",
+      },
+      {
+        id: 2,
+        name: "Meat",
+        image: "",
+      },
+      {
+        id: 3,
+        name: "Seafood",
+        image: "",
+      },
+      {
+        id: 2,
+        name: "Seafood",
+        image: "",
+      },
+      {
+        id: 2,
+        name: "Driedfoods",
+        image: "",
+      },
+      {
+        id: 2,
+        name: "Fast Food",
+        image: "",
+      },
+      {
+        id: 2,
+        name: "Fruit",
+        image: "",
+      },
+      {
+        id: 2,
+        name: "Vegetable",
+        image: "",
+      },
+    ];
+    const colors = [
+      "#3A860A",
+      "#EF8E91",
+      "#D26227",
+      "#0BAA45",
+      "#CB720B",
+      "#37A1EE",
+      "#FBA808",
+    ];
 
     return (
       <React.Fragment>
@@ -187,9 +242,12 @@ class Home extends Component {
 
             <Link to="explore">
               <div className="mock-search-block bg-white px-5 pt-10">
-                <div style={{backgroundColor:'#F5F5F8',border:'none'}} className="px-15 d-flex justify-content-start align-items-center">
+                <div
+                  style={{ backgroundColor: "#F5F5F8", border: "none" }}
+                  className="px-15 d-flex justify-content-start align-items-center"
+                >
                   <div style={{ color: "#ababab", marginTop: "5px" }}>
-                    <Search set={'light'} primaryColor="#000" size={'small'}/>
+                    <Search set={"light"} primaryColor="#000" size={"small"} />
                   </div>
                   <div className="ml-10">
                     <span>Search Food or Store Here</span>
@@ -199,9 +257,10 @@ class Home extends Component {
             </Link>
             <Link to="explore">
               <div className=" px-5 pt-20">
-               <img style={{width:'100%'}} src="assets/img/snakyz-store.png">
-
-               </img>
+                <img
+                  style={{ width: "100%" }}
+                  src="assets/img/snakyz-store.png"
+                />
               </div>
             </Link>
             {promo_slides.message && promo_slides.message.message && (
@@ -214,45 +273,7 @@ class Home extends Component {
             )}
 
             {promo_slides.categories && (
-              <React.Fragment>
-                <div
-                  className="ml-15 mt-20"
-                  style={{ fontSize: "1.2em", fontWeight: "900" }}
-                >
-                  Categories
-                </div>
-                <div
-                  className="ml-15 mr-15 mt-20"
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-around",
-                    alignItems: "center",
-                  }}
-                >
-                  {promo_slides.categories.map((category) => (
-                    <DelayLink
-                      to={"/category-stores/" + category.id}
-                      key={category.id}
-                    >
-                      <div style={{ textAlign: "-webkit-center" }}>
-                        <div className="category-block">
-                          <img
-                            style={{ height: "2rem", width: "2rem" }}
-                            src={WEBSITE_URL + category.image}
-                            alt="name"
-                          />
-                        </div>
-                        <div
-                          className="mt-2"
-                          style={{ fontSize: "13px", fontWeight: "900" }}
-                        >
-                          {category.name}
-                        </div>
-                      </div>
-                    </DelayLink>
-                  ))}
-                </div>
-              </React.Fragment>
+              <StoreCategories promo_slides={promo_slides} />
             )}
 
             {/* Passing slides as props to PromoSlider */}
@@ -264,300 +285,25 @@ class Home extends Component {
                 )}
             </React.Fragment>
 
-            {/* {promo_slides && promo_slides.items && promo_slides.items.length > 0 &&
-								<div className="ml-15 mr-15" style={{ marginTop: '30px' }}>
-									<div className="mb-10" style={{ fontSize: '1.2em', fontWeight: '900' }}>
-										Trending Items
-									</div>
-									<div style={{ display: "flex", overflowX: 'scroll', whiteSpace: 'nowrap' }}>
-										{promo_slides.items.map((item) =>
-											<div className="trending-item p-10 ml-5 mt-5 mb-5 mr-5">
-												<NavLink
-													to={"stores/" + item.store_slug + "/" + item.id}
-													key={item.id}
-													style={{ position: "relative" }}
-												>
-													<LazyLoad>
-														<img
-															src={WEBSITE_URL + "/assets/img/items/" + item.image}
-															alt={item.name}
-															style={{
-																height: '90px',
-																width: '90px',
-																borderRadius: '8px',
-																objectFit: 'cover'
-															}}
-														/>
-													</LazyLoad>
-													<Ink duration="500" hasTouch={true} />
-												</NavLink>
-												<div className="mt-5" style={{ "maxWidth": "90px", "overflow": "hidden" }}>
-													{item.name}
-												</div>
-												<div style={{ "maxWidth": "90px", "overflow": "hidden", "color": "#7E7E7E", "fontSize": "8px" }}>
-													{item.description}
-												</div>
-												<div style={{ display: 'flex', alignItems: 'center' }}>
-													<div className="mr-5" style={{ fontWeight: '600', fontSize: '11px' }}>
-														<span className="rupees-symbol">₹ </span>{item.price}
-													</div>
-													{item.old_price && item.old_price > 0 &&
-														<div style={{ color: 'red', textDecoration: 'line-through', fontSize: '9px' }}>
-															<span className="rupees-symbol">₹ </span>{item.old_price}
-														</div>
-													}
-												</div>
-											</div>
-										)}
-									</div>
-								</div>
-							} */}
-
-            {promo_slides &&
-              promo_slides.trending_stores &&
-              promo_slides.trending_stores.length > 0 && (
-                <div className="ml-15 mr-15" style={{ marginTop: "30px" }}>
-                  <div
-                    className="mb-10"
-                    style={{ fontSize: "1.2em", fontWeight: "900" }}
-                  >
-                    Trending Stores
-                  </div>
-                  <div
-                    style={{
-                      display: "flex",
-                      overflowX: "scroll",
-                      whiteSpace: "nowrap",
-                    }}
-                  >
-                    {promo_slides.trending_stores.map((store) => (
-                      <div
-                        className="p-10 ml-5 mt-5 mb-5 mr-5"
-                        style={{
-                          borderRadius: "10px",
-                          boxShadow: "rgb(136 136 136) 0px 0px 10px -5px",
-                        }}
-                      >
-                        <NavLink
-                          to={"stores/" + store.slug}
-                          key={store.id}
-                          style={{ position: "relative" }}
-                        >
-                          <LazyLoad>
-                            <img
-                              src={WEBSITE_URL + store.image}
-                              alt={store.name}
-                              style={{
-                                height: "80px",
-                                width: "32vw",
-                                borderRadius: "8px",
-                                objectFit: "cover",
-                              }}
-                              className={`${!store.is_active &&
-                                "restaurant-not-active"}`}
-                            />
-                          </LazyLoad>
-                          <Ink duration="500" hasTouch={true} />
-                        </NavLink>
-                        <div
-                          className="mt-5"
-                          style={{
-                            maxWidth: "32vw",
-                            overflow: "hidden",
-                            fontWeight: "bolder",
-                          }}
-                        >
-                          {store.name}
-                        </div>
-                        {!store.is_active && (
-                          <div className="restaurant-not-active-msg">
-                            Not Accepting Any Orders
-                          </div>
-                        )}
-                        <div
-                          style={{
-                            maxWidth: "32vw",
-                            overflow: "hidden",
-                            color: "#7E7E7E",
-                            fontSize: "10px",
-                          }}
-                        >
-                          {store.description}
-                        </div>
-                        <div
-                          className="d-flex"
-                          style={{
-                            justifyContent: "space-between",
-                            color: "#7E7E7E",
-                            fontSize: "9px",
-                          }}
-                        >
-                          <div>
-                            <Rater total={5} rating={store.avgRating} />
-                          </div>
-                          <div
-                            style={{
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "center",
-                            }}
-                          >
-                            <TimeCircle
-                              style={{ marginRight: "1px" }}
-                              size={10}
-                            />
-                            <span className="mt-1">
-                              {" "}
-                              {store.delivery_time} mins
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
             <React.Fragment>
-              <div
-                style={{
-                  marginTop:
-                    promo_slides.trending_stores &&
-                    promo_slides.trending_stores.length > 0
-                      ? null
-                      : "50px",
-                }}
-              >
-                {promo_slides &&
-                  promo_slides.sliders &&
-                  promo_slides.sliders.length > 0 && (
-                    <SmallSlider slides={promo_slides.sliders} />
-                  )}
-              </div>
+              {promo_slides &&
+                promo_slides.sliders &&
+                promo_slides.sliders.length > 0 && (
+                  <SmallSlider slides={promo_slides.sliders} />
+                )}
+              {/* </div> */}
             </React.Fragment>
 
             {promo_slides &&
               promo_slides.featuresStores &&
               promo_slides.featuresStores.length > 0 && (
-                <div style={{ marginTop: "30px" }}>
-                  <div
-                    className="ml-10"
-                    style={{ fontSize: "1.2em", fontWeight: "900" }}
-                  >
-                    Featured Stores
-                  </div>
-                  <div
-                    className="d-flex m-0"
-                    style={{
-                      flexWrap: "wrap",
-                      margin: "5px",
-                      padding: "10px",
-                      justifyContent: "space-between",
-                      backgroundColor: "white",
-                    }}
-                  >
-                    {promo_slides.featuresStores.map((restaurant) => (
-                      <div className="store-block p-10 d-flex justify-content-center">
-                        <NavLink
-                          to={"stores/" + restaurant.slug}
-                          key={restaurant.id}
-                          style={{ position: "relative" }}
-                        >
-                          <LazyLoad>
-                            <img
-                              src={WEBSITE_URL + restaurant.image}
-                              placeholder={
-                                "https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/portal/m/blue_placeholder"
-                              }
-                              // alt={restaurant.name}
-                              style={{
-                                height: "80px",
-                                width: "36vw",
-                                borderRadius: "8px",
-                                objectFit: "cover",
-                              }}
-                              className={`${!restaurant.is_active &&
-                                "restaurant-not-active"}`}
-                            />
-                          </LazyLoad>
-                          <div
-                            className="mt-5"
-                            style={{
-                              maxWidth: "36vw",
-                              overflow: "hidden",
-                              fontWeight: "bolder",
-                            }}
-                          >
-                            {restaurant.name}
-                          </div>
-                          {!restaurant.is_active && (
-                            <div className="restaurant-not-active-msg">
-                              Not Accepting Any Orders
-                            </div>
-                          )}
-                          <div
-                            style={{
-                              maxWidth: "110px",
-                              overflow: "hidden",
-                              color: "#7E7E7E",
-                              fontSize: "10px",
-                            }}
-                          >
-                            {restaurant.description}
-                          </div>
-                          <div
-                            className="d-flex"
-                            style={{
-                              justifyContent: "space-between",
-                              color: "#7E7E7E",
-                              fontSize: "9px",
-                            }}
-                          >
-                            <div>
-                              <Rater total={5} rating={restaurant.avgRating} />
-                            </div>
-                            <div
-                              style={{
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
-                              }}
-                            >
-                              <TimeCircle
-                                style={{ marginRight: "1px" }}
-                                size={10}
-                              />
-                              <span> {restaurant.delivery_time} mins</span>
-                            </div>
-                          </div>
-                          {restaurant.featured_description && (
-                            <div
-                              style={{ display: "flex", alignItems: "center" }}
-                            >
-                              <div className="mr-1">
-                                <img
-                                  src="https://app.snakyz.com/assets/discount.png"
-                                  style={{ height: "1rem" }}
-                                />
-                              </div>
-                              <div
-                                style={{
-                                  maxWidth: "110px",
-                                  overflow: "hidden",
-                                  color: "#7E7E7E",
-                                  fontSize: "10px",
-                                }}
-                              >
-                                {restaurant.featured_description}
-                              </div>
-                            </div>
-                          )}
-                          <Ink duration="500" hasTouch={true} />
-                        </NavLink>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                <PopularRestaurants promo_slides={promo_slides} />
+              )}
+            <Categories />
+            {promo_slides &&
+              promo_slides.items &&
+              promo_slides.items.length > 0 && (
+                <RecommendedItems promo_slides={promo_slides} />
               )}
 
             {promo_slides &&
