@@ -25,11 +25,11 @@ class PopularRestaurants extends Component {
                         color: "#FF6C44",
                       }}
                     >
-                      Show All
+                      Show all
                     </div>
                   </div>
                   <div
-                    className="d-flex mt-20 ml-10"
+                    className="d-flex mt-20"
                     style={{
                       display: "flex",
                       overflowX: "auto",
@@ -83,6 +83,7 @@ class PopularRestaurants extends Component {
                                 display: "flex",
                                 alignItems: "center",
                                 justifyContent: "center",
+                                marginTop:'5px'
                               }}
                             >
                               {/* <div className="mr-1">
@@ -96,6 +97,8 @@ class PopularRestaurants extends Component {
                                   overflow: "hidden",
                                   color: "#757D85",
                                   fontSize: "10px",
+                                  textAlign:'center'
+                                  
                                 }}
                               >
                                 {restaurant.featured_description}
@@ -107,6 +110,9 @@ class PopularRestaurants extends Component {
                                 overflow: "hidden",
                                 color: "#757D85",
                                 fontSize: "10px",
+                                textAlign:'center',
+                                marginTop:'5px'
+
                               }}
                             >
                               {restaurant.description}

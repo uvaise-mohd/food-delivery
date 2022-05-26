@@ -26,7 +26,7 @@ class RecommendedItems extends Component {
               color: "#FE0000",
             }}
           >
-            Show All
+            Show all
           </div>
         </div>
         <div className="x-scroll">

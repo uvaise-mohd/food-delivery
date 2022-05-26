@@ -22,7 +22,7 @@ import { Link } from "react-router-dom";
 import Loading from "../../helpers/loading";
 import LazyLoad from "react-lazyload";
 import { NavLink } from "react-router-dom";
-import { TimeCircle, Star } from "react-iconly";
+import { TimeCircle, Star, Location } from "react-iconly";
 import Rater from "react-rater";
 import "react-rater/lib/react-rater.css";
 import DelayLink from "../../helpers/delayLink";
@@ -31,6 +31,7 @@ import StoreCategories from "./StoreCategories";
 import RecommendedItems from "./RecommendedItems";
 import Categories from "./Categories";
 import PopularRestaurants from "./PopularRestaurants";
+import SuggestedItems from "./SuggestedItems";
 // import moment from "moment";
 
 class Home extends Component {
@@ -257,10 +258,7 @@ class Home extends Component {
             </Link>
             <Link to="explore">
               <div className=" px-5 pt-20">
-                <img
-                  style={{ width: "100%" }}
-                  src="assets/img/snakyz-store.png"
-                />
+                <img style={{ width: "100%" }} src="assets/img/card.png" />
               </div>
             </Link>
             {promo_slides.message && promo_slides.message.message && (
@@ -277,22 +275,14 @@ class Home extends Component {
             )}
 
             {/* Passing slides as props to PromoSlider */}
-            <React.Fragment>
-              {promo_slides &&
-                promo_slides.banners &&
-                promo_slides.banners.length > 0 && (
-                  <PromoSlider slides={promo_slides.banners} />
-                )}
-            </React.Fragment>
 
-            <React.Fragment>
+            {/* <React.Fragment>
               {promo_slides &&
                 promo_slides.sliders &&
                 promo_slides.sliders.length > 0 && (
                   <SmallSlider slides={promo_slides.sliders} />
                 )}
-              {/* </div> */}
-            </React.Fragment>
+            </React.Fragment> */}
 
             {promo_slides &&
               promo_slides.featuresStores &&
@@ -306,23 +296,141 @@ class Home extends Component {
                 <RecommendedItems promo_slides={promo_slides} />
               )}
 
+            {promo_slides && promo_slides.coupon && (
+              <Link to="explore">
+                <div className=" px-5 pt-20">
+                  <img
+                    style={{ width: "100%" }}
+                    src={"https://app.snakyz.com/" + promo_slides.coupon.image}
+                  />
+                </div>
+              </Link>
+            )}
+            <React.Fragment>
+              {promo_slides &&
+                promo_slides.banners &&
+                promo_slides.banners.length > 0 && (
+                  <PromoSlider slides={promo_slides.banners} />
+                )}
+
+
+            </React.Fragment>
+
+            {promo_slides &&
+              promo_slides.items &&
+              promo_slides.items.length > 0 && (
+                <SuggestedItems promo_slides={promo_slides} />
+              )} 
+
             {promo_slides &&
             promo_slides.stores &&
             promo_slides.stores.length > 0 ? (
               <React.Fragment>
-                <div
-                  className="ml-10"
-                  style={{
-                    fontSize: "1.2em",
-                    fontWeight: "900",
-                    marginTop: promo_slides.featuresStores.length
-                      ? null
-                      : "30px",
-                  }}
-                >
-                  Explore Restaurants
+                <div className="d-flex align-items-center justify-content-between">
+                  <div
+                    className="ml-10 mt-10"
+                    style={{ fontSize: "1.2em", fontWeight: "600" }}
+                  >
+                    Restaurants Near You
+                  </div>
                 </div>
-                <div
+                {stores.map((restaurant) => (
+                  <div className="d-flex align-items-center ml-10 ">
+                    <NavLink
+                      to={"stores/" + restaurant.slug}
+                      key={restaurant.id}
+                      style={{ position: "relative" }}
+                    >
+                      <div className="d-flex align-items-center mt-20">
+                        <div className="">
+                          <LazyLoad>
+                            <img
+                              src={WEBSITE_URL + restaurant.image}
+                              placeholder={
+                                "https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/portal/m/blue_placeholder"
+                              }
+                              // alt={restaurant.name}
+                              style={{
+                                height: "140px",
+                                width: "115px",
+                                borderRadius: "8px",
+                                objectFit: "cover",
+                              }}
+                              className={`${!restaurant.is_active &&
+                                "restaurant-not-active"}`}
+                            />
+                          </LazyLoad>
+                        </div>
+                        <div className="d-flex flex-column align-items-start ml-20">
+                          <div className="nearby-name">{restaurant.name}</div>
+                          <div className="nearby-desc mt-5">
+                            {restaurant.description}
+                          </div>
+                          <div className="nearby-address mt-5">
+                            {restaurant.address}
+                          </div>
+                          <hr className="hr-nearby " />
+
+                          <div
+                            className="d-flex align-items-center justify-content-between"
+                            style={{
+                              width: "50vw",
+                              color: "#000",
+                              fontWeight: 600,
+                              fontSize: "11px",
+                            }}
+                          >
+                            <div className="d-flex align-items-center">
+                              <div>
+                                <Rater total={1} rating={1} />
+                              </div>
+                              <div className="ml-5">
+                                4.5
+                                {/* {restaurant.avgRating} */}
+                              </div>
+                            </div>
+                            <div className="d-flex align-items-center">
+                              <div className="mt-1">
+                                <TimeCircle
+                                  style={{ marginRight: "1px" }}
+                                  size={12}
+                                />
+                              </div>
+                              <div className="ml-5">
+                                {restaurant.delivery_time} Mins
+                              </div>
+                            </div>
+                            <div className="d-flex align-items-center">
+                              <div className="mt-1">
+                                <Location
+                                  style={{ marginRight: "1px" }}
+                                  primaryColor={"#FF0000"}
+                                  set={"bold"}
+                                  size={12}
+                                />
+                              </div>
+                              <div className="ml-5">
+                                {parseFloat(restaurant.distance).toFixed(2)} Km
+                              </div>
+                            </div>
+                          </div>
+                          <div className="d-flex align-items-center justify-content-around">
+                            {restaurant.coupons &&
+                              restaurant.coupons.length !== 0 &&
+                              restaurant.coupons.slice(0, 2).map((coupon) => (
+                                <div className="d-flex align-items-center nearby-coupons mr-10">
+                                  {coupon.code}
+                                </div>
+                              ))}
+                          </div>
+                        </div>
+                      </div>
+                      <Ink duration="500" hasTouch={true} />
+                    </NavLink>
+                  </div>
+                ))}
+
+                {/* <div
                   className="d-flex m-0"
                   style={{
                     flexWrap: "wrap",
@@ -432,7 +540,7 @@ class Home extends Component {
                       </NavLink>
                     </div>
                   ))}
-                </div>
+                </div> */}
               </React.Fragment>
             ) : (
               <React.Fragment>
@@ -460,7 +568,7 @@ class Home extends Component {
               </React.Fragment>
             )}
 
-            {promo_slides && promo_slides.categories && (
+            {/* {promo_slides && promo_slides.categories && (
               <NavLink
                 to={"/category-stores/" + 1}
                 style={{ position: "relative" }}
@@ -470,8 +578,8 @@ class Home extends Component {
                 </div>
                 <Ink duration="500" hasTouch={true} />
               </NavLink>
-            )}
-
+            )} */}
+            <div style={{height:'100px'}}/>
             {/* <RestaurantList user={user} /> */}
             <Footer active_home={true} />
           </div>

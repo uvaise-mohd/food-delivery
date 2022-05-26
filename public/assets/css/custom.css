@@ -639,7 +639,7 @@ table > tbody > tr {
   /* box-shadow: rgb(136 136 136) 0px 0px 10px -5px; */
   border-radius: 10px;
   margin: 8px;
-  background-color: #F5F5F8;
+  background-color: #f5f5f8;
   min-height: 220px;
   min-width: 150px;
 }
@@ -657,8 +657,7 @@ table > tbody > tr {
   border-radius: 8px;
   min-width: 320px;
   min-height: 160px;
-  background-color: #F5F5F8;
-
+  background-color: #f5f5f8;
 }
 .x-scroll {
   display: flex;
@@ -686,7 +685,6 @@ table > tbody > tr {
 .trending-item-price {
   font-size: 16px;
   font-weight: 700;
-
 }
 .carousel .control-dots {
   bottom: -35px !important;
@@ -4337,20 +4335,20 @@ footer.section-footer.border-top.bg-dark {
 }
 
 .call-input-icon {
-	padding-left: 50px !important;
-  
-	background: url("/assets/img/call-illu.png") no-repeat left;
-	background-size: 20px;
-	height: 50px !important;
-	padding-left: 20px;
-	letter-spacing: 1px;
-	color: black;
-	margin-top: 40px;
-	box-shadow: none;
-	font-size: 15px;
-	background-position: 15px 14px !important;
-  }
-  
+  padding-left: 50px !important;
+
+  background: url("/assets/img/call-illu.png") no-repeat left;
+  background-size: 20px;
+  height: 50px !important;
+  padding-left: 20px;
+  letter-spacing: 1px;
+  color: black;
+  margin-top: 40px;
+  box-shadow: none;
+  font-size: 15px;
+  background-position: 15px 14px !important;
+}
+
 .name-input-icon {
   padding-left: 50px !important;
 
@@ -4379,3 +4377,41 @@ footer.section-footer.border-top.bg-dark {
   justify-content: center;
 }
 
+.nearby-name {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 12px;
+}
+
+.nearby-desc {
+  font-weight: 400;
+  font-size: 11px;
+  color: #564e4e;
+}
+
+.nearby-address {
+  font-weight: 400;
+  font-size: 10px;
+  color: #564e4e;
+}
+
+.hr-nearby {
+  border: none;
+  height: 0.1px;
+  width: 55vw;
+  background-color: #9e9b9b; /* Modern Browsers */
+}
+
+.nearby-coupons{
+  height: 20px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0.5px solid #FF0000;
+  margin-top: 10px;
+  border-radius: 5px;
+  color: #564E4E;
+  font-weight: 400;
+  font-size: 10px;
+}
