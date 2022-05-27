@@ -751,12 +751,16 @@ table > tbody > tr {
 }
 .float-cart--open {
   opacity: 1;
-  bottom: 0rem;
+  bottom: 1rem;
   -webkit-transition: 0.2s all linear;
   -o-transition: 0.2s all linear;
   transition: 0.2s all linear;
   box-shadow: 0px 2px 25px 12px rgb(0 0 0 / 10%);
-  background-color: #ffffff;
+  background-color: #FF0000;
+  width: 95vw;
+  border-radius: 16px;
+  margin: 10px;
+   min-height: 80px;
 }
 
 .float-cart-desktop {
@@ -4432,3 +4436,4 @@ footer.section-footer.border-top.bg-dark {
   color:#425060;
 
 }
+
