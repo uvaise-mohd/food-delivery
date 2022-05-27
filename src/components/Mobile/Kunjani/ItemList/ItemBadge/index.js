@@ -4,10 +4,10 @@ class ItemBadge extends Component {
 	render() {
 		return (
 			<React.Fragment>
-				<span>
+				<span className="item-badge-collection">
 					{this.props.item.is_recommended === 1 ? (
 						<span
-							className="item-badge badge badge-danger mt-1"
+							className="item-badge"
 							style={{ backgroundColor: localStorage.getItem("recommendedBadgeColor") }}
 						>
 							{localStorage.getItem("recommendedBadgeText")}
@@ -15,14 +15,14 @@ class ItemBadge extends Component {
 					) : null}
 					{this.props.item.is_popular === 1 ? (
 						<span
-							className="item-badge badge badge-warning"
+							className="item-badge"
 							style={{ backgroundColor: localStorage.getItem("popularBadgeColor") }}
 						>
 							{localStorage.getItem("popularBadgeText")}
 						</span>
 					) : null}
 					{this.props.item.is_new === 1 ? (
-						<span className="item-badge badge badge-primary" style={{ backgroundColor: localStorage.getItem("newBadgeColor") }}>
+						<span className="item-badge" style={{ backgroundColor: localStorage.getItem("newBadgeColor") }}>
 							{localStorage.getItem("newBadgeText")}
 						</span>
 					) : null}

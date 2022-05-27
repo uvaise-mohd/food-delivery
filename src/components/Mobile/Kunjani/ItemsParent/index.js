@@ -6,7 +6,7 @@ class ItemsParent extends Component {
 	render() {
 		return (
 			<React.Fragment>
-				{window.innerWidth >= 1024 ? (
+				{window.innerWidth >= 768 ? (
 					<Desktop restaurant={this.props.match.params.restaurant} />
 				) : (
 					<Items restaurant={this.props.match.params.restaurant} history={this.props.history} />

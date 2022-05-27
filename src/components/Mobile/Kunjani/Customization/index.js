@@ -3,7 +3,6 @@ import React, { Component } from "react";
 import Ink from "react-ink";
 
 import Modal from "react-responsive-modal";
-import { connect } from "react-redux";
 
 class Customization extends Component {
 	state = {
@@ -25,7 +24,6 @@ class Customization extends Component {
 		}
 
 		let checkboxes = document.querySelectorAll("input[type=checkbox]:checked");
-
 		for (let i = 0; i < checkboxes.length; i++) {
 			addons["selectedaddons"].push({
 				addon_category_name: checkboxes[i].name,
@@ -46,50 +44,29 @@ class Customization extends Component {
 		this.props.forceUpdate();
 	};
 	render() {
-		const { product, cartProducts } = this.props;
+		const { product } = this.props;
+		// console.log(product)
 		return (
 			<React.Fragment>
-				
-				{cartProducts.find((cp) => cp.id === product.id) ===
-					undefined && (
-					<React.Fragment>
-						<button
-							type="button"
-							className="btn btn-success"
-							style={{position: 'relative', backgroundColor:'white', borderRadius: '0.5rem' ,  borderColor: 'gray', color: 'black',"height":"3rem !important","fontSize":"1rem !important","width":"70px",fontWeight:"500"}}
-
-							onClick={this.handlePopupOpen}
-						>
-							<div className="" style={{color:'#000000', fontWeight:'bold'}}>ADD</div>
-							<Ink duration="500" />
-						</button>
-					</React.Fragment>
-				)}
-
-				{cartProducts.find((cp) => cp.id === product.id) !==
-					undefined && (
-					<React.Fragment>
-						<button
-							type="button"
-							className="btn btn-add-remove"
-							style={{
-								color: localStorage.getItem("cartColor-bg"),
-								width:'30px'
-							}}
-							onClick={this.handlePopupOpen}
-						>
-							<div className="btn-dec  pb-1" style={{color:'#000000', backgroundColor:'#fffffff', borderRadius:'0.5rem',fontWeight:'500',fontSize:'15px'}}>+</div>
-							<Ink duration="500" />
-						</button>
-					</React.Fragment>
-				)}
-
-				<Modal open={this.state.open} onClose={this.handlePopupClose} closeIconSize={20}>
-					<div>
-						<h3 className="mb-2">{localStorage.getItem("customizationHeading")}</h3>
-						<hr className="mb-30 mt-10" style={{ borderColor: "#ccc" }} />
+				<button
+					type="button"
+					style={{"position":"relative","border":"1px solid rgb(255, 72, 72)","color":"rgb(255, 72, 72)","width":"70px","backgroundColor":"rgb(255, 255, 255)","letterSpacing":"0.8px","fontWeight":"bolder","padding":"4px","borderRadius":"0.8rem"}}
+					onClick={this.handlePopupOpen}
+				>
+						ADD
+					<Ink duration="500" />
+				</button>
+				<Modal open={this.state.open} onClose={this.handlePopupClose} closeIconSize={32}>
+					<div
+						style={{
+							marginTop: "5rem",
+							textAlign: "left",
+						}}
+					>
+						<h4 className="mb-2">Customizations</h4>
+						<hr className="mb-30 mt-10" style={{ borderTop: '1px dashed black' }} />
 						{product.addon_categories.map((addon_category) => (
-							<div key={addon_category.id}>
+							<div key={addon_category.id} className="addon-category-block">
 								<React.Fragment>
 									<p className="addon-category-name mb-2">{addon_category.name}</p>
 									{addon_category.addons.length && (
@@ -99,10 +76,10 @@ class Customization extends Component {
 													<div className="form-group addon-list">
 														<input
 															type={
-																addon_category.type === "SINGLE" ? "radio" : "checkbox"
+																addon_category.type === "Single" ? "radio" : "checkbox"
 															}
 															className={
-																addon_category.type === "SINGLE"
+																addon_category.type === "Single"
 																	? "magic-radio"
 																	: "magic-checkbox"
 															}
@@ -111,28 +88,17 @@ class Customization extends Component {
 															data-addon-name={addon.name}
 															value={addon.price}
 															defaultChecked={
-																addon_category.type === "SINGLE" && index === 0 && true
+																addon_category.type === "Single" && index === 0 && true
 															}
 														/>
-														{addon_category.type === "SINGLE" && (
+														{addon_category.type === "Single" && (
 															<label htmlFor={addon.name} />
 														)}
 
 														<label className="text addon-label" htmlFor={addon.name}>
 															{addon.name}{" "}
-															<span className="addon-label-price ml-1">
-																{localStorage.getItem("hidePriceWhenZero") === "true" &&
-																addon.price === "0.00" ? null : (
-																	<React.Fragment>
-																		{localStorage.getItem("currencySymbolAlign") ===
-																			"left" &&
-																			localStorage.getItem("currencyFormat")}
-																		{addon.price}{" "}
-																		{localStorage.getItem("currencySymbolAlign") ===
-																			"right" &&
-																			localStorage.getItem("currencyFormat")}
-																	</React.Fragment>
-																)}
+															<span className="ml-1 font-w600">
+																<span className="rupees-symbol">₹</span> {addon.price}
 															</span>
 														</label>
 													</div>
@@ -147,15 +113,18 @@ class Customization extends Component {
 						<button
 							className="btn btn-lg btn-customization-done"
 							onClick={() => {
+								product.quantity = 1;
 								this._processAddons(product);
 								this.handlePopupClose();
 							}}
 							style={{
-								backgroundColor: '#fc8019',
-								color: localStorage.getItem("cartColorText"),
+								backgroundColor: '#FE0B15',
+								color: 'white',
+								fontWeight: 'bolder',
+								borderRadius: '2rem'
 							}}
 						>
-							{localStorage.getItem("customizationDoneBtnText")}
+							ADD TO CART
 						</button>
 					</div>
 				</Modal>
@@ -163,10 +132,5 @@ class Customization extends Component {
 		);
 	}
 }
-const mapStateToProps = (state) => ({
-	cartProducts: state.cart.products,
-});
 
-export default connect(
-	mapStateToProps,
-)(Customization);
+export default Customization;

@@ -1,198 +1,350 @@
 import React, { Component } from "react";
-import { addProduct, removeProduct } from "../../../../../services/cart/actions";
+import {
+  addProduct,
+  removeProduct,
+} from "../../../../../services/cart/actions";
 
 import Customization from "../../Customization";
 import Fade from "react-reveal/Fade";
 import Ink from "react-ink";
 import LazyLoad from "react-lazyload";
 import { WEBSITE_URL } from "../../../../../configs/website";
+
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { Star } from "react-iconly";
 
 class RecommendedItems extends Component {
-	static contextTypes = {
-		router: () => null,
-	};
+  static contextTypes = {
+    router: () => null,
+  };
 
-	forceStateUpdate = () => {
-		setTimeout(() => {
-			this.forceUpdate();
-			this.props.update();
-		}, 100);
-	};
+  forceStateUpdate = () => {
+    setTimeout(() => {
+      this.forceUpdate();
+      this.props.update();
+    }, 100);
+  };
 
-	render() {
-		const { addProduct, removeProduct, product, cartProducts, restaurant } = this.props;
-		product.quantity = 1;
-		return (
-			<React.Fragment>
-				<div className="mb-10" style={{ height: '180px' }}>
-					<div className="mb-10 mr-10" key={product.id}>
-						{product.image &&
-							<Link to={restaurant.slug + "/" + product.id}>
-								<img style={{ height: '90px', width: '90px', objectFit: 'cover', borderRadius: '0.8rem' }} src={WEBSITE_URL + "/assets/img/items/" + product.image} alt={product.name} />
-							</Link>
-						}
-					</div>
-					<div style={{ position: 'relative', textAlign: 'center', marginTop: product.image ? '-25px' : '40px', left: '-10px', width: '110px' }}>
-						{cartProducts.find((cp) => cp.id === product.id) !==
-							undefined && (
-								<React.Fragment>
-									<div className="item-actions mt-2">
-										<div
-											className="btn-group btn-group-sm"
-											role="group"
-											aria-label="btnGroupIcons1"
-											style={{ borderRadius: "0.5rem" }}
-										>
-											{product.is_active ? (
-												<React.Fragment>
-													{product.addon_categories.length ? (
-														null
-													) : (
-														<button
-															type="button"
-															className="btn btn-add-remove"
-															style={{ "width": "30px", "borderBottom": "1px solid #FF4848", "borderLeft": "1px solid #FF4848", "borderTop": "1px solid #FF4848", "borderTopLeftRadius": "0.8rem", "borderBottomLeftRadius": "0.8rem" }}
-															onClick={() => {
-																product.quantity = 1;
-																removeProduct(product);
-																this.forceStateUpdate();
-															}}
-														>
-															<span class="btn-dec">-</span>
-															{/* <Ink duration="500" /> */}
-														</button>
-													)}
-													{product.addon_categories.length ? null : (
-														<span
-															className="pl-2 pr-2"
-															style={{ "border": "none", "width": "10px", "color": "#FF4848", "display": "flex", "justifyContent": "center", "alignItems": "center", "fontWeight": "600", "fontSize": "1rem", "borderTop": "1px solid #FF4848", "borderBottom": "1px solid #FF4848", "backgroundColor": "rgb(255, 255, 255)" }}
-														>
-															<React.Fragment>
-																{
-																	cartProducts.find(
-																		(cp) => cp.id === product.id
-																	).quantity
-																}
-															</React.Fragment>
-														</span>
-													)}
+  render() {
+    const {
+      addProduct,
+      removeProduct,
+      product,
+      cartProducts,
+      restaurant,
+    } = this.props;
+    product.quantity = 1;
+    // console.log(product);
+    return (
+      <React.Fragment>
+        <div key={product.id} className="product-slider-item bg-white ">
+          <LazyLoad>
+            <div style={{ position: "relative" }}>
+              <Link to={restaurant.slug + "/" + product.id}>
+                <img
+                  src={WEBSITE_URL + "/assets/img/items/" + product.image}
+                  alt={product.name}
+                  className="recommended-item-image"
+                />
+                {localStorage.getItem("showVegNonVegBadge") === "true" &&
+                  product.is_veg !== null && (
+                    <React.Fragment>
+                      {product.is_veg ? (
+                        <img
+                          src="https://kekadelivery.in/assets/img/various/veg.png"
+                          alt="Veg"
+                          style={{
+                            width: "1rem",
+                            position: "absolute",
+                            left: "5px",
+                            backgroundColor: "white",
+                            borderRadius: "3px",
+                            top: "3px",
+                          }}
+                          className="mr-1"
+                        />
+                      ) : (
+                        <img
+                          src="https://kekadelivery.in/assets/img/various/non-veg.png"
+                          alt="Non-Veg"
+                          style={{
+                            width: "1rem",
+                            position: "absolute",
+                            left: "5px",
+                            backgroundColor: "white",
+                            borderRadius: "3px",
+                            top: "3px",
+                          }}
+                          className="mr-1"
+                        />
+                      )}
+                    </React.Fragment>
+                  )}
+              </Link>
+            </div>
+            <div className="">
+              <div
+                className="pt-3 mb-0 pb-0 text-center"
+                style={{ width: "100%", fontSize: "16px" }}
+              >
+                <p
+                  style={{
+                    maxWidth: "170px",
+                    textOverflow: "ellipsis",
+                    overflowWrap: "break-word",
+                    overflowX: "hidden",
+                    fontWeight: 500,
+                    fontSize: "16px",
+                  }}
+                  className="mb-0 pb-0 ml-2"
+                >
+                  {" "}
+                  {product.name}
+                </p>
+              </div>
+            </div>
 
-													{product.addon_categories.length ? (
-														<Customization
-															product={product}
-															addProduct={addProduct}
-															forceUpdate={this.forceStateUpdate}
-														/>
-													) : (
-														<button
-															type="button"
-															className="btn btn-add-remove"
-															style={{ "width": "30px", "color": "#FF4848", "borderTopRightRadius": "0.8rem", "borderBottomRightRadius": "0.8rem", "borderTop": "1px solid #FF4848", "borderRight": "1px solid #FF4848", "borderBottom": "1px solid #FF4848" }}
-															onClick={() => {
-																addProduct(product);
-																this.forceStateUpdate();
-															}}
-														>
-															<span class="btn-dec">+</span>
-															{/* <Ink duration="500" /> */}
-														</button>
-													)}
-												</React.Fragment>
-											) : (
-												<div className="robo text-danger text-item-not-available">
-													Item Not Available
-												</div>
-											)}
-										</div>
-									</div>
-								</React.Fragment>
-							)}
+            <div className="d-flex align-items-center justify-content-center">
+              <div
+                className="d-flex"
+                style={{ fontWeight: 400, color: "#6C727F", fontSize: "12px" }}
+              >
+                24min{" "}
+              </div>
+              &nbsp;&nbsp;
+              <div
+                className="d-flex"
+                style={{ fontWeight: 900, color: "#6C727F" }}
+              >
+                .
+              </div>
+              &nbsp;&nbsp;
+              <div className="d-flex">
+                <div>
+                  <Star
+                    size="small"
+                    set={"bold"}
+                    style={{ marginLeft: "5px" }}
+                    primaryColor={"#FF7A28"}
+                  />
+                </div>
+                <div
+                  className="ml-2"
+                  style={{
+                    fontWeight: 400,
+                    color: "#6C727F",
+                    fontSize: "12px",
+                  }}
+                >
+                  4.1
+                </div>
+              </div>
+            </div>
+            <div className="d-flex align-items-center justify-content-between ml-20 mr-20 ">
+              <div className="text-center ">
+                <div>
+                  {product.addon_categories.length <= 0 ? (
+                    <React.Fragment>
+                      <div
+                        className="d-flex align-items-center mr-5"
+                        style={{ fontWeight: "600",fontSize:'14px' }}
+                      >
+                        <div>AED</div>
+                        <div className="ml-2">{product.price}</div>
+                      </div>
 
-						{cartProducts.find((cp) => cp.id === product.id) ===
-							undefined && (
-								<React.Fragment>
-									<div className="item-actions mt-2">
-										{product.is_active ? (
-											<React.Fragment>
-												{product.addon_categories.length ? (
-													<Customization
-														product={product}
-														addProduct={addProduct}
-														forceUpdate={this.forceStateUpdate}
-													/>
-												) : (
-													<button
-														type="button"
-														style={{ "position": "relative", "border": "1px solid rgb(255, 72, 72)", "color": "rgb(255, 72, 72)", "width": "70px", "backgroundColor": "rgb(255, 255, 255)", "letterSpacing": "0.8px", "fontWeight": "bolder", "padding": "4px", "borderRadius": "0.8rem" }}
-														onClick={() => {
-															product.quantity = 1;
-															addProduct(product);
-															this.forceStateUpdate();
-														}}
-													>
-														ADD
-														{/* <Ink duration="500" /> */}
-													</button>
-												)}
-											</React.Fragment>
-										) : (
-											<div className="robo text-danger text-item-not-available">
-												Item Not Available
-											</div>
-										)}
-									</div>
-								</React.Fragment>
-							)}
-					</div>
-					<div style={{ display: 'flex', alignItems: 'center', marginTop: product.image ? null : '35px' }}>
-						<div>
-							{product.is_veg || product.is_egg ? (
-								<React.Fragment>
-									{product.is_veg ? (
-										<img className="mt-2" style={{ height: '1rem' }} src={WEBSITE_URL + "/assets/veg-icon.png"} />
-									) : (
-										<img className="mt-2" style={{ height: '1rem' }} src={WEBSITE_URL + "/assets/egg-icon.png"} />
-									)}
-								</React.Fragment>
-							) : (
-								<img className="mt-2" style={{ height: '1rem' }} src={WEBSITE_URL + "/assets/non-veg-icon-2.png"} />
-							)}
-						</div>
-						<div className="mt-2 ml-1" style={{ "fontWeight": "bolder", "lineHeight": "20px", "maxWidth": "73px", "fontSize": "13px", "color": "black", "overflow": "hidden", "textOverflow": "ellipsis", "whiteSpace": "nowrap" }}>
-							{product.name}
-						</div>
-					</div>
-					<div style={{ display: 'flex', alignItems: 'center' }}>
-						<div className="mr-5" style={{ fontWeight: '600', fontSize: '11px' }}>
-							<span className="rupees-symbol">₹ </span>{product.price}
-						</div>
-						{product.old_price && product.old_price > 0 &&
-							<div style={{ color: 'red', textDecoration: 'line-through', fontSize: '9px' }}>
-								<span className="rupees-symbol">₹ </span>{product.old_price}
-							</div>
-						}
-					</div>
-					{product.addon_categories.length > 0 && (
-						<span
-							className="text-muted"
-							style={{ "fontWeight": "400", "fontSize": "0.8rem", "opacity": "0.8" }}
-						>
-							Customizable
-						</span>
-					)}
-				</div>
-			</React.Fragment>
-		);
-	}
+                      {/* {product.old_price > 0 ? (
+                        <span
+                          className=" text-right"
+                          style={{
+                            color: "red",
+                            fontSize: "1em",
+                            textDecorationLine: "line-through",
+                            bottom: 0,
+                          }}
+                        >
+                          {" "}
+                          {localStorage.getItem("currencySymbolAlign") ===
+                            "left" &&
+                            localStorage.getItem("currencyFormat")}{" "}
+                          {product.old_price}
+                          {localStorage.getItem("currencySymbolAlign") ===
+                            "right" && localStorage.getItem("currencyFormat")}
+                        </span>
+                      ) : null} */}
+                    </React.Fragment>
+                  ) : (
+                    <React.Fragment>
+                      <span
+                        className="badge badge-success  badge-sm "
+                        style={{
+                          color: "#ffff",
+                          backgroundColor: "green",
+                          marginLeft: "1.5rem",
+                          padddingTop: "-2rem",
+                        }}
+                      >
+                        {localStorage.getItem("customizableItemText")}
+                      </span>
+                      <br />
+                    </React.Fragment>
+                  )}
+                </div>
+              </div>
+              <div className="mt-2 mb-2">
+                {cartProducts.find((cp) => cp.id === product.id) !==
+                  undefined && (
+                  <React.Fragment>
+                    <div className="item-actions text-center ">
+                      <div
+                        className="btn-group btn-group-sm   "
+                        role="group"
+                        aria-label="btnGroupIcons1"
+                        style={{ borderRadius: "1rem" }}
+                      >
+                        <React.Fragment>
+                          {product.addon_categories.length ? (
+                            <button
+                              disabled
+                              type="button"
+                              className="btn btn-add-remove"
+                              style={{
+                              }}
+                            >
+                              <div
+                                className="btn-dec"
+                                style={{ color: "#fff" }}
+                              >
+                                -{" "}
+                              </div>
+                              <Ink duration="500" />
+                            </button>
+                          ) : (
+                            <button
+                              type="button"
+                              className="btn btn-add-remove"
+                              style={{
+                                borderRight: "none",
+								backgroundColor:'#fe0000',
+                              }}
+                              onClick={() => {
+                                product.quantity = 1;
+                                removeProduct(product);
+                                this.forceStateUpdate();
+                              }}
+                            >
+                              <span class="btn-dec" style={{color:'#fff'}}>-</span>
+                              <Ink duration="500" />
+                            </button>
+                          )}
+
+                          <span
+                            className="btn btn-quantity"
+                            style={{
+                              borderRight: "none",
+                              borderLeft: "none",
+                              backgroundColor: "#fff",
+                            }}
+                          >
+                            <React.Fragment>
+                              {
+                                cartProducts.find((cp) => cp.id === product.id)
+                                  .quantity
+                              }
+                            </React.Fragment>
+                          </span>
+
+                          {product.addon_categories.length ? (
+                            <Customization
+                              product={product}
+                              addProduct={addProduct}
+                              forceUpdate={this.forceStateUpdate}
+                            />
+                          ) : (
+                            <button
+                              type="button"
+                              className="btn btn-add-remove"
+                              style={{
+								backgroundColor:'#fe0000',
+
+                              }}
+                              onClick={() => {
+                                addProduct(product);
+                                this.forceStateUpdate();
+                              }}
+                            >
+                              <span className="btn-inc-cart" style={{color:'#fff'}}>+</span>
+                              <Ink duration="500" />
+                            </button>
+                          )}
+                        </React.Fragment>
+                      </div>
+                    </div>
+                  </React.Fragment>
+                )}
+
+                {cartProducts.find((cp) => cp.id === product.id) ===
+                  undefined && (
+                  <React.Fragment>
+                    <div className="item-actions text-center ">
+                      {product.is_active ? (
+                        <React.Fragment>
+                          {product.addon_categories.length ? (
+                            <Customization
+                              product={product}
+                              addProduct={addProduct}
+                              forceUpdate={this.forceStateUpdate}
+                            />
+                          ) : (
+                            <div
+                              style={{
+                                position: "relative",
+                                backgroundColor: "#fe0000",
+                                borderRadius: "10px",
+                                border: "none",
+                                color: "#fff",
+                                fontWeight: "500",
+                                height: "30px",
+                                width: "30px",
+                              }}
+                              onClick={() => {
+                                addProduct(product);
+                                this.forceStateUpdate();
+                              }}
+                            >
+                              <div
+                                className=""
+                                style={{ fontWeight: "400", fontSize: "20px" }}
+                              >
+                                +
+                              </div>
+
+                              <Ink duration="500" />
+                            </div>
+                          )}
+                        </React.Fragment>
+                      ) : (
+                        <div className="text-danger text-item-not-available">
+                          {localStorage.getItem("cartItemNotAvailable")}
+                        </div>
+                      )}
+                    </div>
+                  </React.Fragment>
+                )}
+              </div>
+            </div>
+          </LazyLoad>
+        </div>
+      </React.Fragment>
+    );
+  }
 }
 
 const mapStateToProps = (state) => ({
-	cartProducts: state.cart.products,
+  cartProducts: state.cart.products,
 });
 
-export default connect(
-	mapStateToProps,
-	{ addProduct, removeProduct }
-)(RecommendedItems);
+export default connect(mapStateToProps, { addProduct, removeProduct })(
+  RecommendedItems
+);

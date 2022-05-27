@@ -20,8 +20,10 @@ import RestaurantInfo from "../RestaurantInfo";
 
 import { connect } from "react-redux";
 import ContentLoader from "react-content-loader";
-import { WEBSITE_URL } from "../../../../configs/website";
+
 import { getSettings } from "../../../../services/settings/actions";
+
+import { getAllLanguages, getSingleLanguageData } from "../../../../services/languages/actions";
 
 class SingleItem extends Component {
 	state = {
@@ -43,11 +45,13 @@ class SingleItem extends Component {
 
 	componentDidMount() {
 		this.props.getSettings();
+		this.props.getAllLanguages();
 
 		this.props.getRestaurantInfo(this.props.restaurant);
 
 		this.props.getSingleItem(this.props.itemId).then((response) => {
 			if (response) {
+				// console.log(response.payload.id)
 				if (response.payload.id) {
 					this.setState({ item_loading: false });
 				}
@@ -85,7 +89,7 @@ class SingleItem extends Component {
 	}
 
 	render() {
-		if (window.innerWidth > 768) {
+		if (window.innerWidth > 1024) {
 			return <Redirect to="/" />;
 		}
 		// if (localStorage.getItem("storeColor") === null) {
@@ -93,229 +97,315 @@ class SingleItem extends Component {
 		// }
 
 		const { addProduct, removeProduct, cartProducts, single_item } = this.props;
+		// console.log(single_item)
 		return (
-			<React.Fragment>
-				<div className="bg-white" style={{ minHeight: '100vh' }}>
-					<RestaurantInfo
-						history={this.props.history}
-						restaurant={this.props.restaurant_info}
-						withLinkToRestaurant={true}
-					/>
+			<div className="bg-white">
+				{this.props.restaurant_info &&
+					<React.Fragment>
+						<RestaurantInfo
+							history={this.props.history}
+							restaurant={this.props.restaurant_info}
+							withLinkToRestaurant={false}
+						/>
 
-					{single_item.id && (
-						<div className="single-item px-15 bg-white mt-20 pb-100">
-							<span className="hidden">{(single_item.quantity = 1)}</span>
-							<div
-								className="category-list-item single-item-img"
-								style={{
-									display: "flex",
-									justifyContent: "space-between",
-								}}
-							>
-								{this.state.item_loading ? (
-									<ContentLoader
-										height={400}
-										width={window.innerWidth}
-										speed={1.2}
-										primaryColor="#f3f3f3"
-										secondaryColor="#ecebeb"
-									>
-										<rect x="0" y="0" rx="4" ry="4" width={window.innerWidth} height="290" />
-										<rect x="0" y="300" rx="0" ry="0" width="115" height="20" />
-										<rect x="0" y="325" rx="0" ry="0" width="75" height="16" />
+						{single_item && single_item.id && (
+							<div className="single-item px-15 mt-20 pb-100">
+								<span className="hidden">{(single_item.quantity = 1)}</span>
+								<div
+									className="category-list-item single-item-img"
+									style={{
+										display: "flex",
+										justifyContent: "space-between",
+									}}
+								>
+									{this.state.item_loading ? (
+										<ContentLoader
+											height={400}
+											width={window.innerWidth}
+											speed={1.2}
+											primaryColor="#f3f3f3"
+											secondaryColor="#ecebeb"
+										>
+											<rect x="0" y="0" rx="4" ry="4" width={window.innerWidth} height="290" />
+											<rect x="0" y="300" rx="0" ry="0" width="115" height="20" />
+											<rect x="0" y="325" rx="0" ry="0" width="75" height="16" />
 
-										<rect x={window.innerWidth - 100} y="300" rx="4" ry="4" width="115" height="35" />
-										<rect x={window.innerWidth - 50} y="300" rx="4" ry="4" width="115" height="35" />
-									</ContentLoader>
-								) : (
-									<React.Fragment>
-										{single_item.image && (
-											<LazyLoad>
-												<img
-													src={WEBSITE_URL + "/assets/img/items/" + single_item.image}
-													alt={single_item.name}
-													style={{ width: "100%", height: "auto", borderRadius: '1rem' }}
-													className="mt-20"
-												/>
-											</LazyLoad>
-										)}
+											<rect x={window.innerWidth - 100} y="300" rx="4" ry="4" width="115" height="35" />
+											<rect x={window.innerWidth - 50} y="300" rx="4" ry="4" width="115" height="35" />
+										</ContentLoader>
+									) : (
+										<React.Fragment>
+											{single_item.image !== "" && (
+												<LazyLoad>
+													<img
+														className="single-item-image"
+														src={'https://app.snakyz.com' + single_item.image}
+														alt={single_item.name}
+														style={{ width: "50%", height: "50%" }}
+													/>
 
-										<div className="mt-10" style={{ display: 'flex', justifyContent: 'space-between' }}>
-											<div>
-												<div style={{ display: 'flex', alignItems: 'center' }}>
-													<div>
-														{single_item.is_veg || single_item.is_egg ? (
+													{localStorage.getItem("showVegNonVegBadge") === "true" &&
+														single_item.is_veg !== null && (
 															<React.Fragment>
 																{single_item.is_veg ? (
-																	<img className="mt-2" style={{ height: '1.2rem' }} src={WEBSITE_URL + "/assets/veg-icon.png"} />
+																	<img src={'https://app.snakyz.com/assets/img/various/veg.png'} alt="veg" style={{ width: '1rem' }} className="item-veg" />
 																) : (
-																	<img className="mt-2" style={{ height: '1.2rem' }} src={WEBSITE_URL + "/assets/egg-icon.png"} />
+																	<img src={'https://app.snakyz.com/assets/img/various/non-veg.png'} alt="non-veg" style={{ width: '1rem' }} className="item-nonVeg" />
+
+																)}
+															</React.Fragment>
+														)}
+
+													<React.Fragment>
+														{cartProducts.find((cp) => cp.id === single_item.id) !== undefined && (
+															<Fade duration={150}>
+																<div
+																	className="quantity-badge-list"
+																	style={{
+																		backgroundColor: '#fc8019',
+																	}}
+																>
+																	<span>
+																		{single_item.addon_categories.length ? (
+																			<React.Fragment>
+																				<i
+																					className="si si-check"
+																					style={{
+																						lineHeight: "1.3rem",
+																					}}
+																				/>
+																			</React.Fragment>
+																		) : (
+																			<React.Fragment>
+																				{
+																					cartProducts.find(
+																						(cp) => cp.id === single_item.id
+																					).quantity
+																				}
+																			</React.Fragment>
+																		)}
+																	</span>
+																</div>
+															</Fade>
+														)}
+													</React.Fragment>
+												</LazyLoad>
+											)}
+											<div className="single-item-meta">
+												{/* {cartProducts.find((cp) => cp.id === single_item.id) !==
+														undefined && ( */}
+												<div className="item-actions pull-right pb-0 mt-2">
+													<div
+														className="btn-group btn-group-sm"
+														role="group"
+														aria-label="btnGroupIcons1"
+														style={{ borderRadius: '0.5rem' }}
+													>
+														{single_item.is_active ? (
+															<React.Fragment>
+																{single_item.addon_categories.length ? (
+																	<button
+																		disabled
+																		type="button"
+																		className="btn btn-add-remove mr-2"
+																		style={{
+																			color: localStorage.getItem("cartColor-bg"),
+																		}}
+																	>
+																		<div className="btn-dec  pb-2" style={{ color: '#00000' }}>-</div>
+
+																		<Ink duration="500" />
+																	</button>
+																) : (
+																	<button
+																		type="button"
+																		className="btn btn-add-remove mr-2"
+																		style={{
+																			color: localStorage.getItem("cartColor-bg"),
+																			borderRight: 'none',
+																		}}
+																		onClick={() => {
+																			single_item.quantity = 1;
+																			removeProduct(single_item);
+																			this.forceStateUpdate();
+																		}}
+																	>
+																		<span class="btn-dec">
+
+																			{single_item.quantity === 1 ? (
+																				<i
+																					className="si si-trash"
+																					style={{
+																						fontSize: "0.8rem",
+																						fontWeight: '600',
+																						top: "-0.2rem",
+																						color: "#00000",
+																						border: 'none',
+																					}}
+																				/>
+																			) : (
+																				"-"
+																			)}
+																		</span>
+																		<Ink duration="500" />
+																	</button>
+																)}
+																{/* <span className="pt-1 pl-2 pr-2 btn btn-quantity" style={{ borderRight:'none',borderLeft:'none',backgroundColor: '#F4F2FF' }}>
+																	<React.Fragment>
+																		{
+																			cartProducts.find(
+																				(cp) =>
+																					cp.id ===
+																					single_item.id
+																			).quantity
+																		}
+																	</React.Fragment>
+																</span> */}
+																{single_item.addon_categories.length ? (
+																	<Customization
+																		product={single_item}
+																		addProduct={addProduct}
+																		forceUpdate={this.forceStateUpdate}
+																	/>
+																) : (
+																	<button
+																		type="button"
+																		className="btn btn-add-remove"
+																		style={{
+																			color: localStorage.getItem("cartColor-bg"),
+																		}}
+																		onClick={() => {
+																			addProduct(single_item);
+																			this.forceStateUpdate();
+																		}}
+																	>
+																		<span className="btn-inc">+</span>
+																		<Ink duration="500" />
+																	</button>
 																)}
 															</React.Fragment>
 														) : (
-															<img className="mt-2" style={{ height: '1.2rem' }} src={WEBSITE_URL + "/assets/non-veg-icon-2.png"} />
+															<div className="text-danger text-item-not-available">
+																{localStorage.getItem("cartItemNotAvailable")}
+															</div>
 														)}
 													</div>
-													<div className="mt-3 ml-2" style={{ fontWeight: 'bolder', fontSize: '16px' }}>
-														{single_item.name}
+												</div>
+												{/* )} */}
+												<div className="item-name  font-w500 mt-2">
+													{/* {localStorage.getItem("showVegNonVegBadge") === "true" &&
+												single_item.is_veg !== null && (
+													<React.Fragment>
+														{single_item.is_veg ? (
+															<img
+																src="/assets/img/various/veg-icon.png"
+																alt="Veg"
+																style={{ width: "1rem" }}
+																className="mr-1"
+															/>
+														) : (
+															<img
+																src="/assets/img/various/non-veg-icon.png"
+																alt="Non-Veg"
+																style={{ width: "1rem" }}
+																className="mr-1"
+															/>
+														)}
+													</React.Fragment>
+												)} */}
+													{single_item.name}
+												</div>
+												<div className="item-price">
+													{localStorage.getItem("hidePriceWhenZero") === "true" &&
+														single_item.price === "0.00" ? null : (
+														<React.Fragment>
+															{single_item.old_price > 0 && (
+																<span className="strike-text mr-1">
+																	{" "}
+																	{localStorage.getItem("currencySymbolAlign") === "left" &&
+																		localStorage.getItem("currencyFormat")}{" "}
+																	{single_item.old_price}
+																	{localStorage.getItem("currencySymbolAlign") === "right" &&
+																		localStorage.getItem("currencyFormat")}
+																</span>
+															)}
+
+															<span className="price-text font-size-lg ml-2">
+																{localStorage.getItem("currencySymbolAlign") === "left" &&
+																	localStorage.getItem("currencyFormat")}{" "}
+																{single_item.price}
+																{localStorage.getItem("currencySymbolAlign") === "right" &&
+																	localStorage.getItem("currencyFormat")}
+															</span>
+
+															{single_item.old_price > 0 &&
+																localStorage.getItem("showPercentageDiscount") === "true" && (
+																	<React.Fragment>
+																		<br></br>
+																		<span
+																			className="badge badge-danger price-percentage-discount mb-0 ml-2"
+																			style={{
+																				color: 'white',
+																			}}
+																		>
+																			{parseFloat(
+																				((parseFloat(single_item.old_price) -
+																					parseFloat(single_item.price)) /
+																					parseFloat(single_item.old_price)) *
+																				100
+																			).toFixed(0)}
+																			{localStorage.getItem("itemPercentageDiscountText")}
+																		</span>
+																	</React.Fragment>
+																)}
+														</React.Fragment>
+													)}
+
+													{single_item.addon_categories.length > 0 && (
+														<span
+															className="ml-1 badge badge-warning customizable-item-text"
+															style={{
+																color: 'white',
+															}}
+														>
+															Customizable
+														</span>
+													)}
+
+												</div>
+												<ItemBadge item={single_item} style={{ width: '50%' }} />
+												{single_item.desc !== null ? (
+													<div className="mt-2 mb-100">
+														<div
+															dangerouslySetInnerHTML={{
+																__html: single_item.desc,
+															}}
+														/>
 													</div>
-												</div>
-												<div className="mt-1" style={{ color: '#7E7E7E', fontSize: '13px' }}>
-													{single_item.description}
-												</div>
-												<div className="mt-1" style={{ display: 'flex', alignItems: 'center' }}>
-													<div className="mr-5" style={{ fontWeight: '600', fontSize: '14px' }}>
-														<span className="rupees-symbol">₹ </span>{single_item.price}
-													</div>
-													{single_item.old_price && single_item.old_price > 0 &&
-														<div style={{ color: 'red', textDecoration: 'line-through', fontSize: '12px' }}>
-															<span className="rupees-symbol">₹ </span>{single_item.old_price}
-														</div>
-													}
-												</div>
-												{single_item.addon_categories.length > 0 && (
-													<span
-														className="customizable-item-text"
-														style={{
-															color: localStorage.getItem("storeColor"),
-														}}
-													>
-														Customizable
-													</span>
+												) : (
+													<br />
 												)}
 											</div>
-											<div style={{ position: 'relative', textAlign: 'center' }}>
-												{cartProducts.find((cp) => cp.id === single_item.id) !==
-													undefined && (
-														<React.Fragment>
-															<div className="item-actions mt-2">
-																<div
-																	className="btn-group btn-group-sm"
-																	role="group"
-																	aria-label="btnGroupIcons1"
-																	style={{ borderRadius: "0.5rem" }}
-																>
-																	{single_item.is_active ? (
-																		<React.Fragment>
-																			{single_item.addon_categories.length ? (
-																				null
-																			) : (
-																				<button
-																					type="button"
-																					className="btn btn-add-remove"
-																					style={{ "width": "30px", "borderBottom": "1px solid #FF4848", "borderLeft": "1px solid #FF4848", "borderTop": "1px solid #FF4848", "borderTopLeftRadius": "0.8rem", "borderBottomLeftRadius": "0.8rem" }}
-																					onClick={() => {
-																						single_item.quantity = 1;
-																						removeProduct(single_item);
-																						this.forceStateUpdate();
-																					}}
-																				>
-																					<span class="btn-dec">-</span>
-																					{/* <Ink duration="500" /> */}
-																				</button>
-																			)}
-																			{single_item.addon_categories.length ? null : (
-																				<span
-																					className="pl-2 pr-2"
-																					style={{ "border": "none", "width": "10px", "color": "#FF4848", "display": "flex", "justifyContent": "center", "alignItems": "center", "fontWeight": "600", "fontSize": "1rem", "borderTop": "1px solid #FF4848", "borderBottom": "1px solid #FF4848", "backgroundColor": "rgb(255, 255, 255)" }}
-																				>
-																					<React.Fragment>
-																						{
-																							cartProducts.find(
-																								(cp) => cp.id === single_item.id
-																							).quantity
-																						}
-																					</React.Fragment>
-																				</span>
-																			)}
-
-																			{single_item.addon_categories.length ? (
-																				<Customization
-																					product={single_item}
-																					addProduct={addProduct}
-																					forceUpdate={this.forceStateUpdate}
-																				/>
-																			) : (
-																				<button
-																					type="button"
-																					className="btn btn-add-remove"
-																					style={{ "width": "30px", "color": "#FF4848", "borderTopRightRadius": "0.8rem", "borderBottomRightRadius": "0.8rem", "borderTop": "1px solid #FF4848", "borderRight": "1px solid #FF4848", "borderBottom": "1px solid #FF4848" }}
-																					onClick={() => {
-																						addProduct(single_item);
-																						this.forceStateUpdate();
-																					}}
-																				>
-																					<span class="btn-dec">+</span>
-																					{/* <Ink duration="500" /> */}
-																				</button>
-																			)}
-																		</React.Fragment>
-																	) : (
-																		<div className="robo text-danger text-item-not-available">
-																			Item Not Available
-																		</div>
-																	)}
-																</div>
-															</div>
-														</React.Fragment>
-													)}
-
-												{cartProducts.find((cp) => cp.id === single_item.id) ===
-													undefined && (
-														<React.Fragment>
-															<div className="item-actions mt-2">
-																{single_item.is_active ? (
-																	<React.Fragment>
-																		{single_item.addon_categories.length ? (
-																			<Customization
-																				product={single_item}
-																				addProduct={addProduct}
-																				forceUpdate={this.forceStateUpdate}
-																			/>
-																		) : (
-																			<button
-																				type="button"
-																				style={{ "position": "relative", "border": "1px solid rgb(255, 72, 72)", "color": "rgb(255, 72, 72)", "width": "70px", "backgroundColor": "rgb(255, 255, 255)", "letterSpacing": "0.8px", "fontWeight": "bolder", "padding": "4px", "borderRadius": "0.8rem" }}
-																				onClick={() => {
-																					single_item.quantity = 1;
-																					addProduct(single_item);
-																					this.forceStateUpdate();
-																				}}
-																			>
-																				ADD
-																				{/* <Ink duration="500" /> */}
-																			</button>
-																		)}
-																	</React.Fragment>
-																) : (
-																	<div className="robo text-danger text-item-not-available">
-																		Item Not Available
-																	</div>
-																)}
-															</div>
-														</React.Fragment>
-													)}
-											</div>
-										</div>
-									</React.Fragment>
-								)}
-							</div>
-						</div>
-					)}
-
-					{!this.state.loading && (
-						<React.Fragment>
-							{this.state.is_active ? (
-								<FloatCart />
-							) : (
-								<div className="auth-error no-click">
-									<div className="error-shake">Currently Not Accepting Any Orders</div>
+										</React.Fragment>
+									)}
 								</div>
-							)}
-						</React.Fragment>
-					)}
-				</div>
-			</React.Fragment>
+							</div>
+						)}
+
+						{!this.state.loading && (
+							<React.Fragment>
+								{this.state.is_active ? (
+									<FloatCart />
+								) : (
+									<div className="auth-error no-click">
+										<div className="error-shake">{localStorage.getItem("notAcceptingOrdersMsg")}</div>
+									</div>
+								)}
+							</React.Fragment>
+						)}
+					</React.Fragment>
+				}
+			</div>
 		);
 	}
 }
@@ -325,6 +415,8 @@ const mapStateToProps = (state) => ({
 	cartProducts: state.cart.products,
 	single_item: state.items.single_item,
 	settings: state.settings.settings,
+	languages: state.languages.languages,
+	language: state.languages.language,
 });
 
 export default connect(
@@ -338,5 +430,7 @@ export default connect(
 		addProduct,
 		removeProduct,
 		getSettings,
+		getAllLanguages,
+		getSingleLanguageData,
 	}
 )(SingleItem);

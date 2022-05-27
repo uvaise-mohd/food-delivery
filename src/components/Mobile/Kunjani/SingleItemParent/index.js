@@ -6,7 +6,7 @@ class SingleItemParent extends Component {
 	render() {
 		return (
 			<React.Fragment>
-				{window.innerWidth >= 1024 ? (
+				{window.innerWidth >= 768 ? (
 					<Desktop restaurant={this.props.match.params.restaurant} itemId={this.props.match.params.id} />
 				) : (
 					<SingleItem
