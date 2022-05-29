@@ -1,0 +1,8 @@
+{
+	"folders": [
+		{
+			"name": "SSH FS - fleet",
+			"uri": "ssh://fleet/home"
+		}
+	]
+}
