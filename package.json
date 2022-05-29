@@ -9,6 +9,7 @@
 		"@ramonak/react-progress-bar": "^4.4.0",
 		"@stripe/react-stripe-js": "^1.1.2",
 		"@stripe/stripe-js": "^1.9.0",
+		"add": "^2.0.6",
 		"apexcharts": "^3.22.2",
 		"axios": "^0.18.0",
 		"beauty-stars": "^1.1.0",
@@ -79,6 +80,7 @@
 		"react-star-rating": "^1.4.2",
 		"react-star-rating-component": "^1.4.1",
 		"react-stripe-checkout": "^2.6.3",
+		"react-swipeable-list": "^1.5.1",
 		"react-tabs": "^3.1.0",
 		"react-tilt": "^0.1.4",
 		"react-time-picker": "^4.4.2",
@@ -89,7 +91,8 @@
 		"simple-react-validator": "^1.6.1",
 		"slick-carousel": "^1.8.1",
 		"styled-components": "^5.2.1",
-		"swiper": "^7.0.6"
+		"swiper": "^7.0.6",
+		"yarn": "^1.22.18"
 	},
 	"scripts": {
 		"start": "react-scripts start && cra-append-sw --mode dev ./custom-sw.js",

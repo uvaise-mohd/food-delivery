@@ -2,7 +2,7 @@
 	"folders": [
 		{
 			"name": "SSH FS - fleet",
-			"uri": "ssh://fleet/home"
+			"uri": "ssh://fleet/home/app.snakyz.com/public_html"
 		}
 	]
 }

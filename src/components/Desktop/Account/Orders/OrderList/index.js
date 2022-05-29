@@ -16,7 +16,7 @@ class OrderList extends Component {
 	};
 
 	componentDidMount() {
-		document.getElementsByTagName("body")[0].classList.add("bg-grey");
+		document.getElementsByTagName("body")[0].classList.add("bg-white");
 	}
 
 	_getTotalItemCost = (item) => {

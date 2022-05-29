@@ -243,7 +243,7 @@ class Cart extends Component {
                   display: "flex",
                   justifyContent: "space-between",
                   alignItems: "center",
-                //   marginTop: "-6px",
+                  //   marginTop: "-6px",
                 }}
               >
                 <div
@@ -254,16 +254,22 @@ class Cart extends Component {
                     color: "#fff",
                   }}
                 >
-                  <div style={{ fontWeight: "400",fontSize:'14px' }}>
+                  <div style={{ fontWeight: "400", fontSize: "14px" }}>
                     <span className="">{this.getTotalItemsInCart()} Item</span>
                     <span className="ml-4" style={{ color: "#FE0B15" }}>
-                      <span className="rupees-symbol">₹</span>{" "}
+                      <span className="rupees-symbol">AED </span>{" "}
                       {formatPrice(cartTotal.totalPrice)}
                     </span>
                   </div>
-                  <div  style={{ fontWeight: "600" ,fontSize:'18px',marginTop:'5px'}}>
-				  AED {cartTotal.totalPrice}
-				  </div>
+                  <div
+                    style={{
+                      fontWeight: "600",
+                      fontSize: "18px",
+                      marginTop: "5px",
+                    }}
+                  >
+                    AED {cartTotal.totalPrice}
+                  </div>
                 </div>
                 <div
                   className="d-flex align-items-center p-10"

@@ -864,34 +864,42 @@ table > tbody > tr {
   padding: 0 15px;
   font-weight: 700;
   letter-spacing: 1px;
+  height: 60px !important;
 }
 .apply-coupon-input::-webkit-input-placeholder {
   color: #282c3f;
   letter-spacing: 1px;
+  font-weight: 500;
 }
 .apply-coupon-input:-ms-input-placeholder {
   color: #282c3f;
   letter-spacing: 1px;
+  font-weight: 500;
 }
 .apply-coupon-input::-ms-input-placeholder {
   color: #282c3f;
   letter-spacing: 1px;
+  font-weight: 500;
 }
 .apply-coupon-input::-moz-placeholder {
   color: #282c3f;
   letter-spacing: 1px;
+  font-weight: 500;
 }
 .apply-coupon-input::placeholder {
   color: #282c3f;
   letter-spacing: 1px;
+  font-weight: 500;
 }
 .apply-coupon-input::-webkit-input-placeholder {
   color: #282c3f;
   letter-spacing: 1px;
+  font-weight: 500;
 }
 .apply-coupon-input::-moz-placeholder {
   color: #282c3f;
   letter-spacing: 1px;
+  font-weight: 500;
 }
 .apply-coupon-btn {
   height: 4rem;
@@ -3570,7 +3578,10 @@ button[type="submit"]:disabled {
 .single-item-division-hr {
   border: 0.5px dashed #515875;
 }
-
+.checkout-division-hr {
+  border: 0.5px solid #898B9A;
+  opacity: 0.4;
+}
 .delivery-order-item-quantity {
   border: 1px solid #e0e0e0;
   padding: 2px 8px;

@@ -2419,6 +2419,11 @@ acorn@^8.4.1:
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-8.4.1.tgz#56c36251fc7cabc7096adc18f05afe814321a28c"
   integrity sha512-asabaBSkEKosYKMITunzX177CXxQ4Q8BSSzMTKD+FefUhipQC70gfW5SiUDhYQ3vk8G+81HqQk7Fv9OXwwn9KA==
 
+add@^2.0.6:
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/add/-/add-2.0.6.tgz#248f0a9f6e5a528ef2295dbeec30532130ae2235"
+  integrity sha512-j5QzrmsokwWWp6kUcJQySpbG+xfOBqqKnup3OIk1pz+kB/80SLorZ9V8zHFLO92Lcd+hbvq8bT+zOGoPkmBV0Q==
+
 address@1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/address/-/address-1.0.3.tgz#b5f50631f8d6cec8bd20c963963afb55e06cbce9"
@@ -11217,6 +11222,11 @@ react-stripe-checkout@^2.6.3:
   resolved "https://registry.yarnpkg.com/react-stripe-checkout/-/react-stripe-checkout-2.6.3.tgz#3173a870b04e5a3c321a06d24cd53c6030111c45"
   integrity sha1-MXOocLBOWjwyGgbSTNU8YDARHEU=
 
+react-swipeable-list@^1.5.1:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/react-swipeable-list/-/react-swipeable-list-1.5.1.tgz#170efdfca7c757fdd8db0b8278fb1710aba87571"
+  integrity sha512-iBqFkVaNgRJtTW7hMXkQktgnyqEJYpiuFNgZqeGE8aSCnbQPFNpXjHwshfuf2Jb0lMuvweMf9kUrj8lhhsno1g==
+
 react-tabs@^3.1.0:
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/react-tabs/-/react-tabs-3.2.2.tgz#07bdc3cdb17bdffedd02627f32a93cd4b3d6e4d0"
@@ -13831,3 +13841,8 @@ yargs@^3.10.0:
     string-width "^1.0.1"
     window-size "^0.1.4"
     y18n "^3.2.0"
+
+yarn@^1.22.18:
+  version "1.22.18"
+  resolved "https://registry.yarnpkg.com/yarn/-/yarn-1.22.18.tgz#05b822ade8c672987bab8858635145da0850f78a"
+  integrity sha512-oFffv6Jp2+BTUBItzx1Z0dpikTX+raRdqupfqzeMKnoh7WD6RuPAxcqDkMUy9vafJkrB0YaV708znpuMhEBKGQ==

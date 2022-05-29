@@ -15,7 +15,7 @@ class Store extends Component {
 			document.querySelector("#mainManifest").setAttribute("href", "/delivery-manifest.json");
 		}
 		if (document.getElementsByTagName("body")) {
-			document.getElementsByTagName("body")[0].classList.add("bg-grey");
+			document.getElementsByTagName("body")[0].classList.add("bg-white");
 		}
 
 		const { store_user } = this.props;

@@ -45,6 +45,7 @@ import DatePicker from "react-date-picker";
 import TimePicker from "react-time-picker";
 import Moment from "react-moment";
 import FeatherIcon from "feather-icons-react";
+import DeliveryLocation from "./DeliveryLocation";
 
 class Cart extends Component {
   static contextTypes = {
@@ -164,7 +165,7 @@ class Cart extends Component {
 
     this.setState({ loading: false });
     if (this.props.cartProducts.length) {
-      document.getElementsByTagName("body")[0].classList.add("bg-grey");
+      document.getElementsByTagName("body")[0].classList.add("bg-white");
       this.checkForItemsAvailability();
     }
 
@@ -720,14 +721,14 @@ class Cart extends Component {
     if (!this.props.cartProducts.length) {
       document.getElementsByTagName("body")[0].classList.remove("bg-grey");
     }
-    const { cartTotal, cartProducts, restaurant_info } = this.props;
+    const { cartTotal, cartProducts, restaurant_info, user } = this.props;
     // console.log(this.state.time)
 
     return (
       <React.Fragment>
         <Meta ogtype="website" ogurl={window.location.href} />
 
-        <Dialog
+        {/* <Dialog
           fullWidth={true}
           fullScreen={false}
           open={this.state.self_confirm}
@@ -760,37 +761,40 @@ class Cart extends Component {
               OK
             </div>
           </div>
-        </Dialog>
+        </Dialog> */}
+        {cartProducts && cartProducts.length !== 0 && (
+          <>
+            {!this.state.min_order_satisfied && (
+              <div className="auth-error no-click">
+                <div className="error-shake">
+                  Min cart value should be atleast{" "}
+                  <span className="rupees-symbol">₹ </span>
+                  {this.props.restaurant_info.min_order_price}
+                </div>
+              </div>
+            )}
 
-        {!this.state.min_order_satisfied && (
-          <div className="auth-error no-click">
-            <div className="error-shake">
-              Min cart value should be atleast{" "}
-              <span className="rupees-symbol">₹ </span>
-              {this.props.restaurant_info.min_order_price}
-            </div>
-          </div>
+            {this.state.min_qnt_message && (
+              <div className="auth-error no-click">
+                <div className="error-shake">
+                  Min cart quantity for {this.state.item.name} is{" "}
+                  {this.state.item.min_quantity}
+                </div>
+              </div>
+            )}
+
+            {this.state.max_qnt_message && (
+              <div className="auth-error no-click">
+                <div className="error-shake">
+                  Max cart quantity for {this.state.item.name} is{" "}
+                  {this.state.item.max_quantity}
+                </div>
+              </div>
+            )}
+          </>
         )}
 
-        {this.state.min_qnt_message && (
-          <div className="auth-error no-click">
-            <div className="error-shake">
-              Min cart quantity for {this.state.item.name} is{" "}
-              {this.state.item.min_quantity}
-            </div>
-          </div>
-        )}
-
-        {this.state.max_qnt_message && (
-          <div className="auth-error no-click">
-            <div className="error-shake">
-              Max cart quantity for {this.state.item.name} is{" "}
-              {this.state.item.max_quantity}
-            </div>
-          </div>
-        )}
-
-        {this.state.schedule_modal == true && (
+        {/* {this.state.schedule_modal == true && (
           <React.Fragment>
             <div
               style={{
@@ -862,7 +866,7 @@ class Cart extends Component {
               </Fade>
             </div>
           </React.Fragment>
-        )}
+        )} */}
 
         {(this.state.loading ||
           this.state.process_distance_calc_loading ||
@@ -877,8 +881,8 @@ class Cart extends Component {
             <div
               className={` ${
                 localStorage.getItem("userSelected") === "DELIVERY"
-                  ? "bg-white pb-200"
-                  : "bg-white pb-100"
+                  ? "bg-white"
+                  : "bg-white"
               }`}
             >
               <div className="d-flex flex-row align-items-center justify-content-between pl-15 pr-15 pt-15">
@@ -918,18 +922,46 @@ class Cart extends Component {
                   }}
                   // onClick={() => this.context.router.history.goBack()}
                 >
-                  <div >
+                  <div>
                     <div style={{ position: "relative" }}>
                       <FeatherIcon icon="shopping-bag" size={18} />
-                      <div className="d-flex align-items-center justify-content-center" style={{ position: "absolute",top:'-5px' ,height:'14px',width:'14px',borderRadius:'100px',backgroundColor:'red',fontSize:'8px',color:'#fff',right:'-5px'}}>{cartProducts.length}</div>
+                      <div
+                        className="d-flex align-items-center justify-content-center"
+                        style={{
+                          position: "absolute",
+                          top: "-5px",
+                          height: "14px",
+                          width: "14px",
+                          borderRadius: "100px",
+                          backgroundColor: "red",
+                          fontSize: "8px",
+                          color: "#fff",
+                          right: "-5px",
+                        }}
+                      >
+                        {cartProducts.length}
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
+            </div>
+            <div className="bg-white" style={{ height: "100vh" }}>
+              <DeliveryLocation />
               {cartProducts.length ? (
                 <React.Fragment>
-                  {/* <RestaurantInfoCart restaurant={restaurant_info} /> */}
-                  <div className="p-15 mt-20">
+                  <div className=" pl-15 pr-15 pt-15">
+                    {cartProducts.map((item, index) => (
+                      <CartItems
+                        item={item}
+                        addProductQuantity={this.addProductQuantity}
+                        removeProductQuantity={this.removeProductQuantity}
+                        removeProduct={this.removeProduct}
+                        key={item.name + item.id + index}
+                      />
+                    ))}
+                    {/* <RestaurantInfoCart restaurant={restaurant_info} /> */}
+                    {/* <div className="p-15 mt-20">
                     <div
                       className="block-content block-content-full bg-white"
                       style={{
@@ -960,33 +992,28 @@ class Cart extends Component {
                           </DelayLink>
                         </div>
                       </div>
-                      {cartProducts.map((item, index) => (
-                        <CartItems
-                          item={item}
-                          addProductQuantity={this.addProductQuantity}
-                          removeProductQuantity={this.removeProductQuantity}
-                          removeProduct={this.removeProduct}
-                          key={item.name + item.id + index}
-                        />
-                      ))}
+                 
                       <hr style={{ borderTop: "1px dashed #C9C9C9" }} />
                       <OrderComment />
                     </div>
-                  </div>
+                  </div> */}
 
-                  <div>
-                    <BillDetails
-                      total={cartTotal.totalPrice}
-                      distance={this.state.distance}
-                      alreadyRunningOrders={this.state.alreadyRunningOrders}
-                      tips={this.state.selectedTips}
-                      removeTip={this.removeTip}
-                      user_selected={localStorage.getItem("userSelected")}
-                    />
-                  </div>
+                    <div>
+                      {user && user.success && (
+                        <Coupon subtotal={this.props.cartTotal.totalPrice} />
+                      )}
+                    </div>
+                    {/* <div>
+                      <BillDetails
+                        total={cartTotal.totalPrice}
+                        distance={this.state.distance}
+                        alreadyRunningOrders={this.state.alreadyRunningOrders}
+                        tips={this.state.selectedTips}
+                        removeTip={this.removeTip}
+                        user_selected={localStorage.getItem("userSelected")}
+                      />
+                    </div> */}
 
-                  <div>
-                    <Coupon subtotal={this.props.cartTotal.totalPrice} />
                     {/* {this.state.alreadyRunningOrders && (
 											<div className="px-15">
 												<div className="auth-error ongoing-order-notify">
@@ -1005,7 +1032,7 @@ class Cart extends Component {
 										)} */}
                   </div>
 
-                  {(this.state.tipsAmountSetting ||
+                  {/* {(this.state.tipsAmountSetting ||
                     this.state.tipsPercentageSetting) && (
                     <div
                       className="mx-15 mb-15"
@@ -1160,9 +1187,9 @@ class Cart extends Component {
                         </div>
                       )}
                     </div>
-                  )}
+                  )} */}
 
-                  {this.props.restaurant_info &&
+                  {/* {this.props.restaurant_info &&
                     this.props.restaurant_info.order_schedule == 1 && (
                       <div
                         className="mx-15 p-15"
@@ -1185,9 +1212,9 @@ class Cart extends Component {
                           </div>
                         </div>
                       </div>
-                    )}
+                    )} */}
 
-                  {this.props.restaurant_info &&
+                  {/* {this.props.restaurant_info &&
                     this.props.restaurant_info.order_schedule == 1 &&
                     (localStorage.getItem("schedule_date") ||
                       localStorage.getItem("schedule_time")) && (
@@ -1210,9 +1237,9 @@ class Cart extends Component {
                         )}
                         {this.state.time && <span>{this.state.time}</span>}
                       </div>
-                    )}
+                    )} */}
 
-                  <React.Fragment>
+                  {/* <React.Fragment>
                     {(this.props.restaurant_info.delivery_type == 2 ||
                       this.props.restaurant_info.delivery_type == 3) && (
                       <div
@@ -1290,7 +1317,7 @@ class Cart extends Component {
                         </div>
                       </div>
                     )}
-                  </React.Fragment>
+                  </React.Fragment> */}
 
                   {this.state.is_operational_loading ? (
                     <Loading />
@@ -1298,6 +1325,7 @@ class Cart extends Component {
                     <React.Fragment>
                       {this.state.is_active ? (
                         <React.Fragment>
+                        <div style={{height:'200px',backgroundColor:'#fff'}}></div>
                           {this.state.min_order_satisfied &&
                             !this.state.min_qnt_message &&
                             !this.state.max_qnt_message && (
@@ -1327,6 +1355,13 @@ class Cart extends Component {
                                     user_selected={localStorage.getItem(
                                       "userSelected"
                                     )}
+                                    total={cartTotal.totalPrice}
+                                    distance={this.state.distance}
+                                    alreadyRunningOrders={
+                                      this.state.alreadyRunningOrders
+                                    }
+                                    tips={this.state.selectedTips}
+                                    removeTip={this.removeTip}
                                   />
                                 )}
                               </React.Fragment>

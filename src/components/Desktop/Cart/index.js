@@ -155,7 +155,7 @@ class Cart extends Component {
 
 		this.setState({ loading: false });
 		if (this.props.cartProducts.length) {
-			document.getElementsByTagName("body")[0].classList.add("bg-grey");
+			document.getElementsByTagName("body")[0].classList.add("bg-white");
 			this.checkForItemsAvailability();
 		}
 

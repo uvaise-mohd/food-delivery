@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Ticket, InfoCircle, ChevronRight } from "react-iconly";
+import { Discount, InfoCircle, ChevronRight } from "react-iconly";
 import Ink from "react-ink";
 import { applyCoupon } from "../../../../services/coupon/actions";
 import { connect } from "react-redux";
@@ -71,35 +71,39 @@ class Coupon extends Component {
 		const { coupon, user } = this.props;
 		return (
 			<React.Fragment>
-				<div className="input-group px-15 pb-15">
+				<div className="input-group pb-15 mt-20 mb-200">
+				<div style={{fontWeight:'500',marginBottom:'15px',fontSize:'14px'}}>
+							Add Coupon
+						</div>
 					<form
 						className={`coupon-form ${!user.success && "coupon-block-not-loggedin"}`}
 						onSubmit={this.handleSubmit}
-						style={{ boxShadow: 'rgb(136 136 136) 0px 0px 10px -3px', borderRadius: '10px' }}
+						style={{  borderRadius: '10px' ,border:'1px solid #F5F5F8'}}
 					>
-						<DelayLink to={'/coupons'}>
+						{/* <DelayLink to={'/coupons'}>
 							<div className="input-group p-10 font-w600"
 								style={{ backgroundColor: 'rgb(255 171 175)', borderTopLeftRadius: '5px', borderTopRightRadius: '5px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}
 							>
 								<div>View All Coupons</div>
 								<ChevronRight />
 							</div>
-						</DelayLink>
+						</DelayLink> */}
 
+						
 						<div className="input-group">
 							<input
 								type="text"
 								className="form-control apply-coupon-input"
-								placeholder="Coupon"
+								placeholder="Coupon Code"
 								onChange={this.handleInput}
-								style={{ marginTop: '6px' }}
+								style={{ marginTop: '6px' ,}}
 								spellCheck="false"
 								ref="couponInput"
 							/>
-							<div className="input-group-append">
-								<button type="submit" className="btn apply-coupon-btn" onClick={this.handleSubmit}>
+							<div className="" style={{}}>
+								<button type="submit" style={{backgroundColor:'#ff0000',border:'none',height:'100%',width:'60px',borderTopRightRadius:'10px',borderBottomRightRadius:'10px',position:'relative'}}>
 									<span>
-										<Ticket />
+										<Discount primaryColor="#fff"/>
 									</span>
 									<Ink duration="500" />
 								</button>

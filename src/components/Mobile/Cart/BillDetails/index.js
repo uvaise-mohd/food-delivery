@@ -259,7 +259,7 @@ class BillDetails extends Component {
 								</React.Fragment>
 							)}
 
-							{tips.value !== 0 && (
+							{/* {tips.value !== 0 && (
 								<React.Fragment>
 									<div className="display-flex mb-1">
 										<div className="flex-auto">Delivery Tip</div>
@@ -272,7 +272,7 @@ class BillDetails extends Component {
 										</div>
 									</div>
 								</React.Fragment>
-							)}
+							)} */}
 
 							<hr style={{ borderTop: '1px dashed #C9C9C9' }} />
 
