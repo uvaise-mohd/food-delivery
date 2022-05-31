@@ -947,9 +947,9 @@ class Cart extends Component {
               </div>
             </div>
             <div className="bg-white" style={{ height: "100vh" }}>
-              <DeliveryLocation />
               {cartProducts.length ? (
                 <React.Fragment>
+              <DeliveryLocation />
                   <div className=" pl-15 pr-15 pt-15">
                     {cartProducts.map((item, index) => (
                       <CartItems
@@ -1396,7 +1396,7 @@ class Cart extends Component {
                   <h2 className="cart-empty-text mt-50 pt-20 ml-20 text-center">
                     Your Cart is Empty
                   </h2>
-                  {this.state.alreadyRunningOrders && (
+                  {/* {this.state.alreadyRunningOrders && (
                     <div
                       className="auth-error ongoing-order-notify"
                       style={{
@@ -1417,7 +1417,7 @@ class Cart extends Component {
                         <Ink duration="500" />
                       </DelayLink>
                     </div>
-                  )}
+                  )} */}
                   <Footer active_cart={true} />
                 </div>
               )}

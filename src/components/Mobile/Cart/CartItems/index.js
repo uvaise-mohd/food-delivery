@@ -69,6 +69,7 @@ class CartItems extends Component {
               maxHeight: "110px",
               minHeight: "110px",
               marginTop: "10px",
+              marginLeft:'0px'
             }}
           >
             <FaTrashAlt size={20} color={"#fff"} />
@@ -93,6 +94,7 @@ class CartItems extends Component {
                 marginTop: "10px",
                 maxHeight: "110px",
                 minHeight: "110px",
+                // marginRight:'-20px'
               }}
             >
               <div className="pt-15">
@@ -110,7 +112,7 @@ class CartItems extends Component {
                   <div style={{ width: "85px" }}></div>
                 )}
               </div>
-              <div className="ml-4" style={{ width: "35vw" }}>
+              <div className="ml-4" style={{ width: "34vw" }}>
                 <React.Fragment>
                   <div className="pt-15 pb-2">
                     <div>
