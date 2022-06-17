@@ -4255,7 +4255,7 @@ footer.section-footer.border-top.bg-dark {
   bottom: 15px;
   z-index: 9;
   height: 22vh;
-  box-shadow: rgb(136 136 136) 0px 0px 10px -3px;
+  box-shadow: 0px -2px 25px rgba(0, 0, 0, 0.05);;
   border-radius: 1rem;
 }
 
@@ -4448,3 +4448,54 @@ footer.section-footer.border-top.bg-dark {
 
 }
 
+.input-in {
+  border: none;
+  outline: none;
+  background-color: #e6f8f9;
+  height: 50px;
+}
+
+.input-icon {
+  border: none;
+  outline: none;
+  background-color: #f2eff6;
+  height: 30px;
+  border-radius: 10px;
+  width: 50px;
+}
+
+.fm-control-login {
+  border: none;
+  outline: none;
+  background-color: #e6f8f9;
+  height: 50px;
+  width: 100%;
+}
+
+.fm-control-picker {
+  border: none;
+  outline: none;
+  background-color: #ff00001a;
+  height: 50px;
+  width: 80vw;
+  border-radius: 10px;
+}
+
+.fm-control-profile {
+  border: none;
+  outline: none;
+  background-color: #f2eff6;
+  height: 50px;
+  width: 100%;
+}
+
+.fm-control-login-date {
+  border: none;
+  outline: none;
+  background-color: #e6f8f9;
+  height: 50px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: centerF;
+}

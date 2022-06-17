@@ -94,7 +94,7 @@ class CartItems extends Component {
                 marginTop: "10px",
                 maxHeight: "110px",
                 minHeight: "110px",
-                // marginRight:'-20px'
+                width:'100vw'
               }}
             >
               <div className="pt-15">
