@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import { GoogleApiWrapper } from "google-maps-react";
 import Loading from "../../helpers/loading";
 import { ArrowLeft } from "react-iconly";
-import { ChevronLeft, TimeCircle } from "react-iconly";
+import { ChevronLeft, TimeCircle, Calendar } from "react-iconly";
 import Fade from "react-reveal/Fade";
 import DatePicker from "react-date-picker";
 import TimePicker from "react-time-picker";
@@ -85,9 +85,11 @@ class Checkout extends Component {
   handlePopupClose = () => {
     this.setState({ schedule_modal: false });
   };
-  onChange = (date) => this.setState({ date });
 
-  onTime = (time) => this.setState({ time });
+  onChange = (event) => this.setState({ date: event.target.value });
+
+  onTime = (event) => this.setState({ time: event.target.value });
+
   // fetchPaymentGateways = (token) => {
   // 	if (this.state.continueFetchPaymentGateway) {
   // 		console.log("fetching again...");
@@ -189,10 +191,10 @@ class Checkout extends Component {
                       height: "auto",
                       left: "0",
                       width: "100%",
-                      paddingLeft: "20px",
-                      paddingRight: "20px",
+                      paddingLeft: "8vw",
+                      paddingRight: "8vw",
                       paddingTop: "20px",
-                      paddingBottom: "100px",
+                      paddingBottom: "10rem",
                       bottom: "0px",
                       position: "fixed",
                       zIndex: "9999",
@@ -206,36 +208,89 @@ class Checkout extends Component {
                     >
                       Close
                     </div>
-                    <div className="font-w600">Date</div>
-                    <div className="mt-10 ml-10 mr-20">
-                      <DatePicker
-                        onChange={this.onChange}
-                        value={this.state.date}
-                        clearIcon={null}
-                        minDate={new Date()}
-                      />
+                    <div>
+                      <span
+                        className="fw-100"
+                        style={{ fontSize: "16px", width: "75vw" }}
+                      >
+                        Choose Date and Time to schedule your order
+                      </span>
                     </div>
-                    <div className="font-w600 mt-20">Time</div>
-                    <div className="mt-10 ml-10 mr-20">
-                      <TimePicker
+                    <div className="mt-20 mr-20">
+                      <div className="pt-2 px-2  position-relative">
+                        <div
+                          className="position-absolute  end-0 me-4  translate-middle-y"
+                          style={{ top: "30px" }}
+                        >
+                          {/* <Calendar set="curved" primaryColor="#979999" /> */}
+                        </div>
+                        <label
+                          htmlFor="date-dob"
+                          className="fm-control-picker d-flex flex-row align-items-center ps-4 px-2 border-radius-10"
+                          style={{ color: "#000" }}
+                        >
+                          {this.state.date ? (
+                            <span className="text-dark">{this.state.date}</span>
+                          ) : (
+                            <span>Choose Date</span>
+                          )}
+                        </label>
+                        <input
+                          id="date-dob"
+                          className=""
+                          onChange={this.onChange}
+                          type="date"
+                          min={`${new Date().toISOString().split("T")[0]}`}
+                          style={{ opacity: 0 }}
+                          required
+                          placeholder="Choose Date"
+                        />
+                      </div>
+                    </div>
+                    <div className=" mr-20"></div>
+                    <div className="pt-2 px-2  position-relative">
+                      <div
+                        className="position-absolute  end-0 me-4  translate-middle-y"
+                        style={{ top: "30px" }}
+                      >
+                        {/* <TimeCircle set="curved" primaryColor="#979999" /> */}
+                      </div>
+                      <label
+                        htmlFor="date-time"
+                        className="fm-control-picker d-flex flex-row align-items-center ps-4 px-2 border-radius-10"
+                        style={{ color: "#000" }}
+                      >
+                        {this.state.time ? (
+                          <span className="text-dark">{this.state.time}</span>
+                        ) : (
+                          <span>Choose Time</span>
+                        )}
+                      </label>
+                      <input
+                        id="date-time"
+                        className=""
                         onChange={this.onTime}
-                        value={this.state.time}
-                        clearIcon={null}
+                        type="time"
+                        style={{ opacity: 0 }}
+                        required
+                        placeholder="Choose Date"
                       />
                     </div>
-
-                    <div
+                    <button
+                      className="paymentGatewayBlock"
                       onClick={this.setSchedule}
-                      className="btn btn-lg btn-continue"
                       style={{
-                        backgroundColor: localStorage.getItem("storeColor"),
+                        fontWeight: "700",
                         color: "white",
-                        position: "relative",
+                        backgroundColor: localStorage.getItem("storeColor"),
+                        borderRadius: "0.8rem",
+                        width: "85vw",
+                        border: "none",
+                        height: "40px",
                       }}
                     >
-                      Schedule
-                      <Ink duration={400} />
-                    </div>
+                      Continue
+                    </button>
                   </div>
                 </Fade>
               </div>
@@ -247,7 +302,7 @@ class Checkout extends Component {
               <div
                 className="mx-15 p-15"
                 style={{
-                  boxShadow: "rgb(136 136 136) 0px 0px 10px -3px",
+                  // boxShadow: "rgb(136 136 136) 0px 0px 10px -3px",
                   borderRadius: "10px",
                 }}
               >
@@ -259,9 +314,29 @@ class Checkout extends Component {
                     justifyContent: "space-between",
                   }}
                 >
-                  <div className="font-w600">Schedule Order</div>
-                  <div>
-                    <TimeCircle />
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <div>
+                      <TimeCircle />
+                    </div>
+                    <div className="font-w500 ml-5">
+                      Do you want to schedule <br></br> your order
+                    </div>
+                  </div>
+                  <div
+                    className="font-w500"
+                    style={{
+                      border: "0.5px solid #ff0000",
+                      borderRadius: "8px",
+                      padding: "5px 20px 5px 20px",
+                    }}
+                  >
+                    Select
                   </div>
                 </div>
               </div>
@@ -272,11 +347,16 @@ class Checkout extends Component {
             (localStorage.getItem("schedule_date") ||
               localStorage.getItem("schedule_time")) && (
               <div
-                className="mt-2"
+                className="mt-2 d-flex align-items-center justify-content-center"
                 style={{
-                  color: localStorage.getItem("storeColor"),
-                  display: "flex",
-                  justifyContent: "center",
+                  color: "#fff",
+                  backgroundColor: "#ff0000",
+                  borderRadius: "10px",
+                  height: "50px",
+                  width: "95vw",
+                  marginLeft: "9px",
+                  fontWeight: "600",
+                  fontSize: "15px",
                 }}
               >
                 <span>Scheduled For:&nbsp;</span>
