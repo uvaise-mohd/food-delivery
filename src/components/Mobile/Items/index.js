@@ -1,5 +1,8 @@
 import React, { Component } from "react";
-import { getRestaurantInfo, getRestaurantItems } from "../../../services/items/actions";
+import {
+  getRestaurantInfo,
+  getRestaurantItems,
+} from "../../../services/items/actions";
 
 import FloatCart from "../FloatCart";
 import ItemList from "./ItemList";
@@ -14,273 +17,300 @@ import Flip from "react-reveal/Flip";
 
 import { getSettings } from "../../../services/settings/actions";
 
-import { getAllLanguages, getSingleLanguageData } from "../../../services/languages/actions";
+import {
+  getAllLanguages,
+  getSingleLanguageData,
+} from "../../../services/languages/actions";
 
 class Items extends Component {
-	static contextTypes = {
-		router: () => null,
-	};
-	state = {
-		is_active: 1,
-		loading: true,
-		menuListOpen: false,
-		menuClicked: false,
-		coupons: []
-	};
-	componentDidMount() {
-		this.props.getSettings();
-		this.props.getAllLanguages();
+  static contextTypes = {
+    router: () => null,
+  };
+  state = {
+    is_active: 1,
+    loading: true,
+    menuListOpen: false,
+    menuClicked: false,
+    coupons: [],
+  };
+  componentDidMount() {
+    this.props.getSettings();
+    this.props.getAllLanguages();
 
-		//if currentLocation doesnt exists in localstorage then redirect the user to firstscreen
-		//else make API calls
+    //if currentLocation doesnt exists in localstorage then redirect the user to firstscreen
+    //else make API calls
 
-		this.props.getRestaurantInfo(this.props.restaurant).then((response) => {
-			if (response) {
-				if (response.payload.id) {
-					//get items
-					this.props.getRestaurantItems(this.props.restaurant);
-				} else {
-					//404, redirect to homepage
-					this.context.router.history.push("/");
-				}
+    this.props.getRestaurantInfo(this.props.restaurant).then((response) => {
+      if (response) {
+        if (response.payload.id) {
+          //get items
+          this.props.getRestaurantItems(this.props.restaurant);
+        } else {
+          //404, redirect to homepage
+          this.context.router.history.push("/");
+        }
 
-				if (response.payload.delivery_type === 1) {
-					localStorage.setItem("userSelected", "DELIVERY");
-				}
-				if (response.payload.delivery_type === 2) {
-					localStorage.setItem("userSelected", "SELFPICKUP");
-				}
-				if (
-					response.payload.delivery_type === 3 &&
-					localStorage.getItem("userPreferredSelection") === "DELIVERY"
-				) {
-					localStorage.setItem("userSelected", "DELIVERY");
-				}
-				if (
-					response.payload.delivery_type === 3 &&
-					localStorage.getItem("userPreferredSelection") === "SELFPICKUP"
-				) {
-					localStorage.setItem("userSelected", "SELFPICKUP");
-				}
-				if (response.payload.is_active === "undefined") {
-					this.setState({ loading: true });
-				}
-				if (response.payload.is_active === 1 || response.payload.is_active === 0) {
-					this.setState({ loading: false });
-					this.setState({ is_active: response.payload.is_active });
-				}
-				// if (this.props.user && this.props.user.success) {
-				// 	console.log(response.payload.id)
-				// 	axios
-				// 		.post('https://app.snakyz.com/public/api/get-restaurant-coupons', {
-				// 			token: this.props.user.data.auth_token,
-				// 			id: response.payload.id
-				// 		})
-				// 		.then((response) => {
+        if (response.payload.delivery_type === 1) {
+          localStorage.setItem("userSelected", "DELIVERY");
+        }
+        if (response.payload.delivery_type === 2) {
+          localStorage.setItem("userSelected", "SELFPICKUP");
+        }
+        if (
+          response.payload.delivery_type === 3 &&
+          localStorage.getItem("userPreferredSelection") === "DELIVERY"
+        ) {
+          localStorage.setItem("userSelected", "DELIVERY");
+        }
+        if (
+          response.payload.delivery_type === 3 &&
+          localStorage.getItem("userPreferredSelection") === "SELFPICKUP"
+        ) {
+          localStorage.setItem("userSelected", "SELFPICKUP");
+        }
+        if (response.payload.is_active === "undefined") {
+          this.setState({ loading: true });
+        }
+        if (
+          response.payload.is_active === 1 ||
+          response.payload.is_active === 0
+        ) {
+          this.setState({ loading: false });
+          this.setState({ is_active: response.payload.is_active });
+        }
+        // if (this.props.user && this.props.user.success) {
+        // 	console.log(response.payload.id)
+        // 	axios
+        // 		.post('https://app.snakyz.com/public/api/get-restaurant-coupons', {
+        // 			token: this.props.user.data.auth_token,
+        // 			id: response.payload.id
+        // 		})
+        // 		.then((response) => {
 
-				// 			const coupons = response.data.data.coupons;
+        // 			const coupons = response.data.data.coupons;
 
-				// 			console.log('hii2')
-				// 			this.setState({
-				// 				coupons: coupons,
+        // 			console.log('hii2')
+        // 			this.setState({
+        // 				coupons: coupons,
 
+        // 			});
 
-				// 			});
+        // 		});
+        // }
+      }
+    });
 
-				// 		});
-				// }
-			}
-		});
+    if (localStorage.getItem("userSelected") === null) {
+      localStorage.setItem("userSelected", "DELIVERY");
+    }
+    document.addEventListener("mousedown", this.handleClickOutside);
+  }
 
-		if (localStorage.getItem("userSelected") === null) {
-			localStorage.setItem("userSelected", "DELIVERY");
-		}
-		document.addEventListener("mousedown", this.handleClickOutside);
+  componentWillReceiveProps(nextProps) {
+    if (!this.state.is_active) {
+      document.getElementsByTagName("html")[0].classList.add("page-inactive");
+    }
+    if (this.props.languages !== nextProps.languages) {
+      if (localStorage.getItem("userPreferedLanguage")) {
+        this.props.getSingleLanguageData(
+          localStorage.getItem("userPreferedLanguage")
+        );
+      } else {
+        if (nextProps.languages.length) {
+          // console.log("Fetching Translation Data...");
+          const id = nextProps.languages.filter(
+            (lang) => lang.is_default === 1
+          )[0].id;
+          this.props.getSingleLanguageData(id);
+        }
+      }
+    }
+  }
 
-	}
+  handleMenuOpen = () => {
+    this.setState({ menuListOpen: true });
+    document.getElementsByTagName("html")[0].classList.add("noscroll");
+    document.getElementsByTagName("body")[0].classList.add("noscroll");
+  };
 
-	componentWillReceiveProps(nextProps) {
-		if (!this.state.is_active) {
-			document.getElementsByTagName("html")[0].classList.add("page-inactive");
-		}
-		if (this.props.languages !== nextProps.languages) {
-			if (localStorage.getItem("userPreferedLanguage")) {
-				this.props.getSingleLanguageData(localStorage.getItem("userPreferedLanguage"));
-			} else {
-				if (nextProps.languages.length) {
-					// console.log("Fetching Translation Data...");
-					const id = nextProps.languages.filter((lang) => lang.is_default === 1)[0].id;
-					this.props.getSingleLanguageData(id);
-				}
-			}
-		}
-	}
+  handleClickOutside = (event) => {
+    if (
+      this.refs.menuItemBlock &&
+      !this.refs.menuItemBlock.contains(event.target)
+    ) {
+      document.getElementsByTagName("html")[0].classList.remove("noscroll");
+      document.getElementsByTagName("body")[0].classList.remove("noscroll");
+      this.setState({ menuListOpen: false });
+    }
+  };
 
-	handleMenuOpen = () => {
-		this.setState({ menuListOpen: true });
-		document.getElementsByTagName("html")[0].classList.add("noscroll");
-		document.getElementsByTagName("body")[0].classList.add("noscroll");
-	};
+  //when menu-item clicked, go to that division and change menuListOpen =false
+  handleMenuItemClick = (event) => {
+    this.setState({ menuClicked: true });
+    // console.log(event.currentTarget.dataset.name);
+    const categoryBlock = document.getElementById(
+      event.currentTarget.dataset.name
+    );
 
-	handleClickOutside = (event) => {
-		if (this.refs.menuItemBlock && !this.refs.menuItemBlock.contains(event.target)) {
-			document.getElementsByTagName("html")[0].classList.remove("noscroll");
-			document.getElementsByTagName("body")[0].classList.remove("noscroll");
-			this.setState({ menuListOpen: false });
-		}
-	};
+    setTimeout(
+      () => {
+        categoryBlock.scrollIntoView();
+        window.scrollBy(0, -40);
+        this.setState({ menuListOpen: false });
+        document.getElementsByTagName("html")[0].classList.remove("noscroll");
+        document.getElementsByTagName("body")[0].classList.remove("noscroll");
+      },
+      this.state.menuClicked ? 0 : 500
+    );
+  };
 
-	//when menu-item clicked, go to that division and change menuListOpen =false
-	handleMenuItemClick = (event) => {
-		this.setState({ menuClicked: true });
-		// console.log(event.currentTarget.dataset.name);
-		const categoryBlock = document.getElementById(event.currentTarget.dataset.name);
+  componentWillUnmount() {
+    document.removeEventListener("mousedown", this.handleClickOutside);
+    document.getElementsByTagName("html")[0].classList.remove("page-inactive");
+  }
 
-		setTimeout(
-			() => {
-				categoryBlock.scrollIntoView();
-				window.scrollBy(0, -40);
-				this.setState({ menuListOpen: false });
-				document.getElementsByTagName("html")[0].classList.remove("noscroll");
-				document.getElementsByTagName("body")[0].classList.remove("noscroll");
-			},
-			this.state.menuClicked ? 0 : 500
-		);
-	};
-
-	componentWillUnmount() {
-		document.removeEventListener("mousedown", this.handleClickOutside);
-		document.getElementsByTagName("html")[0].classList.remove("page-inactive");
-	}
-
-	render() {
-		if (window.innerWidth > 1024) {
-			return <Redirect to="/" />;
-		}
-		// if (localStorage.getItem("storeColor") === null) {
-		// 	return <Redirect to={"/"} />;
-		// }
-		const restaurant = this.props.restaurant_info
-		const coupons = this.state.coupons
-		return (
-			<React.Fragment>
-				{restaurant &&
-					<React.Fragment>
-						<Meta
-							seotitle={`${this.props.restaurant_info.name} | ${localStorage.getItem("seoMetaTitle")}`}
-							seodescription={localStorage.getItem("seoMetaDescription")}
-							ogtype="website"
-							ogtitle={`${this.props.restaurant_info.name} | ${localStorage.getItem("seoOgTitle")}`}
-							ogdescription={localStorage.getItem("seoOgDescription")}
-							ogurl={window.location.href}
-							twittertitle={`${this.props.restaurant_info.name} | ${localStorage.getItem("seoTwitterTitle")}`}
-							twitterdescription={localStorage.getItem("seoTwitterDescription")}
-						/>
-						<div className="bg-white" key={this.props.restaurant}>
-							<RestaurantInfo
-								history={this.props.history}
-								restaurant={this.props.restaurant_info}
-								coupons={coupons}
-								withLinkToRestaurant={false}
-							/>
-							<ItemList
-								data={this.props.restaurant_items}
-								restaurant={this.props.restaurant_info}
-								menuClicked={this.state.menuClicked}
-							/>
-						</div>
-						{/* {this.props.restaurant_info.certificate && (
+  render() {
+    if (window.innerWidth > 1024) {
+      return <Redirect to='/' />;
+    }
+    // if (localStorage.getItem("storeColor") === null) {
+    // 	return <Redirect to={"/"} />;
+    // }
+    const restaurant = this.props.restaurant_info;
+    const coupons = this.state.coupons;
+    return (
+      <React.Fragment>
+        {restaurant && (
+          <React.Fragment>
+            <Meta
+              seotitle={`${
+                this.props.restaurant_info.name
+              } | ${localStorage.getItem("seoMetaTitle")}`}
+              seodescription={localStorage.getItem("seoMetaDescription")}
+              ogtype='website'
+              ogtitle={`${
+                this.props.restaurant_info.name
+              } | ${localStorage.getItem("seoOgTitle")}`}
+              ogdescription={localStorage.getItem("seoOgDescription")}
+              ogurl={window.location.href}
+              twittertitle={`${
+                this.props.restaurant_info.name
+              } | ${localStorage.getItem("seoTwitterTitle")}`}
+              twitterdescription={localStorage.getItem("seoTwitterDescription")}
+            />
+            <div className='bg-white mb-100' key={this.props.restaurant}>
+              <RestaurantInfo
+                history={this.props.history}
+                restaurant={this.props.restaurant_info}
+                coupons={coupons}
+                withLinkToRestaurant={false}
+              />
+              <ItemList
+                data={this.props.restaurant_items}
+                restaurant={this.props.restaurant_info}
+                menuClicked={this.state.menuClicked}
+              />
+            </div>
+            {/* {this.props.restaurant_info.certificate && (
 							<div className="mb-100 text-center certificate-code">
 								{localStorage.getItem("certificateCodeText")} {this.props.restaurant_info.certificate}
 							</div>
 						)} */}
-						<div>
-							{!this.state.loading && (
-								<React.Fragment>
-									{this.state.is_active ? (
-										<FloatCart />
-									) : (
-										<div className="auth-error no-click">
-											<div className="error-shake">{localStorage.getItem("notAcceptingOrdersMsg")}</div>
-										</div>
-									)}
-								</React.Fragment>
-							)}
-						</div>
+            <div>
+              {!this.state.loading && (
+                <React.Fragment>
+                  {this.state.is_active ? (
+                    <FloatCart />
+                  ) : (
+                    <div className='auth-error no-click'>
+                      <div className='error-shake'>
+                        {localStorage.getItem("notAcceptingOrdersMsg")}
+                      </div>
+                    </div>
+                  )}
+                </React.Fragment>
+              )}
+            </div>
 
-						<div className="menu-list-container">
-							{this.state.menuListOpen ? (
-								<React.Fragment>
-									<div className="menu-open-backdrop" />
-									<div className="menu-items-block" ref="menuItemBlock">
-										<div className="menu-item-block-inner">
-											{this.props.restaurant_items.items && (
-												<React.Fragment>
-													{Object.keys(this.props.restaurant_items.items).map((category, index) => (
-														<div
-															className="menu-item-block-single"
-															key={category}
-															onClick={this.handleMenuItemClick}
-															data-name={category + index}
-														>
-															<Fade bottom duration={150 * index}>
-																<div className="menu-item-block-single-name">{category}</div>
-																<div className="menu-item-block-single-quantity">
-																	{
-																		Object.keys(this.props.restaurant_items.items[category])
-																			.length
-																	}
-																</div>
-															</Fade>
-														</div>
-													))}
-												</React.Fragment>
-											)}
-										</div>
-									</div>
-								</React.Fragment>
-							) : (
-								<div
-									className="menu-button-block-main "
-									onClick={this.handleMenuOpen}
-									style={{ bottom: this.props.cartTotal.productQuantity > 0 ? "6rem" : "3rem" }}
-								>
-									<Flip bottom>
-										<button
-											className="btn btn-menu-list"
-											style={{ backgroundColor: '#11074C' }}
-										>
-											<i className="si si-list mr-1" /> {localStorage.getItem("itemsMenuButtonText")}
-											<Ink duration="500" hasTouch={false} />
-										</button>
-									</Flip>
-								</div>
-							)}
-						</div>
-					</React.Fragment>
-				}
-			</React.Fragment>
-		);
-	}
+            <div className='menu-list-container'>
+              {this.state.menuListOpen ? (
+                <React.Fragment>
+                  <div className='menu-open-backdrop' />
+                  <div className='menu-items-block' ref='menuItemBlock'>
+                    <div className='menu-item-block-inner'>
+                      {this.props.restaurant_items.items && (
+                        <React.Fragment>
+                          {Object.keys(this.props.restaurant_items.items).map(
+                            (category, index) => (
+                              <div
+                                className='menu-item-block-single'
+                                key={category}
+                                onClick={this.handleMenuItemClick}
+                                data-name={category + index}>
+                                <Fade bottom duration={150 * index}>
+                                  <div className='menu-item-block-single-name'>
+                                    {category}
+                                  </div>
+                                  <div className='menu-item-block-single-quantity'>
+                                    {
+                                      Object.keys(
+                                        this.props.restaurant_items.items[
+                                          category
+                                        ]
+                                      ).length
+                                    }
+                                  </div>
+                                </Fade>
+                              </div>
+                            )
+                          )}
+                        </React.Fragment>
+                      )}
+                    </div>
+                  </div>
+                </React.Fragment>
+              ) : (
+                <div
+                  className='menu-button-block-main '
+                  onClick={this.handleMenuOpen}
+                  style={{
+                    bottom:
+                      this.props.cartTotal.productQuantity > 0
+                        ? "9rem"
+                        : "3rem",
+                  }}>
+                  <Flip bottom>
+                    <button
+                      className='btn btn-menu-list'
+                      style={{ backgroundColor: "rgb(254 0 0)" }}>
+                      Browse Menu
+                      <Ink duration='500' hasTouch={false} />
+                    </button>
+                  </Flip>
+                </div>
+              )}
+            </div>
+          </React.Fragment>
+        )}
+      </React.Fragment>
+    );
+  }
 }
 
 const mapStateToProps = (state) => ({
-	restaurant_info: state.items.restaurant_info,
-	restaurant_items: state.items.restaurant_items,
-	cartTotal: state.total.data,
-	settings: state.settings.settings,
-	languages: state.languages.languages,
-	language: state.languages.language,
-	user: state.user.user,
+  restaurant_info: state.items.restaurant_info,
+  restaurant_items: state.items.restaurant_items,
+  cartTotal: state.total.data,
+  settings: state.settings.settings,
+  languages: state.languages.languages,
+  language: state.languages.language,
+  user: state.user.user,
 });
 
-export default connect(
-	mapStateToProps,
-	{
-		getRestaurantInfo,
-		getRestaurantItems,
-		getSettings,
-		getAllLanguages,
-		getSingleLanguageData,
-	}
-)(Items);
+export default connect(mapStateToProps, {
+  getRestaurantInfo,
+  getRestaurantItems,
+  getSettings,
+  getAllLanguages,
+  getSingleLanguageData,
+})(Items);

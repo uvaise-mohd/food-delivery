@@ -756,11 +756,11 @@ table > tbody > tr {
   -o-transition: 0.2s all linear;
   transition: 0.2s all linear;
   box-shadow: 0px 2px 25px 12px rgb(0 0 0 / 10%);
-  background-color: #FF0000;
+  background-color: #ff0000;
   width: 95vw;
   border-radius: 16px;
   margin: 10px;
-   min-height: 80px;
+  min-height: 80px;
 }
 
 .float-cart-desktop {
@@ -2633,7 +2633,6 @@ button.btn.btn-add-remove:disabled {
   z-index: 9;
   font-weight: 600;
   font-size: 0.95rem;
-  background-color: #5d8ed5 !important;
 }
 .menu-items-block {
   position: fixed;
@@ -3113,11 +3112,11 @@ button[type="submit"]:disabled {
   -webkit-overflow-scrolling: touch;
 }
 .product-slider-item {
-  display: inline-block; 
+  display: inline-block;
   margin-left: 0.5rem;
-   margin-right: 0.5rem; 
-   border-radius: 24px;
-    border: 1px solid #E3E3E3;
+  margin-right: 0.5rem;
+  border-radius: 24px;
+  border: 1px solid #e3e3e3;
 }
 
 .product-slider::-webkit-scrollbar {
@@ -3579,7 +3578,7 @@ button[type="submit"]:disabled {
   border: 0.5px dashed #515875;
 }
 .checkout-division-hr {
-  border: 0.5px solid #898B9A;
+  border: 0.5px solid #898b9a;
   opacity: 0.4;
 }
 .delivery-order-item-quantity {
@@ -4255,7 +4254,7 @@ footer.section-footer.border-top.bg-dark {
   bottom: 15px;
   z-index: 9;
   height: 22vh;
-  box-shadow: 0px -2px 25px rgba(0, 0, 0, 0.05);;
+  box-shadow: 0px -2px 25px rgba(0, 0, 0, 0.05);
   border-radius: 1rem;
 }
 
@@ -4419,16 +4418,16 @@ footer.section-footer.border-top.bg-dark {
   background-color: #9e9b9b; /* Modern Browsers */
 }
 
-.nearby-coupons{
+.nearby-coupons {
   height: 20px;
   padding: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 0.5px solid #FF0000;
+  border: 0.5px solid #ff0000;
   margin-top: 10px;
   border-radius: 5px;
-  color: #564E4E;
+  color: #564e4e;
   font-weight: 400;
   font-size: 10px;
 }
@@ -4437,15 +4436,14 @@ footer.section-footer.border-top.bg-dark {
   font-weight: 700;
   font-size: 14px;
   text-align: center;
-  color:#425060;
+  color: #425060;
 }
 
 .restaurant-info-time-sub-head {
   font-weight: 400;
   font-size: 12px;
   text-align: center;
-  color:#425060;
-
+  color: #425060;
 }
 
 .input-in {

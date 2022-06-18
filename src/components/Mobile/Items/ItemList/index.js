@@ -18,6 +18,7 @@ import { searchItem, clearSearch } from "../../../../services/items/actions";
 import ProgressiveImage from "react-progressive-image";
 import LazyLoad from "react-lazyload";
 import { WEBSITE_URL } from "../../../../configs/website";
+import { Star } from "react-iconly";
 
 class ItemList extends Component {
   state = {
@@ -100,66 +101,48 @@ class ItemList extends Component {
     const { data } = this.state;
     return (
       <React.Fragment>
-        {/* <div className="col-12 mt-10">
-					<div className="input-group" ref="searchGroup" onClick={this.inputFocus}>
-						<input
-							type="text"
-							className="form-control items-search-box"
-							placeholder={localStorage.getItem("itemSearchPlaceholder")}
-							onChange={this.searchItem}
-						/>
-						<div className="input-group-append">
-							<span className="input-group-text items-search-box-icon">
-								<i className="si si-magnifier" />
-							</span>
-						</div>
-					</div>
-				</div> */}
         <div
           className={`bg-grey-light mt-10 pt-5  ${
             restaurant && !restaurant.certificate ? "mb-100" : null
-          }`}
-        >
+          }`}>
           {!this.state.searching && (
-            <div className="px-5">
+            <div className='px-5'>
               {!data.recommended ? (
                 <ContentLoader
                   height={480}
                   width={400}
                   speed={1.2}
-                  primaryColor="#f3f3f3"
-                  secondaryColor="#ecebeb"
-                >
-                  <rect x="10" y="22" rx="4" ry="4" width="185" height="137" />
-                  <rect x="10" y="168" rx="0" ry="0" width="119" height="18" />
-                  <rect x="10" y="193" rx="0" ry="0" width="79" height="18" />
+                  primaryColor='#f3f3f3'
+                  secondaryColor='#ecebeb'>
+                  <rect x='10' y='22' rx='4' ry='4' width='185' height='137' />
+                  <rect x='10' y='168' rx='0' ry='0' width='119' height='18' />
+                  <rect x='10' y='193' rx='0' ry='0' width='79' height='18' />
 
-                  <rect x="212" y="22" rx="4" ry="4" width="185" height="137" />
-                  <rect x="212" y="168" rx="0" ry="0" width="119" height="18" />
-                  <rect x="212" y="193" rx="0" ry="0" width="79" height="18" />
+                  <rect x='212' y='22' rx='4' ry='4' width='185' height='137' />
+                  <rect x='212' y='168' rx='0' ry='0' width='119' height='18' />
+                  <rect x='212' y='193' rx='0' ry='0' width='79' height='18' />
 
-                  <rect x="10" y="272" rx="4" ry="4" width="185" height="137" />
-                  <rect x="10" y="418" rx="0" ry="0" width="119" height="18" />
-                  <rect x="10" y="443" rx="0" ry="0" width="79" height="18" />
+                  <rect x='10' y='272' rx='4' ry='4' width='185' height='137' />
+                  <rect x='10' y='418' rx='0' ry='0' width='119' height='18' />
+                  <rect x='10' y='443' rx='0' ry='0' width='79' height='18' />
 
                   <rect
-                    x="212"
-                    y="272"
-                    rx="4"
-                    ry="4"
-                    width="185"
-                    height="137"
+                    x='212'
+                    y='272'
+                    rx='4'
+                    ry='4'
+                    width='185'
+                    height='137'
                   />
-                  <rect x="212" y="418" rx="0" ry="0" width="119" height="18" />
-                  <rect x="212" y="443" rx="0" ry="0" width="79" height="18" />
+                  <rect x='212' y='418' rx='0' ry='0' width='119' height='18' />
+                  <rect x='212' y='443' rx='0' ry='0' width='79' height='18' />
                 </ContentLoader>
               ) : null}
               {data.recommended && data.recommended.length > 0 && (
-                <div className="d-flex align-items-center justify-content-between">
+                <div className='d-flex align-items-center justify-content-between'>
                   <div
-                    className="ml-10"
-                    style={{ fontSize: "1.2em", fontWeight: "600" }}
-                  >
+                    className='ml-10'
+                    style={{ fontSize: "1.2em", fontWeight: "600" }}>
                     Recommended Items
                   </div>
                 </div>
@@ -173,9 +156,8 @@ class ItemList extends Component {
                   MsOverflowStyle: "none",
                   overflow: "-moz-scrollbars-none",
                   scrollBehavior: "smooth",
-				  marginTop:'10px'
-                }}
-              >
+                  marginTop: "10px",
+                }}>
                 {!data.recommended
                   ? null
                   : data.recommended.map((item) => (
@@ -204,188 +186,108 @@ class ItemList extends Component {
                       : localStorage.getItem("expandAllItemMenu") === "true"
                       ? true
                       : this.props.menuClicked
-                  }
-                >
+                  }>
                   {data.items[category].map((item) => (
                     <React.Fragment key={item.id}>
-                      <span className="hidden">{(item.quantity = 1)}</span>
+                      <span className='hidden'>{(item.quantity = 1)}</span>
                       <div
-                        className="category-list-item"
+                        className='category-list-item'
                         style={{
                           display: "flex",
                           justifyContent: "space-between",
-                        }}
-                      >
-                        {item.image !== "" && (
-                          <React.Fragment>
-                            <Link to={restaurant.slug + "/" + item.id}>
-                              <React.Fragment>
-                                <LazyLoad>
-                                  <ProgressiveImage
-                                    src={
-                                      WEBSITE_URL +
-                                      "/assets/img/items/" +
-                                      item.image
-                                    }
-                                    placeholder="/assets/img/various/blank-white.jpg"
-                                  >
-                                    {(src, loading) => (
-                                      <>
-                                        <img
-                                          style={{
-                                            opacity: loading ? "0.5" : "1",
-                                          }}
-                                          src={src}
-                                          alt={item.name}
-                                          className="flex-item-image "
-                                        />
-                                        {localStorage.getItem(
-                                          "showVegNonVegBadge"
-                                        ) === "true" &&
-                                          item.is_veg !== null && (
-                                            <React.Fragment>
-                                              {item.is_veg ? (
-                                                <img
-                                                  src="https://kekadelivery.in/assets/img/various/veg.png"
-                                                  alt="Veg"
-                                                  style={{
-                                                    width: "1rem",
-                                                    position: "absolute",
-                                                    left: "65px",
-                                                    backgroundColor: "white",
-                                                    borderRadius: "3px",
-                                                    top: "3px",
-                                                  }}
-                                                  className="mr-1"
-                                                />
-                                              ) : (
-                                                <img
-                                                  src="https://kekadelivery.in/assets/img/various/non-veg.png"
-                                                  alt="Non-Veg"
-                                                  style={{
-                                                    width: "1rem",
-                                                    position: "absolute",
-                                                    left: "65px",
-                                                    backgroundColor: "white",
-                                                    borderRadius: "3px",
-                                                    top: "3px",
-                                                  }}
-                                                  className="mr-1"
-                                                />
-                                              )}
-                                            </React.Fragment>
-                                          )}
-                                      </>
-                                    )}
-                                  </ProgressiveImage>
-                                </LazyLoad>
-                                {cartProducts.find(
-                                  (cp) => cp.id === item.id
-                                ) !== undefined && (
-                                  <React.Fragment>
-                                    <div
-                                      style={{ position: "absolute", top: "0" }}
-                                    >
-                                      <div
-                                        className="quantity-badge-list"
-                                        style={{
-                                          backgroundColor: "#fc8019",
-                                        }}
-                                      >
-                                        <span>
-                                          {item.addon_categories.length ? (
-                                            <React.Fragment>
-                                              <i
-                                                className="si si-check"
-                                                style={{
-                                                  lineHeight: "1.3rem",
-                                                }}
-                                              />
-                                            </React.Fragment>
-                                          ) : (
-                                            <React.Fragment>
-                                              {
-                                                cartProducts.find(
-                                                  (cp) => cp.id === item.id
-                                                ).quantity
-                                              }
-                                            </React.Fragment>
-                                          )}
-                                        </span>
-                                      </div>
-                                    </div>
-                                  </React.Fragment>
-                                )}
-                              </React.Fragment>
-                            </Link>
-                          </React.Fragment>
-                        )}
+                          position: "relative",
+                        }}>
                         <div
                           className={
                             item.image !== ""
                               ? "flex-item-name ml-3"
                               : "flex-item-name ml-3 ml-0"
-                          }
-                        >
-                          <span className="item-name ">{item.name}</span>{" "}
-                          {item.desc !== null ? (
+                          }>
+                          <div>
+                            {localStorage.getItem("showVegNonVegBadge") ===
+                              "true" &&
+                              item.is_veg !== null && (
+                                <React.Fragment>
+                                  {item.is_veg ? (
+                                    <img
+                                      src='https://kekadelivery.in/assets/img/various/veg.png'
+                                      alt='Veg'
+                                      style={{
+                                        width: "1rem",
+                                        backgroundColor: "white",
+                                        borderRadius: "3px",
+                                      }}
+                                      className='mr-1'
+                                    />
+                                  ) : (
+                                    <img
+                                      src='https://kekadelivery.in/assets/img/various/non-veg.png'
+                                      alt='Non-Veg'
+                                      style={{
+                                        width: "1rem",
+                                        backgroundColor: "white",
+                                        borderRadius: "3px",
+                                      }}
+                                      className='mr-1'
+                                    />
+                                  )}
+                                </React.Fragment>
+                              )}
+                            <span>
+                              <Star
+                                size='small'
+                                set={"bold"}
+                                style={{
+                                  marginLeft: "2px",
+                                  marginBottom: "-5px",
+                                }}
+                                primaryColor={"#F8C246"}
+                              />
+                            </span>
+                          </div>
+                          <span
+                            className='item-name '
+                            style={{ fontSize: "14px" }}>
+                            {item.name}
+                          </span>{" "}
+                          {item.description !== null ? (
                             <React.Fragment>
                               <br />
-                              <ShowMore
-                                lines={1}
-                                more={localStorage.getItem(
-                                  "showMoreButtonText"
-                                )}
-                                less={localStorage.getItem(
-                                  "showLessButtonText"
-                                )}
-                                anchorclassName="show-more ml-1"
-                              >
-                                <div
-                                  dangerouslySetInnerHTML={{
-                                    __html: item.desc,
-                                  }}
-                                />
-                              </ShowMore>
+
+                              <div
+                                style={{
+                                  fontStyle: "normal",
+                                  fontWeight: "400",
+                                  fontSize: "12px",
+                                  lineHeight: "18px",
+                                  color: "#777777",
+                                }}>
+                                {item.description}
+                              </div>
                             </React.Fragment>
                           ) : (
                             <br />
                           )}
                           <span
-                            className="item-price "
-                            style={{ color: "#fc8019", fontWeight: "800" }}
-                          >
+                            className='item-price '
+                            style={{
+                              fontStyle: "normal",
+                              fontWeight: "400",
+                              fontSize: "16px",
+                              lineHeight: "24px",
+                              textAlign: "center",
+                              color: "#000000",
+                            }}>
                             {localStorage.getItem("hidePriceWhenZero") ===
                               "true" && item.price === "0.00" ? null : (
                               <React.Fragment>
                                 {item.old_price > 0 && (
-                                  <span className="strike-text mr-1">
-                                    {" "}
-                                    {localStorage.getItem(
-                                      "currencySymbolAlign"
-                                    ) === "left" &&
-                                      localStorage.getItem(
-                                        "currencyFormat"
-                                      )}{" "}
-                                    {item.old_price}
-                                    {localStorage.getItem(
-                                      "currencySymbolAlign"
-                                    ) === "right" &&
-                                      localStorage.getItem("currencyFormat")}
+                                  <span className='strike-text mr-1'>
+                                    AED {item.old_price}
                                   </span>
                                 )}
 
-                                <span>
-                                  {localStorage.getItem(
-                                    "currencySymbolAlign"
-                                  ) === "left" &&
-                                    localStorage.getItem("currencyFormat")}{" "}
-                                  {item.price}
-                                  {localStorage.getItem(
-                                    "currencySymbolAlign"
-                                  ) === "right" &&
-                                    localStorage.getItem("currencyFormat")}
-                                </span>
+                                <span>AED {item.price}</span>
 
                                 {item.old_price > 0 &&
                                 localStorage.getItem(
@@ -393,13 +295,12 @@ class ItemList extends Component {
                                 ) === "true" ? (
                                   <React.Fragment>
                                     <p
-                                      className="price-percentage-discount mb-0"
+                                      className='price-percentage-discount mb-0'
                                       style={{
                                         color: localStorage.getItem(
                                           "cartColorBg"
                                         ),
-                                      }}
-                                    >
+                                      }}>
                                       {parseFloat(
                                         ((parseFloat(item.old_price) -
                                           parseFloat(item.price)) /
@@ -419,83 +320,117 @@ class ItemList extends Component {
                             {item.addon_categories.length > 0 && (
                               <React.Fragment>
                                 <span
-                                  className=" badge badge-warning customizable-item-text mb-1"
+                                  className=' badge badge-warning customizable-item-text mb-1'
                                   style={{
                                     color: "#ffff",
-                                  }}
-                                >
+                                  }}>
                                   {localStorage.getItem("customizableItemText")}
                                 </span>
                                 <br />
                               </React.Fragment>
                             )}
                           </span>
-                          <ItemBadge item={item} />
+                          {/* <ItemBadge item={item} /> */}
                         </div>
 
-                        <div className="col-4 d-flex justify-content-end pt-3  ">
+                        {item.image !== "" && (
+                          <React.Fragment>
+                            <Link to={restaurant.slug + "/" + item.id}>
+                              <React.Fragment>
+                                <LazyLoad>
+                                  <ProgressiveImage
+                                    src={
+                                      WEBSITE_URL +
+                                      "/assets/img/items/" +
+                                      item.image
+                                    }
+                                    placeholder='/assets/img/various/blank-white.jpg'>
+                                    {(src, loading) => (
+                                      <>
+                                        <img
+                                          style={{
+                                            opacity: loading ? "0.5" : "1",
+                                            width: "120px",
+                                            height: "100px",
+                                          }}
+                                          src={src}
+                                          alt={item.name}
+                                          className='flex-item-image '
+                                        />
+                                      </>
+                                    )}
+                                  </ProgressiveImage>
+                                </LazyLoad>
+                              </React.Fragment>
+                            </Link>
+                          </React.Fragment>
+                        )}
+
+                        <div
+                          className='d-flex'
+                          style={{
+                            position: "absolute",
+                            right: "0%",
+                            bottom: "14%",
+                            width: "33%",
+                            justifyContent: "center",
+                          }}>
                           {cartProducts.find((cp) => cp.id === item.id) !==
                             undefined && (
                             <React.Fragment>
-                              <div className=" item-actions text-center">
+                              <div className=' item-actions text-center'>
                                 <div
-                                  className="btn-group btn-group-sm"
-                                  role="group"
-                                  aria-label="btnGroupIcons1"
-                                  style={{ borderRadius: "0.5rem" }}
-                                >
+                                  className='btn-group btn-group-sm'
+                                  role='group'
+                                  aria-label='btnGroupIcons1'
+                                  style={{ borderRadius: "0.5rem" }}>
                                   {item.is_active ? (
                                     <React.Fragment>
                                       {item.addon_categories.length ? (
                                         <button
                                           disabled
-                                          type="button"
-                                          className="btn btn-add-remove"
+                                          type='button'
+                                          className='btn btn-add-remove'
                                           style={{
                                             color: localStorage.getItem(
                                               "cartColor-bg"
                                             ),
                                             width: "30px",
-                                          }}
-                                        >
+                                          }}>
                                           <div
-                                            className="btn-dec  pb-2"
-                                            style={{ color: "#00000" }}
-                                          >
+                                            className='btn-dec  pb-2'
+                                            style={{ color: "#00000" }}>
                                             -
                                           </div>
-                                          <Ink duration="500" />
+                                          <Ink duration='500' />
                                         </button>
                                       ) : (
                                         <button
-                                          type="button"
-                                          className="btn btn-add-remove"
+                                          type='button'
+                                          className='btn btn-add-remove'
                                           style={{
-                                            color: localStorage.getItem(
-                                              "cartColor-bg"
-                                            ),
+                                            color: "white",
                                             borderRight: "none",
                                             width: "30px",
+                                            backgroundColor: "#fe0000",
                                           }}
                                           onClick={() => {
                                             item.quantity = 1;
                                             removeProduct(item);
                                             this.forceStateUpdate();
-                                          }}
-                                        >
-                                          <span class="btn-dec">-</span>
-                                          <Ink duration="500" />
+                                          }}>
+                                          <span class='btn-dec'>-</span>
+                                          <Ink duration='500' />
                                         </button>
                                       )}
 
                                       <span
-                                        className="pt-2 pl-2 pr-2 btn btn-quantity"
+                                        className='pt-2 pl-2 pr-2 btn '
                                         style={{
                                           borderRight: "none",
                                           borderLeft: "none",
                                           backgroundColor: "#F4F2FF",
-                                        }}
-                                      >
+                                        }}>
                                         <React.Fragment>
                                           {
                                             cartProducts.find(
@@ -513,36 +448,33 @@ class ItemList extends Component {
                                         />
                                       ) : (
                                         <button
-                                          type="button"
-                                          className="btn btn-add-remove robo"
+                                          type='button'
+                                          className='btn btn-add-remove robo'
                                           style={{
-                                            color: localStorage.getItem(
-                                              "cartColor-bg"
-                                            ),
+                                            color: "white",
                                             width: "30px",
+                                            backgroundColor: "#fe0000",
                                           }}
                                           onClick={() => {
                                             addProduct(item);
                                             this.forceStateUpdate();
-                                          }}
-                                        >
+                                          }}>
                                           <span
-                                            className="robo"
+                                            className='robo'
                                             style={{
                                               fontSize: "1.2rem",
                                               lineHeight: "14px",
-                                              color: "#282c3f",
+                                              color: "white",
                                               fontWeight: "500",
-                                            }}
-                                          >
+                                            }}>
                                             +
                                           </span>
-                                          <Ink duration="500" />
+                                          <Ink duration='500' />
                                         </button>
                                       )}
                                     </React.Fragment>
                                   ) : (
-                                    <div className="robo text-danger text-item-not-available">
+                                    <div className='robo text-danger text-item-not-available'>
                                       {localStorage.getItem(
                                         "cartItemNotAvailable"
                                       )}
@@ -556,7 +488,7 @@ class ItemList extends Component {
                           {cartProducts.find((cp) => cp.id === item.id) ===
                             undefined && (
                             <React.Fragment>
-                              <div className="item-actions pull-right">
+                              <div className='item-actions pull-right'>
                                 {item.is_active ? (
                                   <React.Fragment>
                                     {item.addon_categories.length ? (
@@ -567,31 +499,35 @@ class ItemList extends Component {
                                       />
                                     ) : (
                                       <button
-                                        type="button"
-                                        className="robo btn btn-success mt-2"
+                                        type='button'
+                                        className='robo btn btn-success'
                                         style={{
                                           position: "relative",
-                                          backgroundColor: "white",
-                                          borderRadius: "0.5rem",
-                                          borderColor: "gray",
-                                          color: "black",
-                                          height: "3rem !important",
-                                          fontSize: "1rem !important",
-                                          width: "70px",
-                                          fontWeight: "500",
+                                          backgroundColor: "rgb(254, 0, 0)",
+                                          borderRadius: "13px",
+                                          borderColor: "rgb(254, 0, 0)",
+                                          color: "white",
+                                          width: "40px",
+                                          fontWeight: "200",
+                                          fontSize: "20px",
                                         }}
                                         onClick={() => {
                                           addProduct(item);
                                           this.forceStateUpdate();
-                                        }}
-                                      >
-                                        ADD
-                                        <Ink duration="500" />
+                                        }}>
+                                        <span
+                                          style={{
+                                            position: "relative",
+                                            left: "-15%",
+                                          }}>
+                                          +
+                                        </span>
+                                        {/* <Ink duration='500' /> */}
                                       </button>
                                     )}
                                   </React.Fragment>
                                 ) : (
-                                  <div className="robo text-danger text-item-not-available">
+                                  <div className='robo text-danger text-item-not-available'>
                                     {localStorage.getItem(
                                       "cartItemNotAvailable"
                                     )}
@@ -607,7 +543,7 @@ class ItemList extends Component {
                 </Collapsible>
               </div>
             ))}
-          <div className="mb-50" />
+          <div className='mb-50' />
         </div>
       </React.Fragment>
     );

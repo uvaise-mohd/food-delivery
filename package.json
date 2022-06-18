@@ -76,7 +76,7 @@
 		"react-slick": "^0.28.1",
 		"react-social-login": "^3.4.5",
 		"react-spring": "^9.4.5",
-		"react-spring-bottom-sheet": "^3.4.0",
+		"react-spring-bottom-sheet": "^3.4.1",
 		"react-star-rating": "^1.4.2",
 		"react-star-rating-component": "^1.4.1",
 		"react-stripe-checkout": "^2.6.3",

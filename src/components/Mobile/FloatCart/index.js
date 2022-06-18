@@ -179,47 +179,43 @@ class Cart extends Component {
               style={{ width: "100%", margin: "auto" }}
               PaperProps={{
                 style: { backgroundColor: "#fff", borderRadius: "4px" },
-              }}
-            >
+              }}>
               <div
-                className="container"
-                style={{ borderRadius: "5px", height: "220px" }}
-              >
+                className='container'
+                style={{ borderRadius: "5px", height: "220px" }}>
                 <React.Fragment>
-                  <div className="px-10 col-12 py-3 d-flex justify-content-between align-items-center">
-                    <h1 className="mt-2 mb-0 font-weight-black h4">
+                  <div className='px-10 col-12 py-3 d-flex justify-content-between align-items-center'>
+                    <h1 className='mt-2 mb-0 font-weight-black h4'>
                       Replace items already in the cart?
                     </h1>
                   </div>
-                  <div className="px-10 mb-20">
+                  <div className='px-10 mb-20'>
                     Your cart contains items from other store. Do you want to
                     discard the selection and add items from this store?
                   </div>
-                  <div className="d-flex justify-content-center">
-                    <div className="text-center mr-4">
+                  <div className='d-flex justify-content-center'>
+                    <div className='text-center mr-4'>
                       <button
-                        className="btn clear-cart-btn"
+                        className='btn clear-cart-btn'
                         onClick={this.handlePopup}
                         style={{
                           borderColor: localStorage.getItem("storeColor"),
                           borderRadius: "2rem",
-                        }}
-                      >
+                        }}>
                         No
                       </button>
                     </div>
 
-                    <div className="text-center">
+                    <div className='text-center'>
                       <button
-                        className="btn clear-cart-btn"
+                        className='btn clear-cart-btn'
                         onClick={this.clearCart}
                         style={{
                           backgroundColor: localStorage.getItem("storeColor"),
                           borderColor: localStorage.getItem("storeColor"),
                           color: "#ffffff",
                           borderRadius: "2rem",
-                        }}
-                      >
+                        }}>
                         Yes
                       </button>
                     </div>
@@ -244,20 +240,18 @@ class Cart extends Component {
                   justifyContent: "space-between",
                   alignItems: "center",
                   //   marginTop: "-6px",
-                }}
-              >
+                }}>
                 <div
                   style={{
                     display: "flex",
                     alignItems: "start",
                     flexDirection: "column",
                     color: "#fff",
-                  }}
-                >
+                  }}>
                   <div style={{ fontWeight: "400", fontSize: "14px" }}>
-                    <span className="">{this.getTotalItemsInCart()} Item</span>
-                    <span className="ml-4" style={{ color: "#FE0B15" }}>
-                      <span className="rupees-symbol">AED </span>{" "}
+                    <span className=''>{this.getTotalItemsInCart()} Item</span>
+                    <span className='ml-4' style={{ color: "#FE0B15" }}>
+                      <span className='rupees-symbol'>AED </span>{" "}
                       {formatPrice(cartTotal.totalPrice)}
                     </span>
                   </div>
@@ -266,45 +260,26 @@ class Cart extends Component {
                       fontWeight: "600",
                       fontSize: "18px",
                       marginTop: "5px",
-                    }}
-                  >
+                    }}>
                     AED {cartTotal.totalPrice}
                   </div>
                 </div>
                 <div
-                  className="d-flex align-items-center p-10"
+                  className='d-flex align-items-center p-10'
                   style={{
                     fontWeight: "600",
                     color: "#000",
                     backgroundColor: "#fff",
                     borderRadius: "100px",
-                  }}
-                >
+                  }}>
                   <div>
-                    <Buy primaryColor="#FF0000" />
+                    <Buy primaryColor='#FF0000' />
                   </div>
-                  <div className="ml-2">Proceed To Cart</div>
+                  <div className='ml-2'>Proceed to cart</div>
                 </div>
               </div>
-              {/* <span>
-								<Buy />
-							</span>
-							<span className="ml-2">
-								{this.getTotalItemsInCart()} Item
-							</span>
-							<span className="pl-5 pr-5">&nbsp;&nbsp;&nbsp;&nbsp;</span>
-							<span>
-								{localStorage.getItem("currencySymbolAlign") === "left" &&
-									localStorage.getItem("currencyFormat")}
-								{formatPrice(cartTotal.totalPrice)}
-								{localStorage.getItem("currencySymbolAlign") === "right" &&
-									localStorage.getItem("currencyFormat")}
-							</span> */}
-              {/* <span>{`${localStorage.getItem("currencyFormat")} ${formatPrice(cartTotal.totalPrice)}`}</span> */}
-              {/* <span className="pull-right">
-								{localStorage.getItem("floatCartViewCartText")} <i className="si si-basket" />
-							</span> */}
-              <Ink duration="500" />
+
+              {/* <Ink duration='500' /> */}
             </DelayLink>
           ) : (
             <span>&nbsp;</span>

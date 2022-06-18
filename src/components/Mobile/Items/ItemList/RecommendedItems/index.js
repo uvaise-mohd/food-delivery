@@ -214,7 +214,7 @@ class RecommendedItems extends Component {
                       )}
 
                       <span
-                        className='btn btn-quantity'
+                        className='btn '
                         style={{
                           borderRight: "none",
                           borderLeft: "none",
