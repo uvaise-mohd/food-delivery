@@ -50,6 +50,10 @@ class Orders extends Component {
     this.setState({ loading: false });
   }
 
+  setLoading = (loading) => {
+    this.setState({ loading: loading });
+  };
+
   render() {
     if (window.innerWidth > 768) {
       return <Redirect to='/' />;
@@ -237,6 +241,8 @@ class Orders extends Component {
                 user={user}
                 cancelOrder={this.props.cancelOrder}
                 cancel={this.props.cancel}
+                history={this.context.router.history}
+                setLoading={this.setLoading}
               />
             ))}
           </div>

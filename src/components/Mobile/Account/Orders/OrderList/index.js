@@ -12,9 +12,10 @@ import {
 } from "react-iconly";
 import { formatPrice } from "../../../../helpers/formatPrice";
 import OrderCancelPopup from "./OrderCancelPopup";
+import { addProduct, loadCart } from "../../../../../services/cart/actions";
 import { getSingleItem } from "../../../../../services/items/actions";
+import { updateCart } from "../../../../../services/total/actions";
 import { connect } from "react-redux";
-import { addProduct } from "../../../../../services/cart/actions";
 import { ChevronDown } from "react-iconly";
 
 class OrderList extends Component {
@@ -37,27 +38,102 @@ class OrderList extends Component {
     return formatPrice(itemCost);
   };
 
-  addProducts = (order) => {
-    const { addProduct } = this.props;
-    console.log(order.orderitems);
+  //   addProducts = (order) => {
+  //     const { addProduct } = this.props;
+  //     console.log(order.orderitems);
 
-    order.orderitems.forEach((item) => {
-      this.props.getSingleItem(item.item_id).then((response) => {
-        if (response) {
-          response.payload.quantity = 1;
-          addProduct(response.payload);
-        }
-      });
-    });
+  //     order.orderitems.forEach((item) => {
+  //       this.props.getSingleItem(item.item_id).then((response) => {
+  //         if (response) {
+  //           response.payload.quantity = 1;
+  //           addProduct(response.payload);
+  //         }
+  //       });
+  //     });
 
-    setTimeout(() => {
-      this.context.router.history.push("/cart");
-    }, 1000);
-  };
+  //     setTimeout(() => {
+  //       this.context.router.history.push("/cart");
+  //     }, 1000);
+  //   };
 
   componentWillUnmount() {
     document.getElementsByTagName("body")[0].classList.remove("bg-grey");
   }
+
+  retryOrder = (order) => {
+    this.props.setLoading(true);
+    // console.log(order.orderitems);
+
+    order.orderitems.forEach((item) => {
+      this.props.getSingleItem(item.item_id).then((response) => {
+        if (response) {
+          let addons = [];
+          addons["selectedaddons"] = [];
+
+          response.payload.quantity = item.quantity;
+          if (item.order_item_addons.length > 0) {
+            item.order_item_addons.forEach((addon) => {
+              addons["selectedaddons"].push({
+                addon_category_name: addon.addon_category_name,
+                addon_id: addon.id,
+                addon_name: addon.addon_name,
+                price: addon.addon_price,
+              });
+            });
+            response.payload.selectedaddons = addons["selectedaddons"];
+          }
+          // console.log(response.payload);
+          this.addProduct(response.payload);
+        }
+      });
+    });
+
+    // this.props.loadCart();
+
+    setTimeout(() => {
+      this.props.history.push("/cart");
+    }, 1000);
+  };
+
+  addProduct = (product) => {
+    const { cartProducts, updateCart } = this.props;
+
+    //get restaurant id and save to localStorage as active restaurant
+    localStorage.setItem("activeRestaurant", product.restaurant_id);
+
+    let productAlreadyInCart = false;
+    cartProducts.forEach((cp) => {
+      // first check if the restaurent id matches with items in cart
+      // if restaurant id doesn't match, then remove all products from cart
+      // then continue to add the new product to cart
+      if (cp.restaurant_id === product.restaurant_id) {
+        // then add the item to cart or increment count
+        if (cp.id === product.id) {
+          //check if product has customizations, and if the customization matches with any
+          if (
+            JSON.stringify(cp.selectedaddons) ===
+            JSON.stringify(product.selectedaddons)
+          ) {
+            // increment the item quantity by 1
+            cp.quantity += 1;
+            productAlreadyInCart = true;
+          }
+        }
+      } else {
+        // else if restaurant id doesn't match, then remove all products from cart
+
+        cartProducts.splice(0, cartProducts.length);
+      }
+    });
+
+    if (!productAlreadyInCart) {
+      cartProducts.push(product);
+    }
+    // veCoupon();
+    // console.log(cartProducts);
+    updateCart(cartProducts);
+    //   this.openFloatCart();
+  };
 
   render() {
     const { order, user, cancelOrder } = this.props;
@@ -138,6 +214,7 @@ class OrderList extends Component {
 
             <div className='mb-2 mt-4 d-flex justify-content-between'>
               <div
+                onClick={() => this.retryOrder(order)}
                 style={{
                   background: "rgb(255, 0, 0)",
                   borderRadius: "10px",
@@ -152,7 +229,8 @@ class OrderList extends Component {
                 }}>
                 Re-Order
               </div>
-              <div
+              <DelayLink
+                to={`/view-order/${order.unique_order_id}`}
                 style={{
                   background: "#ecb8aa4a",
                   borderRadius: "10px",
@@ -166,7 +244,7 @@ class OrderList extends Component {
                   alignItems: "center",
                 }}>
                 Details
-              </div>
+              </DelayLink>
             </div>
             {/* <DelayLink
               to={`/view-order/${order.unique_order_id}`}
@@ -308,7 +386,7 @@ class OrderList extends Component {
               </div>
             </DelayLink> */}
 
-            <div
+            {/* <div
               style={{
                 display: "flex",
                 alignItems: "center",
@@ -321,19 +399,21 @@ class OrderList extends Component {
                   cancelOrder={cancelOrder}
                 />
               )}
-            </div>
+            </div> */}
           </div>
         </div>
       </React.Fragment>
     );
   }
 }
-
 const mapStateToProps = (state) => ({
   user: state.user.user,
   cancel: state.orders.cancel,
+  cartProducts: state.cart.products,
 });
 
-export default connect(mapStateToProps, { getSingleItem, addProduct })(
-  OrderList
-);
+export default connect(mapStateToProps, {
+  getSingleItem,
+  addProduct,
+  updateCart,
+})(OrderList);

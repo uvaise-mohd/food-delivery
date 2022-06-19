@@ -2,31 +2,32 @@ import { GET_ORDERS, CANCEL_ORDER } from "./actionTypes";
 import { GET_ORDERS_URL, GET_ORDER_CANCEL_URL } from "../../configs";
 import Axios from "axios";
 
-export const getOrders = (token, user_id) => dispatch => {
-    Axios.post(GET_ORDERS_URL, {
-        token: token,
-        user_id: user_id
+export const getOrders = (token, user_id, type_of_data) => (dispatch) => {
+  Axios.post(GET_ORDERS_URL, {
+    token: token,
+    user_id: user_id,
+    type_of_data: type_of_data,
+  })
+    .then((response) => {
+      const orders = response.data;
+      return dispatch({ type: GET_ORDERS, payload: orders });
     })
-        .then(response => {
-            const orders = response.data;
-            return dispatch({ type: GET_ORDERS, payload: orders });
-        })
-        .catch(function(error) {
-            console.log(error);
-        });
+    .catch(function(error) {
+      console.log(error);
+    });
 };
 
-export const cancelOrder = (token, user_id, order_id) => dispatch => {
-    Axios.post(GET_ORDER_CANCEL_URL, {
-        token: token,
-        user_id: user_id,
-        order_id: order_id
+export const cancelOrder = (token, user_id, order_id) => (dispatch) => {
+  Axios.post(GET_ORDER_CANCEL_URL, {
+    token: token,
+    user_id: user_id,
+    order_id: order_id,
+  })
+    .then((response) => {
+      const res = response.data;
+      return dispatch({ type: CANCEL_ORDER, payload: res });
     })
-        .then(response => {
-            const res = response.data;
-            return dispatch({ type: CANCEL_ORDER, payload: res });
-        })
-        .catch(function(error) {
-            console.log(error);
-        });
+    .catch(function(error) {
+      console.log(error);
+    });
 };
