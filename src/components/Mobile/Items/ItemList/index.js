@@ -178,15 +178,7 @@ class ItemList extends Component {
             Object.keys(data.items).map((category, index) => (
               <div key={category} id={category + index}>
                 {/* <Collapsible trigger={category} open={true}> */}
-                <Collapsible
-                  trigger={category}
-                  open={
-                    index === 0
-                      ? true
-                      : localStorage.getItem("expandAllItemMenu") === "true"
-                      ? true
-                      : this.props.menuClicked
-                  }>
+                <Collapsible trigger={category} open={true}>
                   {data.items[category].map((item) => (
                     <React.Fragment key={item.id}>
                       <span className='hidden'>{(item.quantity = 1)}</span>
