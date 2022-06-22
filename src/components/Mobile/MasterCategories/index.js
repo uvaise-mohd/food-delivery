@@ -4,6 +4,7 @@ import { ChevronLeft } from "react-iconly";
 import FeatherIcon from "feather-icons-react";
 import { connect } from "react-redux";
 import ItemCategories from "./ItemCategories";
+import ItemList from "./ItemList";
 
 class MasterCategories extends Component {
   static contextTypes = {
@@ -13,7 +14,7 @@ class MasterCategories extends Component {
     master_category: [],
     item_categories: [],
     loading: true,
-    selected_category:0,
+    selected_category: [],
   };
   componentDidMount() {
     this.setState({
@@ -25,9 +26,12 @@ class MasterCategories extends Component {
       latitude: userSetAddress.lat,
       longitude: userSetAddress.lng,
     }).then((response) => {
-      if (response.data.item_categories && response.data.item_categories.length!==0  ) {
+      if (
+        response.data.item_categories &&
+        response.data.item_categories.length !== 0
+      ) {
         this.setState({
-          selected_category: response.data.item_categories[0].id,
+          selected_category: response.data.item_categories[0],
         });
       }
       this.setState({
@@ -41,7 +45,7 @@ class MasterCategories extends Component {
     this.setState({
       selected_category: id,
     });
-  }
+  };
   render() {
     const { cartProducts } = this.props;
     return (
@@ -129,18 +133,25 @@ class MasterCategories extends Component {
                 </div>
 
                 <div
-                  style={{ fontSize: "16px", fontWeight: "600", color: "#000",textAlign:'center' }}
+                  style={{
+                    fontSize: "16px",
+                    fontWeight: "600",
+                    color: "#000",
+                    textAlign: "center",
+                  }}
                 >
                   {this.state.master_category.name}
                 </div>
               </div>
             </div>
-            <div style={{height:'100vh',backgroundColor:'#fff'}}>
-              <ItemCategories 
-              item_categories={this.state.item_categories}
-              __selectCategory={this.__selectCategory}
-              selected_category={this.state.selected_category}
+            <div style={{ height: "100vh", backgroundColor: "#fff" }}>
+              <ItemCategories
+                item_categories={this.state.item_categories}
+                __selectCategory={this.__selectCategory}
+                selected_category={this.state.selected_category}
               />
+
+              <ItemList selected_category={this.state.selected_category} />
             </div>
           </React.Fragment>
         ) : null}
