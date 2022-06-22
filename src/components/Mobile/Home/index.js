@@ -289,7 +289,11 @@ class Home extends Component {
               promo_slides.featuresStores.length > 0 && (
                 <PopularRestaurants promo_slides={promo_slides} />
               )}
-            <Categories />
+              {promo_slides &&
+              promo_slides.master_categories &&
+              promo_slides.master_categories.length > 0 && (
+                <Categories master_categories={promo_slides.master_categories} />
+              )}
             {promo_slides &&
               promo_slides.items &&
               promo_slides.items.length > 0 && (

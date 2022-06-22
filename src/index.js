@@ -283,7 +283,10 @@ const SlideItems = Loadable({
 	loader: () => import("./components/Mobile/SlideItems"),
 	loading: () => <Loading />,
 });
-
+const MasterCategories = Loadable({
+	loader: () => import("./components/Mobile/MasterCategories"),
+	loading: () => <Loading />,
+});
 const DesktopSlideItems = Loadable({
 	loader: () => import("./components/Desktop/SlideItems"),
 	loading: () => <Loading />,
@@ -428,6 +431,8 @@ ReactDOM.render(
 					{/* <Route path={"/stores/:restaurant/:id"} exact component={withTracker(SingleItem)} /> */}
 					<Route path={"/stores/:restaurant/:id"} exact component={withTracker(SingleItemParent)} />
 					<Route path={"/desktop/stores/:restaurant/:id"} exact component={withTracker(DesktopSingleItemParent)} />
+
+					<Route path={"/master-category/:id"} exact component={withTracker(MasterCategories)} />
 
 					<Route path={"/explore"} exact component={withTracker(Explore)} />
 					<Route path={"/desktop/explore"} exact component={withTracker(DesktopExplore)} />

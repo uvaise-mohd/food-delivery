@@ -13,6 +13,7 @@ import DatePicker from "react-date-picker";
 import TimePicker from "react-time-picker";
 import Moment from "react-moment";
 import Ink from "react-ink";
+import { formatPrice } from "../../helpers/formatPrice";
 
 class Checkout extends Component {
   state = {
@@ -120,7 +121,91 @@ class Checkout extends Component {
       this.setState({ toPay: data });
     }, 200);
   };
+  getTotalAfterCalculation = () => {
+    const { total, restaurant_info, coupon, tips } = this.props;
+    let calc = 0;
+    if (coupon.code) {
+      if (coupon.discount_type === "PERCENTAGE") {
+        let percentage_discount = formatPrice(
+          (coupon.coupon_discount / 100) * parseFloat(total)
+        );
+        if (coupon.max_discount) {
+          if (parseFloat(percentage_discount) >= coupon.max_discount) {
+            percentage_discount = coupon.max_discount;
+          }
+        }
 
+        this.props.couponApplied(coupon, percentage_discount);
+        const saveCouponAppliedAmount = new Promise((resolve) => {
+          localStorage.setItem("couponAppliedAmount", percentage_discount);
+          resolve("Saved");
+        });
+        saveCouponAppliedAmount.then(() => {
+          this.checkAndSetAppliedAmount();
+        });
+
+        calc = formatPrice(
+          formatPrice(
+            parseFloat(total) -
+              percentage_discount +
+              parseFloat(restaurant_info.store_charges || 0.0)
+          )
+        );
+      } else {
+        calc = formatPrice(
+          parseFloat(total) -
+            (parseFloat(coupon.coupon_discount) || 0.0) +
+            (parseFloat(restaurant_info.store_charges) || 0.0)
+        );
+      }
+    } else {
+      calc = formatPrice(
+        parseFloat(total) + parseFloat(restaurant_info.store_charges || 0.0)
+      );
+    }
+
+    if (restaurant_info.tax && restaurant_info.tax > 0) {
+      calc = formatPrice(
+        parseFloat(
+          parseFloat(calc) +
+            parseFloat(parseFloat(restaurant_info.tax) / 100) * calc
+        )
+      );
+    }
+
+    // if (
+    //   restaurant_info.convenience_fee &&
+    //   restaurant_info.convenience_fee > 0
+    // ) {
+    //   calc = formatPrice(
+    //     parseFloat(calc) + parseFloat(restaurant_info.convenience_fee)
+    //   );
+    // }
+
+    // if (
+    //   localStorage.getItem("userSelected") === "DELIVERY" &&
+    //   restaurant_info.city &&
+    //   restaurant_info.city.is_surge == 1 &&
+    //   restaurant_info.city.surge_fee &&
+    //   restaurant_info.city.surge_fee > 0
+    // ) {
+    //   calc = formatPrice(
+    //     parseFloat(calc) + parseFloat(restaurant_info.city.surge_fee)
+    //   );
+    // }
+
+    if (this.state.delivery_charges && this.state.delivery_charges > 0) {
+      calc = formatPrice(
+        parseFloat(calc) + parseFloat(this.state.delivery_charges || 0.0)
+      );
+    }
+
+    // if (tips.value > 0) {
+    //   calc = parseFloat(calc) + parseFloat(tips.value);
+    // }
+
+    return formatPrice(calc);
+  };
   render() {
     if (!this.props.cartProducts.length) {
       // no items in cart after checkout goto cart page
@@ -369,6 +454,16 @@ class Checkout extends Component {
                 {this.state.time && <span>{this.state.time}</span>}
               </div>
             )}
+          <div
+            style={{
+              height: "100px",
+              backgroundColor: "rgba(255, 240, 241, 1)",
+              borderTop: "1px dashed rgba(244, 63, 94, 1)",
+              borderBottom: "1px dashed rgba(244, 63, 94, 1)",
+            }}
+          >
+            To Pay AED {this.getTotalAfterCalculation()}
+          </div>
           <div className="pt-20">
             <div className="font-w600 my-10 ml-20">Choose a Payment Method</div>
             <PaymentList
