@@ -454,7 +454,7 @@ class Checkout extends Component {
                 {this.state.time && <span>{this.state.time}</span>}
               </div>
             )}
-          <div
+          {/* <div
             style={{
               height: "100px",
               backgroundColor: "rgba(255, 240, 241, 1)",
@@ -463,7 +463,7 @@ class Checkout extends Component {
             }}
           >
             To Pay AED {this.getTotalAfterCalculation()}
-          </div>
+          </div> */}
           <div className="pt-20">
             <div className="font-w600 my-10 ml-20">Choose a Payment Method</div>
             <PaymentList

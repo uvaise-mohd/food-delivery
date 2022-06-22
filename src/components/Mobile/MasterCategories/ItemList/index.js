@@ -13,9 +13,17 @@ import {
   import { connect } from "react-redux";
   import { Link } from "react-router-dom";
   import { Star } from "react-iconly";
+import FloatCart from "../../FloatCart";
 class ItemList extends Component {
+
+  forceStateUpdate = () => {
+    setTimeout(() => {
+      this.forceUpdate();
+      this.props.update();
+    }, 100);
+  };
   render() {
-    const { item_categories, __selectCategory, selected_category ,cartProducts} = this.props;
+    const { addProduct,removeProduct, selected_category ,cartProducts} = this.props;
 
     return (
       <div
@@ -23,7 +31,7 @@ class ItemList extends Component {
         style={{
           flexWrap: "wrap",
           margin: "5px",
-          padding: "10px",
+          padding: "10px 10px 100px 10px",
           justifyContent: "space-between",
           backgroundColor: "white",
         }}
@@ -31,7 +39,9 @@ class ItemList extends Component {
         {selected_category.items.map((product) => (
           <div className="store-block p-10 d-flex justify-content-center">
             {/* <LazyLoad> */}
+              <div className="product-slider-item bg-white ">
               <div style={{ position: "relative" }}>
+
                 {/* <Link to={restaurant.slug + "/" + product.id}> */}
                   <img
                     src={WEBSITE_URL + "/assets/img/items/" + product.image}
@@ -248,6 +258,7 @@ class ItemList extends Component {
                               backgroundColor: "#fe0000",
                             }}
                             onClick={() => {
+                              product.quantity = 1;
                               addProduct(product);
                               this.forceStateUpdate();
                             }}
@@ -303,6 +314,7 @@ class ItemList extends Component {
                               alignItems: "center",
                             }}
                             onClick={() => {
+                              product.quantity = 1;
                               addProduct(product);
                               this.forceStateUpdate();
                             }}
@@ -328,7 +340,9 @@ class ItemList extends Component {
               )}
             </div>
           </div>
+        </div>
         ))}
+
       </div>
     );
   }

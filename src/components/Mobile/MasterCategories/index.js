@@ -5,6 +5,7 @@ import FeatherIcon from "feather-icons-react";
 import { connect } from "react-redux";
 import ItemCategories from "./ItemCategories";
 import ItemList from "./ItemList";
+import FloatCart from "../FloatCart";
 
 class MasterCategories extends Component {
   static contextTypes = {
@@ -15,6 +16,7 @@ class MasterCategories extends Component {
     item_categories: [],
     loading: true,
     selected_category: [],
+    update: true,
   };
   componentDidMount() {
     this.setState({
@@ -46,6 +48,16 @@ class MasterCategories extends Component {
       selected_category: id,
     });
   };
+  forceStateUpdate = () => {
+    setTimeout(() => {
+      this.forceUpdate();
+      if (this.state.update) {
+        this.setState({ update: false });
+      } else {
+        this.setState({ update: true });
+      }
+    }, 100);
+  };
   render() {
     const { cartProducts } = this.props;
     return (
@@ -54,6 +66,8 @@ class MasterCategories extends Component {
         this.state.master_category &&
         this.state.master_category.id ? (
           <React.Fragment>
+        <FloatCart />
+
             <div style={{ position: "relative" }}>
               <div
                 style={{
@@ -151,7 +165,12 @@ class MasterCategories extends Component {
                 selected_category={this.state.selected_category}
               />
 
-              <ItemList selected_category={this.state.selected_category} />
+              <ItemList 
+              selected_category={this.state.selected_category} 
+              shouldUpdate={this.state.update}
+                        update={this.forceStateUpdate}
+
+              />
             </div>
           </React.Fragment>
         ) : null}

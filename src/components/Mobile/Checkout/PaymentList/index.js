@@ -1037,7 +1037,7 @@ class PaymentList extends Component {
 												</div>
 											</div>
 										}
-										<div
+										{/* <div
 											className="col-12 mt-20 paymentGatewayBlock"
 											onClick={this.openConfirmOrderOnline}
 										>
@@ -1056,7 +1056,7 @@ class PaymentList extends Component {
 													</div>
 												</div>
 											</div>
-										</div>
+										</div> */}
 									</React.Fragment>
 								))}
 							</div>

@@ -629,7 +629,7 @@ table > tbody > tr {
 }
 .store-block {
   width: 44%;
-  box-shadow: rgb(136 136 136) 0px 0px 10px -5px;
+  /* box-shadow: rgb(136 136 136) 0px 0px 10px -5px; */
   border-radius: 10px;
   margin: 8px;
 }
