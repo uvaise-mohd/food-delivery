@@ -10,7 +10,8 @@ import { Offline, Online } from "react-detect-offline";
 import OfflineComponent from "./components/Mobile/OfflineComponent";
 import CustomCssProvider from "./components/CustomCssProvider";
 import PWAInstallation from "./components/Mobile/PWAInstallation";
-
+// import '../src/assets/css/custom.css';
+// import '../src/assets/css/main.css';
 const polling = {
 	enabled: false,
 };
