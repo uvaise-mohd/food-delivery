@@ -99,7 +99,7 @@ class Onboard extends Component {
                     </div>
 
                     <div className="onboard-image d-flex align-items-center justify-content-center">
-                      <img src="assets/img/illustration.png" />
+                      <img src="https://app.snakyz.com/assets/snaky/Illustration.png" />
                     </div>
 
                     <div className="d-flex flex-column align-items-center justify-content-center">
@@ -132,7 +132,7 @@ class Onboard extends Component {
                 <span className="">realtime.</span>
               </div>
               <div className="onboard-image d-flex align-items-center justify-content-center">
-                <img src="assets/img/delivery-illu.png" />
+                <img src="https://app.snakyz.com/assets/snaky/delivery-illu.png" />
               </div>
               <div className="d-flex flex-column align-items-center justify-content-center">
                 <div onClick={this.__thirdSlider} className="next-button d-flex align-items-center justify-content-center text-white">
@@ -161,7 +161,7 @@ class Onboard extends Component {
                 <span className="">realtime.</span>
               </div>
               <div className="onboard-image d-flex align-items-center justify-content-center">
-                <img src="assets/img/illu-3.png" />
+                <img src="https://app.snakyz.com/assets/snaky/illu-3.png" />
               </div>
               <DelayLink delay={200} to={"/login"}>
                 <div className="d-flex flex-column align-items-center justify-content-center">
