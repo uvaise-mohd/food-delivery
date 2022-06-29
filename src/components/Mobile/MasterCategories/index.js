@@ -150,7 +150,7 @@ class MasterCategories extends Component {
                   style={{
                     fontSize: "16px",
                     fontWeight: "600",
-                    color: "#000",
+                    color: "#fff",
                     textAlign: "center",
                   }}
                 >

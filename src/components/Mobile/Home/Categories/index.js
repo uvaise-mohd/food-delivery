@@ -76,7 +76,7 @@ var styles = {
       display: "flex",
       gridAutoFlow: "column",
       flexWrap: "wrap",
-      columnGap: "14px",
+      columnGap: "17px",
       height: "auto",
       alignItems: "center",
       rowGap: "0px",

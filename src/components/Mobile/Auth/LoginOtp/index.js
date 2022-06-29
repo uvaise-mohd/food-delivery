@@ -341,11 +341,7 @@ class LoginOtp extends Component {
             </div>
           </div>
           <div style={{ marginTop: "10%" }}>
-            <form
-              onSubmit={this.sendOtp}
-              id="loginForm"
-              style={{}}
-            >
+            <form onSubmit={this.sendOtp} id="loginForm" style={{}}>
               <div className="form-group px-15">
                 <div className="d-flex align-items-start flex-column">
                   <div
@@ -371,14 +367,14 @@ class LoginOtp extends Component {
                   placeholder="+971 Enter Your Phone Number"
                   minLength={10}
                   maxLength={10}
-				  autoComplete={'off'}
-				  className="form-control  call-input-icon"
+                  autoComplete={"off"}
+                  className="form-control  call-input-icon"
                   style={{
                     letterSpacing: "1px",
                     color: "black",
                     marginTop: "40px",
                     border: "1px solid #ff0000",
-					textTransform:'capitalize',
+                    textTransform: "capitalize",
                     input_focus: {
                       border: "1px solid #ff0000",
                       backgroundColor: "none",
@@ -535,10 +531,11 @@ class LoginOtp extends Component {
               </div>
             </form>
 
-            <form onSubmit={this.handleRegister} id="registerForm" 
+            <form
+              onSubmit={this.handleRegister}
+              id="registerForm"
               className="hidden"
-
-			>
+            >
               <div className="form-group px-15 pt-30">
                 <div className="d-flex align-items-start flex-column">
                   <div
@@ -556,14 +553,13 @@ class LoginOtp extends Component {
                   type="text"
                   onChange={this.handleInputChange}
                   className="form-control  name-input-icon"
-				  autoComplete={'off'}
-
+                  autoComplete={"off"}
                   style={{
                     letterSpacing: "1px",
                     color: "black",
                     marginTop: "40px",
                     border: "1px solid #ff0000",
-					textTransform:'capitalize',
+                    textTransform: "capitalize",
                     input_focus: {
                       border: "1px solid #ff0000",
                       backgroundColor: "none",

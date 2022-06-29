@@ -144,7 +144,7 @@ class SingleItem extends Component {
               Details
             </div>
             {single_item && single_item.id && (
-              <div className='single-item px-15 mt-20 pb-100'>
+              <div className='single-item px-15  pb-100'>
                 <span className='hidden'>{(single_item.quantity = 1)}</span>
                 <div
                   className='category-list-item single-item-img'
@@ -288,7 +288,7 @@ class SingleItem extends Component {
                             fontFamily: "'Poppins'",
                             fontStyle: "normal",
                             fontWeight: "500",
-                            fontSize: "24px",
+                            fontSize: "18px",
                             lineHeight: "36px",
                           }}>
                           {single_item.name}
@@ -299,7 +299,7 @@ class SingleItem extends Component {
                             fontFamily: "Poppins",
                             fontStyle: "normal",
                             fontWeight: "500",
-                            fontSize: "24px",
+                            fontSize: "18px",
                             lineHeight: "36px",
                           }}>
                           {localStorage.getItem("hidePriceWhenZero") ===

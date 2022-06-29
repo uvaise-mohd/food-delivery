@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
-import { Home, Heart2, Bag, User, ChevronRight } from "react-iconly";
+import { Home, Heart2, Bag, User, ChevronRight, Search } from "react-iconly";
 import PWAInstallation from "../PWAInstallation";
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -59,8 +59,8 @@ class Footer extends Component {
 						<NavLink to="/" className={`col footer-links px-2 py-1 ${this.state.active_home ? "active-footer-tab" : ""}`}>
 							{this.state.active_home ? <Home set="bold" /> : <Home />}
 						</NavLink>
-						<NavLink to={user.success ? "/my-favorite-stores" : "/login"} className={`col footer-links px-2 py-1 ${this.state.active_favourite ? "active-footer-tab" : ""}`}>
-							{this.state.active_favourite ? <Heart2 set="bold" /> : <Heart2 />}
+						<NavLink to={"/explore"} className={`col footer-links px-2 py-1 ${this.state.active_favourite ? "active-footer-tab" : ""}`}>
+							{this.state.active_favourite ? <Search set="bold" /> : <Search />}
 						</NavLink>
 						<NavLink to="/cart" className={`col footer-links px-2 py-1 ${this.state.active_cart ? "active-footer-tab" : ""}`}>
 							{this.state.active_cart ? <Bag set="bold" /> : <Bag />}

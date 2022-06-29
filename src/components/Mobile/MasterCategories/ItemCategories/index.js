@@ -13,14 +13,14 @@ class ItemCategories extends Component {
           style={{
             display: "flex",
             overflowX: "auto",
-            justifyContent: "space-around",
+            // justifyContent: "space-around",
           }}
         >
           {item_categories &&
             item_categories.length !== 0 &&
             item_categories.map((category) => (
               <>
-                <div onClick={() => __selectCategory(category)}>
+                <div className="ml-10" onClick={() => __selectCategory(category)}>
                   <div
                     className="d-flex   align-items-center justify-content-center"
                     style={{

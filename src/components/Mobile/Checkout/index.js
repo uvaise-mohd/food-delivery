@@ -123,6 +123,7 @@ class Checkout extends Component {
   };
   getTotalAfterCalculation = () => {
     const { total, restaurant_info, coupon, tips } = this.props;
+
     let calc = 0;
     if (coupon.code) {
       if (coupon.discount_type === "PERCENTAGE") {
@@ -172,6 +173,7 @@ class Checkout extends Component {
         )
       );
     }
+
 
     // if (
     //   restaurant_info.convenience_fee &&
@@ -454,16 +456,23 @@ class Checkout extends Component {
                 {this.state.time && <span>{this.state.time}</span>}
               </div>
             )}
-          {/* <div
+          <div 
+          className="d-flex align-items-center justify-content-center"
             style={{
-              height: "100px",
+              height: "60px",
               backgroundColor: "rgba(255, 240, 241, 1)",
               borderTop: "1px dashed rgba(244, 63, 94, 1)",
               borderBottom: "1px dashed rgba(244, 63, 94, 1)",
+              color:'#ff0000',
+              fontWeight:'600',
+              fontSize:'16px'
             }}
           >
-            To Pay AED {this.getTotalAfterCalculation()}
-          </div> */}
+          <div>
+
+           Total Amount To Pay AED {localStorage.getItem('calc')}
+          </div>
+          </div>
           <div className="pt-20">
             <div className="font-w600 my-10 ml-20">Choose a Payment Method</div>
             <PaymentList

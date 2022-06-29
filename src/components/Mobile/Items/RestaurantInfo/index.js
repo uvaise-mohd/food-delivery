@@ -5,9 +5,10 @@ import { connect } from "react-redux";
 import { setFavoriteRest } from "../../../../services/items/actions";
 import ProgressiveImage from "react-progressive-image";
 import Ink from "react-ink";
-import { ChevronLeft ,Heart} from "react-iconly";
+import { ChevronLeft, Heart, Search } from "react-iconly";
 import Rater from "react-rater";
 import { TimeCircle } from "react-iconly";
+import { Link } from "react-router-dom";
 
 class RestaurantInfo extends Component {
   state = {
@@ -67,12 +68,12 @@ class RestaurantInfo extends Component {
   setFavoriteRestaurant = () => {
     const { restaurant_info, user } = this.props;
     if (user.success) {
-		this.setState({isFavorite : !this.state.isFavorite})
-    //   if (restaurant_info.is_favorited) {
-    //     this.refs.heartIcon.classList.remove("is-active");
-    //   } else {
-    //     this.refs.heartIcon.classList.add("is-active");
-    //   }
+      this.setState({ isFavorite: !this.state.isFavorite });
+      //   if (restaurant_info.is_favorited) {
+      //     this.refs.heartIcon.classList.remove("is-active");
+      //   } else {
+      //     this.refs.heartIcon.classList.add("is-active");
+      //   }
       this.props.setFavoriteRest(user.data.auth_token, restaurant_info.id);
     }
   };
@@ -116,7 +117,7 @@ class RestaurantInfo extends Component {
               position: "absolute",
               top: "2vh",
               left: "2vh",
-			  width:'90vw'
+              width: "90vw",
             }}
           >
             <div
@@ -127,8 +128,7 @@ class RestaurantInfo extends Component {
                 width: "3rem",
                 backgroundColor: "transparent",
                 border: "1px solid #fff",
-				position:'relative'
-
+                position: "relative",
               }}
               onClick={this.context.router.history.goBack}
             >
@@ -139,30 +139,32 @@ class RestaurantInfo extends Component {
               />
               <Ink duration="500" />
             </div>
-			{user.success && (
-
-			<div
-              className="btn search-navs-btns"
-              style={{
-                borderRadius: "14px",
-                height: "3rem",
-                width: "3rem",
-                backgroundColor: "transparent",
-                border: "1px solid #fff",
-				position:'relative'
-              }}
-			  onClick={this.setFavoriteRestaurant}>
-              <Heart
-			    ref="heartIcon"
-                size="medium"
-
-				set={this.state.isFavorite ?'bold' :'light'}
-                style={{ marginLeft: "-0.6rem" }}
-                primaryColor={this.state.isFavorite ? '#e2254d' : '#fff'}
-              />
-              <Ink duration="500" />
-            </div>
-			)}
+            {/* {user.success && ( */}
+              <div
+                className="btn search-navs-btns"
+                style={{
+                  borderRadius: "14px",
+                  height: "3rem",
+                  width: "3rem",
+                  backgroundColor: "transparent",
+                  border: "1px solid #fff",
+                  position: "relative",
+                }}
+                onClick={this.setFavoriteRestaurant}
+              >
+              <Link to={'/explore'}>
+                
+                <Search
+                  ref="heartIcon"
+                  size="medium"
+                  set={this.state.isFavorite ? "bold" : "light"}
+                  style={{ marginLeft: "-0.6rem" }}
+                  primaryColor={this.state.isFavorite ? "#e2254d" : "#fff"}
+                />
+                <Ink duration="500" />
+              </Link>
+              </div>
+            {/* )} */}
           </div>
 
           {restaurant.length === 0 ? (
@@ -224,6 +226,8 @@ class RestaurantInfo extends Component {
                   </ProgressiveImage>
                 </div>
                 <div className="pl-20 pr-20 pt-30 bg-white">
+                <div className="d-flex flex-column align-items-start">
+
                   <div
                     style={{
                       display: "flex",
@@ -237,6 +241,20 @@ class RestaurantInfo extends Component {
                       </h4>
                     </div>
                   </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <div>
+                      <h6 className="font-w400 mb-5 text-dark">
+                        {restaurant.description}
+                      </h6>
+                    </div>
+                  </div>
+                </div>
                   <div className="d-flex align-items-center justify-content-around mt-20">
                     <div className="d-flex flex-column align-items-center justify-content-center">
                       <div>

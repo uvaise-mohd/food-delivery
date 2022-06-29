@@ -210,6 +210,7 @@ class OrderList extends Component {
               <div>
                 <Moment format='MMM DD, hh:mm A'>{order.created_at}</Moment>
               </div>
+              
             </div>
 
             <div className='mb-2 mt-4 d-flex justify-content-between'>

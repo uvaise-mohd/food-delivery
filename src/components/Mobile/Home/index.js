@@ -227,7 +227,7 @@ class Home extends Component {
 
           {this.state.loading && <Loading />}
 
-          <div className="height-100-percent bg-white p-10">
+          <div className="height-100-percent bg-white pl-10">
             <HomeHeader
               active_nearme={true}
               disable_back_button={true}
@@ -244,10 +244,10 @@ class Home extends Component {
             <Link to="explore">
               <div className="mock-search-block bg-white px-5 pt-10">
                 <div
-                  style={{ backgroundColor: "#F5F5F8", border: "none" }}
-                  className="px-15 d-flex justify-content-start align-items-center"
+                  style={{ backgroundColor: "#F5F5F8", border: "none" ,width:'95%'}}
+                  className="ml-5 px-15 d-flex justify-content-start align-items-center"
                 >
-                  <div style={{ color: "#ababab", marginTop: "5px" }}>
+                  <div style={{ color: "#ababab", marginTop: "5px", }}>
                     <Search set={"light"} primaryColor="#000" size={"small"} />
                   </div>
                   <div className="ml-10">
@@ -257,8 +257,11 @@ class Home extends Component {
               </div>
             </Link>
             <Link to="explore">
-              <div className=" px-5 pt-20">
-                <img style={{ width: "100%" }} src="assets/img/card.png" />
+              <div className="ml-10 px-5 pt-20">
+                <img
+                  style={{ width: "95%" }}
+                  src="https://app.snakyz.com/assets/snaky/Card.png"
+                />
               </div>
             </Link>
             {promo_slides.message && promo_slides.message.message && (
@@ -289,10 +292,32 @@ class Home extends Component {
               promo_slides.featuresStores.length > 0 && (
                 <PopularRestaurants promo_slides={promo_slides} />
               )}
-              {promo_slides &&
+            {promo_slides &&
               promo_slides.master_categories &&
               promo_slides.master_categories.length > 0 && (
-                <Categories master_categories={promo_slides.master_categories} />
+                <div>
+                  <div className="d-flex align-items-center justify-content-between">
+                    <div
+                      className="ml-10"
+                      style={{ fontSize: "1.2em", fontWeight: "600" }}
+                    >
+                      Categories
+                    </div>
+                    <div
+                      className="mr-10"
+                      style={{
+                        fontSize: "14px",
+                        fontWeight: "600",
+                        color: "#FF6C44",
+                      }}
+                    >
+                      Show all
+                    </div>
+                  </div>
+                  <Categories
+                    master_categories={promo_slides.master_categories}
+                  />
+                </div>
               )}
             {promo_slides &&
               promo_slides.items &&
@@ -316,15 +341,13 @@ class Home extends Component {
                 promo_slides.banners.length > 0 && (
                   <PromoSlider slides={promo_slides.banners} />
                 )}
-
-
             </React.Fragment>
 
             {promo_slides &&
               promo_slides.items &&
               promo_slides.items.length > 0 && (
                 <SuggestedItems promo_slides={promo_slides} />
-              )} 
+              )}
 
             {promo_slides &&
             promo_slides.stores &&
@@ -421,11 +444,13 @@ class Home extends Component {
                           <div className="d-flex align-items-center justify-content-around">
                             {restaurant.coupons &&
                               restaurant.coupons.length !== 0 &&
-                              restaurant.coupons.slice(0, 2).map((coupon) => (
-                                <div className="d-flex align-items-center nearby-coupons mr-10">
-                                  {coupon.code}
-                                </div>
-                              ))}
+                              restaurant.coupons
+                                .slice(0, 2)
+                                .map((coupon) => (
+                                  <div className="d-flex align-items-center nearby-coupons mr-10">
+                                    {coupon.code}
+                                  </div>
+                                ))}
                           </div>
                         </div>
                       </div>
@@ -583,7 +608,7 @@ class Home extends Component {
                 <Ink duration="500" hasTouch={true} />
               </NavLink>
             )} */}
-            <div style={{height:'100px'}}/>
+            <div style={{ height: "100px" }} />
             {/* <RestaurantList user={user} /> */}
             <Footer active_home={true} />
           </div>

@@ -837,7 +837,7 @@ class PaymentList extends Component {
 					style={{ width: "90vw", margin: "auto" }}
 					PaperProps={{ style: { backgroundColor: "#fff", borderRadius: "10px" } }}
 				>
-					<img src="https://app.snakyz.com/assets/order-success.gif" />
+					<img src="https://app.snakyz.com/assets/snaky/order-success.gif" />
 					<div style={{ fontWeight: 'bolder', fontSize: '16px', textAlign: 'center' }}>Successful</div>
 					<div className="mb-20" style={{ fontWeight: '400', fontSize: '13px', textAlign: 'center' }}>Order Placed Successfully</div>
 				</Dialog>

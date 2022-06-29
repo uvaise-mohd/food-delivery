@@ -61,12 +61,15 @@ class PromoSlider extends Component {
             </ContentLoader>
           ) : (
             <React.Fragment>
-              <div className="d-flex align-items-center justify-content-between" style={{ marginTop: "20px" }}>
+              <div
+                className="d-flex align-items-center justify-content-between"
+                style={{ marginTop: "20px" }}
+              >
                 <div
                   className="ml-10"
                   style={{ fontSize: "1.2em", fontWeight: "600" }}
                 >
-                 Collection
+                  Collection
                 </div>
                 <div
                   className="mr-10"
@@ -80,53 +83,52 @@ class PromoSlider extends Component {
                 </div>
               </div>
 
-			  <div
-                    className="d-flex mt-10 ml-5"
-                    style={{
-                      display: "flex",
-                      overflowX: "auto",
-                    }}
-                  >
-                    {slides.map((restaurant) => (
-                      <div className="p-5 d-flex flex-column justify-content-center align-items-center">
-                        <DelayLink
-                          to={"stores/" + restaurant.slug}
-                          key={restaurant.id}
-                          style={{ position: "relative" }}
-                        >
-                          <div>
-                            <LazyLoad>
-                              <img
-                                src={WEBSITE_URL + restaurant.image}
-                                placeholder={
-                                  "https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/portal/m/blue_placeholder"
-                                }
-                                // alt={restaurant.name}
-                                style={{
-                                  height: "170px",
-                                  width: "170px",
-                                  borderRadius: "33px",
-                                  objectFit: "cover",
-                                }}
-                                
-                              />
-                            </LazyLoad>
-                          </div>
-                          <div
-                            className="mt-5"
+              <div
+                className="d-flex mt-10 ml-5"
+                style={{
+                  display: "flex",
+                  overflowX: "auto",
+                }}
+              >
+                {slides.map((restaurant) => (
+                  <div className="p-5 d-flex flex-column justify-content-center align-items-center">
+                    <DelayLink
+                      to={"stores/" + restaurant.slug}
+                      key={restaurant.id}
+                      style={{ position: "relative" }}
+                    >
+                      <div>
+                        <LazyLoad>
+                          <img
+                            src={WEBSITE_URL + restaurant.image}
+                            placeholder={
+                              "https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto/portal/m/blue_placeholder"
+                            }
+                            // alt={restaurant.name}
                             style={{
-                              overflow: "hidden",
-                              fontWeight: "400",
-                              textAlign: "center",
+                              height: "170px",
+                              width: "170px",
+                              borderRadius: "33px",
+                              objectFit: "cover",
                             }}
-                          >
-                            {restaurant.name}
-                          </div>
-                          <Ink duration="500" hasTouch={true} />
-                        </DelayLink>
+                          />
+                        </LazyLoad>
                       </div>
-                    ))}
+                      <div
+                        className="mt-5"
+                        style={{
+                          overflow: "hidden",
+                          fontWeight: "400",
+                          textAlign: "center",
+                        }}
+                      >
+                        {restaurant.name}
+                      </div>
+                      <Ink duration="500" hasTouch={true} />
+                    </DelayLink>
                   </div>
+                ))}
+              </div>
               {/* <Carousel
                 className="mt-20"
                 autoFocus={true}

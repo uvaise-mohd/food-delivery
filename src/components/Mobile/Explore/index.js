@@ -9,6 +9,7 @@ import RestaurantSearchList from "./RestaurantSearchList";
 import { connect } from "react-redux";
 import { debounce } from "../../helpers/debounce";
 import ContentLoader from "react-content-loader";
+import Footer from "../Footer";
 
 class Explore extends Component {
 	state = {
@@ -137,6 +138,8 @@ class Explore extends Component {
 						)}
 					</div>
 				</div>
+				<Footer active_favourite={true} />
+
 			</React.Fragment>
 		);
 	}

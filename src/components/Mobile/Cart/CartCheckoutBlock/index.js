@@ -262,7 +262,7 @@ class CartCheckoutBlock extends Component {
         parseFloat(calc) + parseFloat(this.state.delivery_charges || 0.0)
       );
     }
-
+    localStorage.setItem('calc',calc)
     // if (tips.value > 0) {
     //   calc = parseFloat(calc) + parseFloat(tips.value);
     // }
@@ -334,7 +334,7 @@ class CartCheckoutBlock extends Component {
                       style={{
                         // boxShadow: "rgb(136 136 136) 0px 0px 10px -3px",
                         borderRadius: "10px",
-						padding:'25px'
+                        padding: "25px",
                       }}
                     >
                       {/* <h2 className="bill-detail-text m-0">Payment Details</h2> */}
@@ -494,13 +494,21 @@ class CartCheckoutBlock extends Component {
 								</React.Fragment>
 							)} */}
 
-                      <hr className="checkout-division-hr"/>
+                      <hr className="checkout-division-hr" />
 
                       <div className="display-flex">
-                        <div className="flex-auto"    style={{ fontSize: "14px", fontWeight: "600" }}>Grand Total</div>
-                        <div className="flex-auto text-right"  style={{ fontSize: "16px", fontWeight: "700" }}>
+                        <div
+                          className="flex-auto"
+                          style={{ fontSize: "14px", fontWeight: "600" }}
+                        >
+                          Grand Total
+                        </div>
+                        <div
+                          className="flex-auto text-right"
+                          style={{ fontSize: "16px", fontWeight: "700" }}
+                        >
                           {/* Calculating total after coupon_discount coupon or without coupon_discount coupon */}
-                          <span className="mr-2"   >AED </span>
+                          <span className="mr-2">AED </span>
                           {this.getTotalAfterCalculation()}
                         </div>
                       </div>
@@ -515,63 +523,62 @@ class CartCheckoutBlock extends Component {
               </React.Fragment>
               <React.Fragment>
                 {this.props.is_operational ? (
-                  <div className="float-cart--open" style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                        width:'90vw',
-						marginLeft:'20px',
-						padding:'10px'
-						
-                      }}>
+                  <div
+                    className="float-cart--open"
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      width: "90vw",
+                      marginLeft: "20px",
+                      padding: "10px",
+                    }}
+                  >
                     {/* <div
                       
                     > */}
-                      <div
-                        style={{
-                          display: "flex",
-                          alignItems: "start",
-                          flexDirection: "column",
-                          color: "#fff",
-                        }}
-                      >
-                        <div style={{ fontWeight: "400", fontSize: "14px" }}>
-                          <span className="">{cartProducts.length} Item</span>
-                          <span className="ml-4" style={{ color: "#FE0B15" }}>
-                            <span className="rupees-symbol">₹</span>{" "}
-                            {formatPrice(total)}
-                          </span>
-                        </div>
-                        <div
-                          style={{
-                            fontWeight: "600",
-                            fontSize: "18px",
-                            marginTop: "5px",
-                          }}
-                        >
-                          AED {this.getTotalAfterCalculation()}
-                        </div>
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "start",
+                        flexDirection: "column",
+                        color: "#fff",
+                      }}
+                    >
+                      <div style={{ fontWeight: "400", fontSize: "14px" }}>
+                        <span className="">{cartProducts.length} Item</span>
+                        <span className="ml-4" style={{ color: "#FE0B15" }}>
+                          <span className="rupees-symbol">₹</span>{" "}
+                          {formatPrice(total)}
+                        </span>
                       </div>
                       <div
-                      onClick={this.processCart}
-
-                        className="d-flex align-items-center p-10"
                         style={{
                           fontWeight: "600",
-                          color: "#000",
-                          backgroundColor: "#fff",
-                          borderRadius: "100px",
-						  position: "relative",
-
+                          fontSize: "18px",
+                          marginTop: "5px",
                         }}
                       >
-                        <div>
-                          <Buy primaryColor="#FF0000" />
-                        </div>
-                        <div className="ml-2">Checkout</div>
+                        AED {this.getTotalAfterCalculation()}
+                      </div>
+                    </div>
+                    <div
+                      onClick={this.processCart}
+                      className="d-flex align-items-center p-10"
+                      style={{
+                        fontWeight: "600",
+                        color: "#000",
+                        backgroundColor: "#fff",
+                        borderRadius: "100px",
+                        position: "relative",
+                      }}
+                    >
+                      <div>
+                        <Buy primaryColor="#FF0000" />
+                      </div>
+                      <div className="ml-2">Checkout</div>
                       {/* </div> */}
                       <Ink duration={400} />
-
                     </div>
                     {/* <div
                       onClick={this.processCart}

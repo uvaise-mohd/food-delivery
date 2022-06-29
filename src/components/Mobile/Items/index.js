@@ -171,7 +171,7 @@ class Items extends Component {
 
   render() {
     if (window.innerWidth > 1024) {
-      return <Redirect to='/' />;
+      return <Redirect to="/" />;
     }
     // if (localStorage.getItem("storeColor") === null) {
     // 	return <Redirect to={"/"} />;
@@ -187,7 +187,7 @@ class Items extends Component {
                 this.props.restaurant_info.name
               } | ${localStorage.getItem("seoMetaTitle")}`}
               seodescription={localStorage.getItem("seoMetaDescription")}
-              ogtype='website'
+              ogtype="website"
               ogtitle={`${
                 this.props.restaurant_info.name
               } | ${localStorage.getItem("seoOgTitle")}`}
@@ -198,7 +198,7 @@ class Items extends Component {
               } | ${localStorage.getItem("seoTwitterTitle")}`}
               twitterdescription={localStorage.getItem("seoTwitterDescription")}
             />
-            <div className='bg-white mb-100' key={this.props.restaurant}>
+            <div className="bg-white mb-100" key={this.props.restaurant}>
               <RestaurantInfo
                 history={this.props.history}
                 restaurant={this.props.restaurant_info}
@@ -222,8 +222,8 @@ class Items extends Component {
                   {this.state.is_active ? (
                     <FloatCart />
                   ) : (
-                    <div className='auth-error no-click'>
-                      <div className='error-shake'>
+                    <div className="auth-error no-click">
+                      <div className="error-shake">
                         {localStorage.getItem("notAcceptingOrdersMsg")}
                       </div>
                     </div>
@@ -232,26 +232,27 @@ class Items extends Component {
               )}
             </div>
 
-            <div className='menu-list-container'>
+            <div className="menu-list-container">
               {this.state.menuListOpen ? (
                 <React.Fragment>
-                  <div className='menu-open-backdrop' />
-                  <div className='menu-items-block' ref='menuItemBlock'>
-                    <div className='menu-item-block-inner'>
+                  <div className="menu-open-backdrop" />
+                  <div className="menu-items-block" ref="menuItemBlock">
+                    <div className="menu-item-block-inner">
                       {this.props.restaurant_items.items && (
                         <React.Fragment>
                           {Object.keys(this.props.restaurant_items.items).map(
                             (category, index) => (
                               <div
-                                className='menu-item-block-single'
+                                className="menu-item-block-single"
                                 key={category}
                                 onClick={this.handleMenuItemClick}
-                                data-name={category + index}>
+                                data-name={category + index}
+                              >
                                 <Fade bottom duration={150 * index}>
-                                  <div className='menu-item-block-single-name'>
+                                  <div className="menu-item-block-single-name">
                                     {category}
                                   </div>
-                                  <div className='menu-item-block-single-quantity'>
+                                  <div className="menu-item-block-single-quantity">
                                     {
                                       Object.keys(
                                         this.props.restaurant_items.items[
@@ -271,21 +272,27 @@ class Items extends Component {
                 </React.Fragment>
               ) : (
                 <div
-                  className='menu-button-block-main '
+                  className="menu-button-block-main "
                   onClick={this.handleMenuOpen}
                   style={{
                     bottom:
                       this.props.cartTotal.productQuantity > 0
                         ? "9rem"
                         : "3rem",
-                  }}>
+                  }}
+                >
                   <Flip bottom>
-                    <button
-                      className='btn btn-menu-list'
-                      style={{ backgroundColor: "rgb(254 0 0)" }}>
-                      Browse Menu
-                      <Ink duration='500' hasTouch={false} />
-                    </button>
+                    <div className="d-flex align-items-center btn btn-menu-list"
+                          style={{ backgroundColor: "rgb(254 0 0)" }}
+                    >
+                      <div>
+                        <img src="https://app.snakyz.com/assets/snaky/script.png" />
+                      </div>
+                      <div className="ml-2">
+                          Browse Menu
+                          <Ink duration="500" hasTouch={false} />
+                      </div>
+                    </div>
                   </Flip>
                 </div>
               )}
