@@ -1444,7 +1444,7 @@ const mapStateToProps = (state) => ({
 });
 
 export default GoogleApiWrapper({
-  apiKey: "AIzaSyAGYL-CoRexODv8-xNDUA4Zf9w9SMHZs04",
+  apiKey: "",
   LoadingContainer: Loading,
 })(
   connect(mapStateToProps, {
